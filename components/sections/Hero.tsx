@@ -6,17 +6,18 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   Building2,
+  CalendarRange,
   MapPin,
-  Search,
+  MessageSquare,
   ShieldCheck,
   Sparkles,
-  Wallet,
+  Target,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
-import { heroSearchOptions } from "@/lib/data/homepage";
+import { heroConsultationOptions } from "@/lib/data/homepage";
 import { SITE_TAGLINE } from "@/lib/constants";
 
 export function Hero() {
@@ -25,10 +26,10 @@ export function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const [filters, setFilters] = useState({
-    propertyType: "",
-    category: "",
+    projectType: "",
+    goal: "",
     city: "",
-    budget: "",
+    timeline: "",
   });
 
   useEffect(() => {
@@ -71,7 +72,6 @@ export function Hero() {
     const bg = bgRef.current;
     if (!section || !bg) return;
 
-    // Mouse parallax only on fine pointers (desktop) for performance
     const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
     if (!pointerMq.matches) return;
 
@@ -108,16 +108,16 @@ export function Hero() {
     >
       <div ref={bgRef} className="absolute inset-[-4%]">
         <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=75"
-          alt="Luxury modern residence representing Done & Delivered verified properties"
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=75"
+          alt="Premium real estate marketing for luxury property brands"
           fill
           priority
           fetchPriority="high"
           quality={75}
-          className="hero-bg-image object-cover object-[center_35%]"
+          className="hero-bg-image object-cover object-[center_30%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.94)_0%,rgba(11,46,131,0.82)_46%,rgba(11,46,131,0.42)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.94)_0%,rgba(11,46,131,0.84)_48%,rgba(11,46,131,0.48)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.24),transparent_38%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.35),transparent_30%)]" />
         <div className="premium-noise absolute inset-0" />
@@ -131,37 +131,40 @@ export function Hero() {
             <div className="hero-line mb-5 inline-flex sm:mb-6">
               <Badge tone="glass">
                 <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden />
-                Premium Verified Real Estate
+                Premium Real Estate Marketing & Sales Partner
               </Badge>
             </div>
 
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.15rem] leading-[1.08] text-white sm:text-5xl md:text-6xl lg:text-[4.15rem]"
+              className="font-display text-[2.15rem] leading-[1.08] text-white sm:text-5xl md:text-6xl lg:text-[4rem]"
             >
-              <span className="hero-line block">Verified Properties.</span>
+              <span className="hero-line block">Premium Property</span>
               <span className="hero-line mt-1.5 block sm:mt-2">
-                Verified{" "}
                 <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent">
-                  Developers.
+                  Marketing.
                 </span>
               </span>
-              <span className="hero-line mt-1.5 block sm:mt-2">
-                Verified Investments.
+              <span className="hero-line mt-1.5 block text-[0.92em] sm:mt-2">
+                Verified Projects. Luxury Positioning.
+              </span>
+              <span className="hero-line mt-1.5 block text-[0.92em] sm:mt-2">
+                End-to-End Sales Support.
               </span>
             </h1>
 
             <p className="hero-line mt-5 max-w-xl text-[0.95rem] leading-relaxed text-white/90 sm:mt-6 sm:text-lg md:text-xl">
-              {SITE_TAGLINE} An enterprise advisory platform built for luxury
-              living and capital decisions you can trust.
+              {SITE_TAGLINE}. Done & Delivered is a specialized real-estate
+              marketing agency helping builders and developers reach serious,
+              high-intent buyers with precision and impact.
             </p>
 
             <div className="hero-line mt-7 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
               {[
-                "RERA-aligned diligence",
-                "Institutional verification",
-                "Luxury portfolio access",
+                "Premium project branding",
+                "Performance lead systems",
+                "Sales funnel excellence",
               ].map((item) => (
                 <span
                   key={item}
@@ -179,16 +182,16 @@ export function Hero() {
 
           <div className="hero-stats hidden grid-cols-3 gap-3 lg:grid">
             {[
-              { value: "2,400+", label: "Verified Listings" },
-              { value: "180+", label: "Developer Partners" },
-              { value: "₹4,800 Cr+", label: "Guided Capital" },
+              { value: "1450+", label: "Lead Capacity" },
+              { value: "7+", label: "Official Projects" },
+              { value: "16 Wk", label: "Launch Systems" },
             ].map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-2xl border border-white/15 bg-white/8 p-4 text-center backdrop-blur-md"
               >
                 <p className="font-display text-2xl text-white">{stat.value}</p>
-                <p className="mt-1 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-white/65">
+                <p className="mt-1 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-white/75">
                   {stat.label}
                 </p>
               </div>
@@ -208,45 +211,45 @@ export function Hero() {
             <div className="mb-4 flex flex-col gap-3 px-1 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
                 <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary text-white shadow-[0_10px_24px_rgba(11,46,131,0.25)]">
-                  <Search className="h-4 w-4" aria-hidden />
+                  <MessageSquare className="h-4 w-4" aria-hidden />
                 </span>
                 <div>
                   <p className="text-sm font-bold text-primary md:text-base">
-                    Premium Property Search
+                    Project Marketing Consultation
                   </p>
                   <p className="mt-0.5 text-xs text-muted md:text-sm">
-                    Search verified inventory by type, city, and budget
+                    Tell us about your launch—we craft reach, leads, and sales
+                    systems
                   </p>
                 </div>
               </div>
               <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/25 bg-accent/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-accent-dark">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Live Inventory
+                For Builders & Developers
               </span>
             </div>
 
             <form
               className="grid gap-3 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_1fr_auto] xl:items-end"
               onSubmit={(e) => e.preventDefault()}
-              role="search"
-              aria-label="Search verified properties"
+              aria-label="Request marketing consultation"
             >
               <div className="search-field">
-                <label htmlFor="hero-property-type">
+                <label htmlFor="hero-project-type">
                   <span className="inline-flex items-center gap-1.5">
                     <Building2 className="h-3 w-3 text-accent" aria-hidden />
-                    Property Type
+                    Project Type
                   </span>
                 </label>
                 <select
-                  id="hero-property-type"
-                  value={filters.propertyType}
+                  id="hero-project-type"
+                  value={filters.projectType}
                   onChange={(e) =>
-                    setFilters((f) => ({ ...f, propertyType: e.target.value }))
+                    setFilters((f) => ({ ...f, projectType: e.target.value }))
                   }
                 >
-                  <option value="">All types</option>
-                  {heroSearchOptions.propertyTypes.map((item) => (
+                  <option value="">Select type</option>
+                  {heroConsultationOptions.projectTypes.map((item) => (
                     <option key={item} value={item}>
                       {item}
                     </option>
@@ -255,16 +258,21 @@ export function Hero() {
               </div>
 
               <div className="search-field">
-                <label htmlFor="hero-category">Category</label>
+                <label htmlFor="hero-goal">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Target className="h-3 w-3 text-accent" aria-hidden />
+                    Marketing Goal
+                  </span>
+                </label>
                 <select
-                  id="hero-category"
-                  value={filters.category}
+                  id="hero-goal"
+                  value={filters.goal}
                   onChange={(e) =>
-                    setFilters((f) => ({ ...f, category: e.target.value }))
+                    setFilters((f) => ({ ...f, goal: e.target.value }))
                   }
                 >
-                  <option value="">All categories</option>
-                  {heroSearchOptions.categories.map((item) => (
+                  <option value="">Select goal</option>
+                  {heroConsultationOptions.goals.map((item) => (
                     <option key={item} value={item}>
                       {item}
                     </option>
@@ -287,7 +295,7 @@ export function Hero() {
                   }
                 >
                   <option value="">Select city</option>
-                  {heroSearchOptions.cities.map((item) => (
+                  {heroConsultationOptions.cities.map((item) => (
                     <option key={item} value={item}>
                       {item}
                     </option>
@@ -296,21 +304,21 @@ export function Hero() {
               </div>
 
               <div className="search-field">
-                <label htmlFor="hero-budget">
+                <label htmlFor="hero-timeline">
                   <span className="inline-flex items-center gap-1.5">
-                    <Wallet className="h-3 w-3 text-accent" aria-hidden />
-                    Budget
+                    <CalendarRange className="h-3 w-3 text-accent" aria-hidden />
+                    Timeline
                   </span>
                 </label>
                 <select
-                  id="hero-budget"
-                  value={filters.budget}
+                  id="hero-timeline"
+                  value={filters.timeline}
                   onChange={(e) =>
-                    setFilters((f) => ({ ...f, budget: e.target.value }))
+                    setFilters((f) => ({ ...f, timeline: e.target.value }))
                   }
                 >
-                  <option value="">Any budget</option>
-                  {heroSearchOptions.budgets.map((item) => (
+                  <option value="">Select timeline</option>
+                  {heroConsultationOptions.timelines.map((item) => (
                     <option key={item} value={item}>
                       {item}
                     </option>
@@ -320,42 +328,25 @@ export function Hero() {
 
               <div className="sm:col-span-2 xl:col-span-1">
                 <Button
-                  type="submit"
+                  href="/contact?intent=consultation"
                   variant="primary"
                   size="lg"
                   fullWidth
-                  className="h-[3.35rem] rounded-[1rem] xl:min-w-[158px]"
-                  icon={<Search className="h-4 w-4" />}
+                  className="h-[3.35rem] rounded-[1rem] xl:min-w-[168px]"
+                  icon={<Sparkles className="h-4 w-4" />}
                 >
-                  Search
+                  Consult Now
                 </Button>
               </div>
             </form>
-
-            <div className="mt-4 flex flex-wrap gap-2 border-t border-primary/6 px-1 pt-4">
-              <span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-muted">
-                Popular:
-              </span>
-              {["Bengaluru Apartments", "Sarjapur Villas", "ORR Commercial"].map(
-                (chip) => (
-                  <button
-                    key={chip}
-                    type="button"
-                    className="rounded-full border border-primary/10 bg-[#F7FAFF] px-3 py-1 text-xs font-medium text-primary transition-all hover:border-accent/40 hover:bg-primary hover:text-white"
-                  >
-                    {chip}
-                  </button>
-                ),
-              )}
-            </div>
           </div>
         </motion.div>
 
         <div className="hero-stats mt-8 grid grid-cols-3 gap-2 sm:gap-3 lg:hidden">
           {[
-            { value: "2,400+", label: "Listings" },
-            { value: "180+", label: "Developers" },
-            { value: "₹4.8k Cr+", label: "Capital" },
+            { value: "1450+", label: "Leads" },
+            { value: "7+", label: "Projects" },
+            { value: "16 Wk", label: "Systems" },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -364,7 +355,7 @@ export function Hero() {
               <p className="font-display text-lg text-white sm:text-xl">
                 {stat.value}
               </p>
-              <p className="mt-0.5 text-[0.62rem] font-medium uppercase tracking-[0.1em] text-white/65">
+              <p className="mt-0.5 text-[0.62rem] font-medium uppercase tracking-[0.1em] text-white/75">
                 {stat.label}
               </p>
             </div>

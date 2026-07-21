@@ -1,34 +1,34 @@
-export type PropertyCategory = {
+export type Project = {
   id: string;
-  title: string;
-  description: string;
-  count: string;
-  image: string;
-  href: string;
-};
-
-export type Property = {
-  id: string;
-  title: string;
-  location: string;
-  city: string;
-  price: string;
-  status: "Ready to Move" | "Under Construction" | "New Launch";
+  name: string;
   type: string;
-  beds: string;
-  area: string;
+  status: "Ongoing" | "Completed";
+  developer: string;
+  location: string;
+  description: string;
   image: string;
-  builder: string;
-  builderLogo: string;
-  verified: boolean;
+  initials: string;
 };
 
 export type Developer = {
   id: string;
   name: string;
-  projects: string;
-  years: string;
-  logoInitials: string;
+  focus: string;
+  initials: string;
+  projectCount: string;
+};
+
+export type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  icon:
+    | "branding"
+    | "digital"
+    | "leads"
+    | "performance"
+    | "influencer"
+    | "funnel";
 };
 
 export type WhyChooseItem = {
@@ -41,411 +41,434 @@ export type WhyChooseItem = {
     | "handshake"
     | "chart"
     | "users"
-    | "sparkles";
+    | "sparkles"
+    | "megaphone"
+    | "target";
 };
 
-export type Testimonial = {
-  id: string;
-  name: string;
-  role: string;
-  location: string;
-  quote: string;
-  rating: number;
-  image: string;
-};
-
-export type BlogPost = {
+export type ProcessStep = {
   id: string;
   title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  image: string;
-  href: string;
+  summary: string;
+  items: string[];
 };
 
-export const propertyMegaMenu = [
-  {
-    title: "Apartments",
-    description: "Curated premium residences",
-    href: "/properties?type=apartment",
-    count: "860+ homes",
-    icon: "building" as const,
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Villas",
-    description: "Private luxury estates",
-    href: "/properties?type=villa",
-    count: "210+ estates",
-    icon: "home" as const,
-    image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Plots",
-    description: "Verified land investments",
-    href: "/properties?type=plot",
-    count: "340+ parcels",
-    icon: "map" as const,
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Commercial",
-    description: "High-yield office & retail",
-    href: "/properties?type=commercial",
-    count: "120+ assets",
-    icon: "briefcase" as const,
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
-  },
-];
+export type FunnelStep = {
+  id: string;
+  value: string;
+  label: string;
+};
 
-export const megaMenuFeaturedLinks = [
-  {
-    title: "New Launches",
-    description: "Just released verified projects",
-    href: "/properties?status=new-launch",
-  },
-  {
-    title: "Ready to Move",
-    description: "Move-in ready luxury homes",
-    href: "/properties?status=ready",
-  },
-  {
-    title: "Investment Picks",
-    description: "High-confidence yield opportunities",
-    href: "/investments",
-  },
-  {
-    title: "Book a Site Visit",
-    description: "Curated visits with advisors",
-    href: "/contact?intent=site-visit",
-  },
-];
+export type TimelinePhase = {
+  id: string;
+  title: string;
+  weeks: string;
+  points: string[];
+};
 
-export const verifiedServices = [
+/** Official ongoing projects from Done & Delivered Brand Deck */
+export const ongoingProjects: Project[] = [
   {
-    id: "properties",
-    title: "Verified Properties",
+    id: "nikhar-celio",
+    name: "Nikhar Celio",
+    type: "Residential Apartment",
+    status: "Ongoing",
+    developer: "Nikhar",
+    location: "Bengaluru",
     description:
-      "Every listing is legally vetted, documented, and physically validated by our specialist team before it reaches you.",
-    metric: "2,400+",
-    metricLabel: "Verified Listings",
-    icon: "building" as const,
-  },
-  {
-    id: "developers",
-    title: "Verified Developers",
-    description:
-      "We partner only with RERA-compliant, delivery-proven developers with transparent track records and strong governance.",
-    metric: "180+",
-    metricLabel: "Trusted Partners",
-    icon: "badge" as const,
-  },
-  {
-    id: "investments",
-    title: "Verified Investments",
-    description:
-      "Data-backed opportunity scoring, ROI modelling, and risk screening for confident capital allocation decisions.",
-    metric: "₹4,800 Cr+",
-    metricLabel: "Guided Capital",
-    icon: "chart" as const,
-  },
-];
-
-export const propertyCategories: PropertyCategory[] = [
-  {
-    id: "apartment",
-    title: "Apartment",
-    description: "Skyline residences with refined amenities",
-    count: "860+ Homes",
+      "Premium residential apartments positioned with luxury storytelling and high-intent buyer acquisition.",
     image:
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1400&q=80",
-    href: "/properties?type=apartment",
+    initials: "NC",
   },
   {
-    id: "villa",
-    title: "Villa",
-    description: "Private estates crafted for elevated living",
-    count: "210+ Estates",
-    image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80",
-    href: "/properties?type=villa",
-  },
-  {
-    id: "plots",
-    title: "Plots",
-    description: "Clear-title land in growth corridors",
-    count: "340+ Parcels",
+    id: "astro-boulevards",
+    name: "Astro Boulevards",
+    type: "Plots",
+    status: "Ongoing",
+    developer: "Astro City",
+    location: "Off Sarjapura Road, Bengaluru",
+    description:
+      "Plot inventory marketed with corridor-focused demand generation and conversion-led campaign systems.",
     image:
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
-    href: "/properties?type=plot",
+    initials: "AB",
   },
   {
-    id: "commercial",
-    title: "Commercial",
-    description: "Prime offices and retail destinations",
-    count: "120+ Assets",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80",
-    href: "/properties?type=commercial",
-  },
-];
-
-export const featuredProperties: Property[] = [
-  {
-    id: "p1",
-    title: "The Aurelia Residences",
-    location: "Whitefield",
-    city: "Bengaluru",
-    price: "₹1.85 Cr*",
-    status: "New Launch",
-    type: "3 & 4 BHK Apartment",
-    beds: "3–4 BHK",
-    area: "1,680–2,450 sq.ft",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
-    builder: "Aether Homes",
-    builderLogo: "AH",
-    verified: true,
-  },
-  {
-    id: "p2",
-    title: "Lakeview Imperial Villas",
-    location: "Sarjapur Road",
-    city: "Bengaluru",
-    price: "₹4.20 Cr*",
-    status: "Ready to Move",
-    type: "4 BHK Villa",
-    beds: "4 BHK",
-    area: "3,200–4,100 sq.ft",
-    image:
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80",
-    builder: "Crestline Estates",
-    builderLogo: "CE",
-    verified: true,
-  },
-  {
-    id: "p3",
-    title: "Meridian Business Park",
-    location: "ORR",
-    city: "Bengaluru",
-    price: "₹1.12 Cr*",
-    status: "Under Construction",
-    type: "Commercial Office",
-    beds: "Grade A",
-    area: "850–5,000 sq.ft",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80",
-    builder: "Vertex Realty",
-    builderLogo: "VR",
-    verified: true,
-  },
-  {
-    id: "p4",
-    title: "Serenity Greens Plots",
-    location: "Devanahalli",
-    city: "Bengaluru",
-    price: "₹78 Lakh*",
-    status: "New Launch",
-    type: "Premium Plot",
-    beds: "Plot",
-    area: "1,200–2,400 sq.ft",
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
-    builder: "Horizon Lands",
-    builderLogo: "HL",
-    verified: true,
-  },
-  {
-    id: "p5",
-    title: "Obsidian Sky Towers",
-    location: "Gachibowli",
-    city: "Hyderabad",
-    price: "₹2.45 Cr*",
-    status: "Under Construction",
-    type: "3 BHK Apartment",
-    beds: "3 BHK",
-    area: "1,920–2,180 sq.ft",
+    id: "psr-vanasree",
+    name: "PSR Vanasree",
+    type: "Residential Apartment",
+    status: "Ongoing",
+    developer: "PSR",
+    location: "Bengaluru",
+    description:
+      "Residential launch supported through premium branding, performance media, and sales-enablement workflows.",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
-    builder: "NorthPeak Group",
-    builderLogo: "NG",
-    verified: true,
-  },
-  {
-    id: "p6",
-    title: "Casa Marina Estate",
-    location: "ECR",
-    city: "Chennai",
-    price: "₹5.90 Cr*",
-    status: "Ready to Move",
-    type: "5 BHK Villa",
-    beds: "5 BHK",
-    area: "4,800 sq.ft",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
-    builder: "Lumina Developers",
-    builderLogo: "LD",
-    verified: true,
+    initials: "PV",
   },
 ];
 
+/** Official completed projects from Done & Delivered Brand Deck */
+export const completedProjects: Project[] = [
+  {
+    id: "sunshine-signature",
+    name: "Sunshine Signature",
+    type: "Residential",
+    status: "Completed",
+    developer: "Sunshine Signature",
+    location: "Bengaluru",
+    description:
+      "Completed residential mandate delivered with full-funnel marketing and sales support.",
+    image:
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+    initials: "SS",
+  },
+  {
+    id: "bhavishya-homes",
+    name: "Bhavishya Homes",
+    type: "Residential",
+    status: "Completed",
+    developer: "Bhavishya Homes Pvt. Ltd.",
+    location: "Bengaluru",
+    description:
+      "ISO-certified developer partnership with premium positioning and measurable lead outcomes.",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
+    initials: "BH",
+  },
+  {
+    id: "msr-dew-drops",
+    name: "MSR Dew Drops",
+    type: "Residential",
+    status: "Completed",
+    developer: "MSR Group",
+    location: "Bengaluru",
+    description:
+      "Completed residential campaign with performance marketing and conversion optimization.",
+    image:
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80",
+    initials: "MD",
+  },
+  {
+    id: "skanda-avani-c99",
+    name: "Skanda Avani C99",
+    type: "Lifestyle Villas",
+    status: "Completed",
+    developer: "Skanda Avani",
+    location: "Bengaluru",
+    description:
+      "Lifestyle villa project supported with creative branding and high-intent buyer outreach.",
+    image:
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80",
+    initials: "SA",
+  },
+];
+
+/** Verified developers / builder brands from official project portfolio */
 export const featuredDevelopers: Developer[] = [
-  { id: "d1", name: "Aether Homes", projects: "42 Projects", years: "28 yrs", logoInitials: "AH" },
-  { id: "d2", name: "Crestline Estates", projects: "31 Projects", years: "22 yrs", logoInitials: "CE" },
-  { id: "d3", name: "Vertex Realty", projects: "56 Projects", years: "35 yrs", logoInitials: "VR" },
-  { id: "d4", name: "Horizon Lands", projects: "19 Projects", years: "16 yrs", logoInitials: "HL" },
-  { id: "d5", name: "NorthPeak Group", projects: "48 Projects", years: "30 yrs", logoInitials: "NG" },
-  { id: "d6", name: "Lumina Developers", projects: "27 Projects", years: "20 yrs", logoInitials: "LD" },
-  { id: "d7", name: "Sovereign Build", projects: "38 Projects", years: "25 yrs", logoInitials: "SB" },
-  { id: "d8", name: "Paragon Infra", projects: "33 Projects", years: "18 yrs", logoInitials: "PI" },
+  {
+    id: "nikhar",
+    name: "Nikhar",
+    focus: "Residential Apartments",
+    initials: "NK",
+    projectCount: "Nikhar Celio",
+  },
+  {
+    id: "astro-city",
+    name: "Astro City",
+    focus: "Plotted Developments",
+    initials: "AC",
+    projectCount: "Astro Boulevards",
+  },
+  {
+    id: "psr",
+    name: "PSR",
+    focus: "Residential Apartments",
+    initials: "PS",
+    projectCount: "PSR Vanasree",
+  },
+  {
+    id: "sunshine",
+    name: "Sunshine Signature",
+    focus: "Completed Residential",
+    initials: "SS",
+    projectCount: "1 Completed",
+  },
+  {
+    id: "bhavishya",
+    name: "Bhavishya Homes",
+    focus: "ISO 9001:2015 Certified",
+    initials: "BH",
+    projectCount: "1 Completed",
+  },
+  {
+    id: "msr",
+    name: "MSR Group",
+    focus: "Construction & Delivery",
+    initials: "MS",
+    projectCount: "MSR Dew Drops",
+  },
+  {
+    id: "skanda",
+    name: "Skanda Avani",
+    focus: "Lifestyle Villas",
+    initials: "SA",
+    projectCount: "Avani C99",
+  },
+];
+
+export const services: ServiceItem[] = [
+  {
+    id: "s1",
+    title: "Premium Project Branding",
+    description:
+      "Luxury brand systems, positioning frameworks, and creative identity crafted for premium real-estate launches.",
+    icon: "branding",
+  },
+  {
+    id: "s2",
+    title: "Digital Marketing",
+    description:
+      "High-impact digital campaigns across search, social, and content channels built for serious buyer intent.",
+    icon: "digital",
+  },
+  {
+    id: "s3",
+    title: "Lead Generation",
+    description:
+      "Conversion-focused strategies that attract genuine homebuyers and fill developer pipelines with quality enquiries.",
+    icon: "leads",
+  },
+  {
+    id: "s4",
+    title: "Performance Marketing",
+    description:
+      "Data-led media buying, optimization, and reporting that turns visibility into measurable sales outcomes.",
+    icon: "performance",
+  },
+  {
+    id: "s5",
+    title: "Influencer Marketing",
+    description:
+      "Trusted creator partnerships that amplify project narratives to high-intent audiences with premium reach.",
+    icon: "influencer",
+  },
+  {
+    id: "s6",
+    title: "Sales Funnel Optimization",
+    description:
+      "End-to-end funnel design for real-estate launches—from first impression to site visit, pipeline, and booking.",
+    icon: "funnel",
+  },
 ];
 
 export const whyChooseItems: WhyChooseItem[] = [
   {
     id: "w1",
-    title: "End-to-End Verification",
+    title: "Premium Real Estate Marketing",
     description:
-      "Title diligence, RERA checks, site audits, and developer scoring—before any recommendation is made.",
-    icon: "shield",
+      "Exclusive real-estate focus with strategies built only for builders, developers, and premium property brands.",
+    icon: "megaphone",
   },
   {
     id: "w2",
-    title: "Luxury Portfolio Access",
+    title: "Verified Property Promotions",
     description:
-      "Exclusive inventory across apartments, villas, plots, and commercial assets in India’s growth cities.",
-    icon: "sparkles",
+      "Campaigns structured around authentic inventory storytelling, compliance-aware messaging, and buyer trust.",
+    icon: "badge",
   },
   {
     id: "w3",
-    title: "Investment Intelligence",
+    title: "Performance Marketing",
     description:
-      "Transparent pricing insights, yield projections, and corridor-level demand analytics for smarter decisions.",
+      "Advanced targeting and continuous optimization to reach genuine homebuyers—not vanity traffic.",
     icon: "chart",
   },
   {
     id: "w4",
-    title: "Dedicated Advisors",
+    title: "Lead Generation",
     description:
-      "Relationship-led guidance from specialists who understand both lifestyle living and capital growth.",
-    icon: "users",
+      "High-intent enquiry systems designed to improve visit rates, pipeline quality, and booking probability.",
+    icon: "target",
   },
   {
     id: "w5",
-    title: "Trusted Partnerships",
+    title: "Sales Enablement",
     description:
-      "Handpicked alliances with verified developers known for quality, compliance, and on-time delivery.",
-    icon: "handshake",
+      "From creative assets to CRM-ready follow-ups, we equip sales teams to convert faster and closer stronger.",
+    icon: "users",
   },
   {
     id: "w6",
-    title: "Seamless Transaction Care",
+    title: "Creative Branding",
     description:
-      "From shortlisting and site visits to documentation support—crafted for a calm, premium experience.",
-    icon: "badge",
+      "High-end creative execution and storytelling that elevates project presence in competitive markets.",
+    icon: "sparkles",
+  },
+  {
+    id: "w7",
+    title: "End-to-End Project Launch Support",
+    description:
+      "Strategy to execution—positioning, media, nurture, and sales support delivered as one integrated partner.",
+    icon: "handshake",
   },
 ];
 
-export const testimonials: Testimonial[] = [
+export const marketingProcess: ProcessStep[] = [
   {
-    id: "t1",
-    name: "Ananya Mehta",
-    role: "Founder, Studio Atelier",
-    location: "Bengaluru",
-    quote:
-      "Done & Delivered transformed a complex investment decision into a clear, confident process. The verification depth and presentation quality were unmatched.",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+    id: "reach",
+    title: "Reach",
+    summary: "Build awareness among the right premium audience.",
+    items: [
+      "Market research & consumer journey mapping",
+      "Target audience & SWOT analysis",
+      "Content strategy & media planning",
+      "PPC reach, social activation & influencer marketing",
+    ],
   },
   {
-    id: "t2",
-    name: "Rahul Khanna",
-    role: "Managing Director",
-    location: "Mumbai",
-    quote:
-      "Their advisory felt institutional yet personal. Every developer claim was validated, and the site visits were meticulously planned.",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    id: "acquisition",
+    title: "Acquisition",
+    summary: "Convert attention into qualified project enquiries.",
+    items: [
+      "Paid media & property portals",
+      "Website, content strategy & SEO",
+      "Remarketing & tech integration",
+      "Analytics, visualization & reporting",
+    ],
   },
   {
-    id: "t3",
-    name: "Sneha & Arjun Iyer",
-    role: "Homebuyers",
-    location: "Hyderabad",
-    quote:
-      "We found our villa without the usual noise of the market. Premium service, transparent pricing, and genuine care at every step.",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
+    id: "nurture",
+    title: "Nurture",
+    summary: "Stay present until high-intent buyers are ready.",
+    items: [
+      "SMS & email marketing sequences",
+      "WhatsApp nurturing workflows",
+      "Online site visits",
+      "Digital asset enablement",
+    ],
   },
   {
-    id: "t4",
-    name: "Vikram Shah",
-    role: "Portfolio Investor",
-    location: "Ahmedabad",
-    quote:
-      "The investment scoring framework alone justified working with them. Clean data, elegant communication, outstanding follow-through.",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
-  },
-];
-
-export const latestBlogs: BlogPost[] = [
-  {
-    id: "b1",
-    title: "How Verified Investments Reduce Risk in Luxury Real Estate",
-    excerpt:
-      "A practical framework for evaluating developer credibility, title integrity, and corridor fundamentals before you commit capital.",
-    category: "Investments",
-    date: "12 Mar 2026",
-    readTime: "6 min read",
-    image:
-      "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&w=1200&q=80",
-    href: "/blogs/verified-investments-reduce-risk",
-  },
-  {
-    id: "b2",
-    title: "Whitefield vs Sarjapur: Where Premium Buyers Are Moving Next",
-    excerpt:
-      "A side-by-side look at lifestyle amenities, rental demand, and long-term appreciation for discerning Bengaluru buyers.",
-    category: "Market Insights",
-    date: "04 Mar 2026",
-    readTime: "5 min read",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-    href: "/blogs/whitefield-vs-sarjapur",
-  },
-  {
-    id: "b3",
-    title: "The Complete Checklist Before Booking a Site Visit",
-    excerpt:
-      "From documentation requests to on-ground observations—prepare like a professional investor and buy with clarity.",
-    category: "Buyer Guide",
-    date: "21 Feb 2026",
-    readTime: "4 min read",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    href: "/blogs/site-visit-checklist",
+    id: "sales",
+    title: "Sales",
+    summary: "Drive pipeline velocity and booking outcomes.",
+    items: [
+      "Referral programs",
+      "Loyalty programs",
+      "Sales team enablement",
+      "Conversion-focused follow-through",
+    ],
   },
 ];
 
-export const heroSearchOptions = {
-  propertyTypes: ["Apartment", "Villa", "Plot", "Commercial"],
-  categories: ["Residential", "Investment", "Ready to Move", "New Launch"],
-  cities: ["Bengaluru", "Hyderabad", "Chennai", "Mumbai", "Pune", "Delhi NCR"],
-  budgets: [
-    "Under ₹50 Lakh",
-    "₹50L – ₹1 Cr",
-    "₹1 Cr – ₹2 Cr",
-    "₹2 Cr – ₹5 Cr",
-    "₹5 Cr+",
+/** Homepage sales funnel highlight (brand sales funnel system) */
+export const salesFunnel: FunnelStep[] = [
+  { id: "f1", value: "1450", label: "Leads" },
+  { id: "f2", value: "150", label: "Site Visits" },
+  { id: "f3", value: "60", label: "Re-visits" },
+  { id: "f4", value: "45", label: "Pipeline" },
+  { id: "f5", value: "35", label: "Price Discussion" },
+  { id: "f6", value: "25", label: "Closers" },
+];
+
+export const marketingTimeline: TimelinePhase[] = [
+  {
+    id: "pre-launch",
+    title: "Pre Launch",
+    weeks: "Week 1–2",
+    points: [
+      "CP activations and exclusive tech solutions",
+      "Awareness building among primary audiences",
+      "Vicinity pindrop targeting on Google & Meta",
+      "Performance campaigns for early lead generation",
+    ],
+  },
+  {
+    id: "performance",
+    title: "Performance",
+    weeks: "Week 3–10",
+    points: [
+      "Weekly optimization of performance campaigns",
+      "Remarketing for website and awareness traffic",
+      "Product & brand validation creative systems",
+      "Lead-service oriented budget allocation",
+    ],
+  },
+  {
+    id: "mop-up",
+    title: "Mop-up",
+    weeks: "Week 11–13",
+    points: [
+      "Refreshed communication and creatives",
+      "Remarketing and performance intensification",
+      "Inventory load-out with benefit-led offers",
+      "Focus on remaining unit conversion",
+    ],
+  },
+  {
+    id: "sustenance",
+    title: "Sustenance",
+    weeks: "Week 14–16",
+    points: [
+      "Controlled campaign pacing after stable lead volume",
+      "Remarketing for retained high-intent audiences",
+      "Ongoing support for residual inventory demand",
+      "Long-term brand presence maintenance",
+    ],
+  },
+];
+
+export const projectMegaMenu = ongoingProjects.map((project) => ({
+  title: project.name,
+  description: project.type,
+  href: `/#${project.id}`,
+  count: project.status,
+  icon:
+    project.type.toLowerCase().includes("plot")
+      ? ("map" as const)
+      : ("building" as const),
+  image: project.image,
+}));
+
+export const megaMenuFeaturedLinks = [
+  {
+    title: "Ongoing Projects",
+    description: "Active launch mandates we are marketing",
+    href: "/#ongoing-projects",
+  },
+  {
+    title: "Completed Projects",
+    description: "Delivered campaigns and sales outcomes",
+    href: "/#completed-projects",
+  },
+  {
+    title: "Our Services",
+    description: "Branding, media, leads & sales funnels",
+    href: "/#services",
+  },
+  {
+    title: "Book Consultation",
+    description: "Partner with Done & Delivered",
+    href: "/contact?intent=consultation",
+  },
+];
+
+export const heroConsultationOptions = {
+  projectTypes: [
+    "Residential Apartment",
+    "Villas",
+    "Plots",
+    "Commercial",
+    "Mixed Use",
   ],
+  goals: [
+    "Project Launch",
+    "Lead Generation",
+    "Brand Positioning",
+    "Sales Acceleration",
+    "Full-Funnel Marketing",
+  ],
+  cities: ["Bengaluru", "Hyderabad", "Chennai", "Mumbai", "Pune", "Other"],
+  timelines: ["Immediate", "1–3 Months", "3–6 Months", "Planning Stage"],
 };

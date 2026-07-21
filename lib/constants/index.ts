@@ -1,5 +1,5 @@
 export const SITE_NAME = "Done & Delivered";
-export const SITE_TAGLINE = "Helping people invest with confidence.";
+export const SITE_TAGLINE = "Premium Reach for Premium Properties";
 export const SITE_PHONE = "+91 98765 43210";
 export const SITE_PHONE_HREF = "tel:+919876543210";
 export const SITE_WHATSAPP = "https://wa.me/919876543210";
@@ -18,13 +18,12 @@ export const BRAND = {
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   {
-    label: "Properties",
-    href: "/properties",
+    label: "Projects",
+    href: "/#ongoing-projects",
     mega: true,
   },
-  { label: "Developers", href: "/developers" },
-  { label: "Investments", href: "/investments" },
-  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#marketing-process" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

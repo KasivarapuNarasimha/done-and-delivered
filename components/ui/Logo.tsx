@@ -54,7 +54,7 @@ export function Logo({
             isLight ? "text-white/65" : "text-muted",
           )}
         >
-          Verified Real Estate
+          Premium Property Marketing
         </span>
       </span>
     </Link>

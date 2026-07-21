@@ -1,9 +1,10 @@
 export { Hero } from "./Hero";
-export { VerifiedServices } from "./VerifiedServices";
-export { PropertyCategories } from "./PropertyCategories";
-export { FeaturedProperties } from "./FeaturedProperties";
-export { FeaturedDevelopers } from "./FeaturedDevelopers";
+export { Services } from "./Services";
 export { WhyChoose } from "./WhyChoose";
-export { Testimonials } from "./Testimonials";
-export { LatestBlogs } from "./LatestBlogs";
+export { MarketingProcess } from "./MarketingProcess";
+export { SalesFunnel } from "./SalesFunnel";
+export { MarketingTimeline } from "./MarketingTimeline";
+export { OngoingProjects } from "./OngoingProjects";
+export { CompletedProjects } from "./CompletedProjects";
+export { FeaturedDevelopers } from "./FeaturedDevelopers";
 export { CTA } from "./CTA";

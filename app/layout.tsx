@@ -22,19 +22,23 @@ const body = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://doneanddelivered.com"),
   title: {
-    default: "Done & Delivered | Verified Properties, Developers & Investments",
+    default:
+      "Done & Delivered | Premium Real Estate Marketing & Property Branding",
     template: "%s | Done & Delivered",
   },
   description:
-    "Done & Delivered is a premium enterprise real estate platform for verified properties, verified developers, and verified investments—helping people invest with confidence.",
+    "Done & Delivered is a premium real estate marketing and sales partner for builders and developers—specializing in property branding, project launches, performance marketing, lead generation, and luxury property marketing.",
   keywords: [
+    "Done & Delivered",
     "Done and Delivered",
-    "verified properties",
-    "verified developers",
-    "verified investments",
-    "luxury real estate",
-    "premium property advisory",
-    "RERA verified projects",
+    "Premium Real Estate Marketing",
+    "Property Branding",
+    "Project Launch",
+    "Luxury Property Marketing",
+    "Real Estate Lead Generation",
+    "Performance Marketing for Developers",
+    "Sales Funnel Optimization",
+    "Real Estate Marketing Agency India",
   ],
   authors: [{ name: "Done & Delivered" }],
   creator: "Done & Delivered",
@@ -42,15 +46,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "Done & Delivered",
-    title: "Done & Delivered | Verified Properties, Developers & Investments",
+    title:
+      "Done & Delivered | Premium Real Estate Marketing & Property Branding",
     description:
-      "Premium enterprise real estate platform for verified properties, developers, and investments.",
+      "Premium reach for premium properties. Project branding, performance marketing, lead generation, and end-to-end sales support for builders and developers.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Done & Delivered | Verified Real Estate",
+    title: "Done & Delivered | Premium Real Estate Marketing",
     description:
-      "Helping people invest with confidence through verified properties, developers, and investments.",
+      "Premium property marketing, branding, project launches, and sales enablement for developers.",
   },
   robots: {
     index: true,

@@ -26,7 +26,7 @@ import {
   SITE_PHONE_HREF,
   SITE_WHATSAPP,
 } from "@/lib/constants";
-import { megaMenuFeaturedLinks, propertyMegaMenu } from "@/lib/data/homepage";
+import { megaMenuFeaturedLinks, projectMegaMenu } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils";
 
 const megaIcons = {
@@ -124,7 +124,7 @@ export function Header() {
                         <motion.div
                           id={megaId}
                           role="region"
-                          aria-label="Properties menu"
+                          aria-label="Projects menu"
                           initial={{ opacity: 0, y: 14, scale: 0.985 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.985 }}
@@ -140,14 +140,14 @@ export function Header() {
                                 <div className="mb-4 flex items-end justify-between gap-3">
                                   <div>
                                     <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-accent-dark">
-                                      Browse by category
+                                      Official portfolio
                                     </p>
                                     <p className="mt-1 font-display text-2xl text-primary">
-                                      Explore Properties
+                                      Ongoing Projects
                                     </p>
                                   </div>
                                   <Link
-                                    href="/properties"
+                                    href="/#ongoing-projects"
                                     className="inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-accent-dark"
                                   >
                                     View all
@@ -156,7 +156,7 @@ export function Header() {
                                 </div>
 
                                 <div className="grid gap-3 sm:grid-cols-2">
-                                  {propertyMegaMenu.map((item) => {
+                                  {projectMegaMenu.map((item) => {
                                     const Icon = megaIcons[item.icon];
                                     return (
                                       <Link
@@ -219,16 +219,17 @@ export function Header() {
 
                                 <div className="mt-5 rounded-2xl border border-primary/10 bg-primary p-4 text-white">
                                   <p className="text-sm font-semibold">
-                                    Need curated shortlists?
+                                    Launching a premium project?
                                   </p>
                                   <p className="mt-1 text-xs text-white/70">
-                                    Speak with a verified property advisor today.
+                                    Partner with Done & Delivered for branding,
+                                    leads, and sales systems.
                                   </p>
                                   <Link
                                     href="/contact?intent=consultation"
                                     className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent transition-colors hover:text-accent-soft"
                                   >
-                                    Book free consultation
+                                    Book consultation
                                     <ArrowUpRight className="h-4 w-4" />
                                   </Link>
                                 </div>
@@ -328,7 +329,7 @@ export function Header() {
                       </button>
                       {mobilePropsOpen ? (
                         <div className="space-y-1 px-2 pb-3">
-                          {propertyMegaMenu.map((item) => {
+                          {projectMegaMenu.map((item) => {
                             const Icon = megaIcons[item.icon];
                             return (
                               <Link

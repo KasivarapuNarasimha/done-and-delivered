@@ -21,20 +21,20 @@ import { Reveal } from "@/components/animations/Reveal";
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "Properties", href: "/properties" },
-  { label: "Developers", href: "/developers" },
-  { label: "Investments", href: "/investments" },
-  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/#services" },
+  { label: "Marketing Process", href: "/#marketing-process" },
+  { label: "Ongoing Projects", href: "/#ongoing-projects" },
+  { label: "Completed Projects", href: "/#completed-projects" },
   { label: "About", href: "/about" },
 ];
 
 const serviceLinks = [
-  { label: "Verified Properties", href: "/properties" },
-  { label: "Verified Developers", href: "/developers" },
-  { label: "Verified Investments", href: "/investments" },
-  { label: "Book Site Visit", href: "/contact?intent=site-visit" },
-  { label: "Free Consultation", href: "/contact?intent=consultation" },
-  { label: "Contact", href: "/contact" },
+  { label: "Premium Project Branding", href: "/#services" },
+  { label: "Digital Marketing", href: "/#services" },
+  { label: "Lead Generation", href: "/#services" },
+  { label: "Performance Marketing", href: "/#services" },
+  { label: "Sales Funnel Optimization", href: "/#sales-funnel" },
+  { label: "Book Consultation", href: "/contact?intent=consultation" },
 ];
 
 const socials = [
@@ -93,8 +93,9 @@ export function Footer() {
           <Reveal>
             <Logo variant="light" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/80">
-              A premium enterprise real estate platform built on verification,
-              trust, and refined advisory—helping people invest with confidence.
+              A specialized real-estate marketing agency dedicated to helping
+              builders, developers, and premium property brands reach the right
+              audience with precision and impact.
             </p>
             <div className="mt-6 flex items-center gap-2.5">
               {socials.map(({ label, href, icon: Icon }) => (
