@@ -128,6 +128,27 @@ const jsonLd = {
 export default function HomePage() {
   return (
     <>
+      {/* TEMPORARY — remove after Hostinger deploy verification */}
+      <div
+        style={{
+          position: "fixed",
+          top: 12,
+          left: 12,
+          zIndex: 99999,
+          background: "#FF0000",
+          color: "#FFFFFF",
+          fontWeight: 800,
+          fontSize: 14,
+          lineHeight: 1.2,
+          padding: "10px 14px",
+          borderRadius: 8,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+          letterSpacing: "0.02em",
+          fontFamily: "system-ui, sans-serif",
+        }}
+      >
+        DEPLOY TEST 9150426
+      </div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
