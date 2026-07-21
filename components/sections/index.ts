@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { VerifiedServices } from "./VerifiedServices";
+export { PropertyCategories } from "./PropertyCategories";
+export { FeaturedProperties } from "./FeaturedProperties";
+export { FeaturedDevelopers } from "./FeaturedDevelopers";
+export { WhyChoose } from "./WhyChoose";
+export { Testimonials } from "./Testimonials";
+export { LatestBlogs } from "./LatestBlogs";
+export { CTA } from "./CTA";

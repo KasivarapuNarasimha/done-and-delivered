@@ -1,5 +1,5 @@
-/**
- * Shared TypeScript types and interfaces.
- */
-
-export {};
+export type NavLink = {
+  label: string;
+  href: string;
+  mega?: boolean;
+};
