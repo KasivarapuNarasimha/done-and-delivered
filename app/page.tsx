@@ -70,7 +70,7 @@ const jsonLd = {
         "Done & Delivered is a specialized real-estate marketing agency for builders, developers, and premium property brands—delivering premium project branding, performance marketing, lead generation, and end-to-end sales support.",
       slogan: "Premium Reach for Premium Properties",
       email: "hello@doneanddelivered.com",
-      telephone: "+91-98765-43210",
+      telephone: "+91-91104-17950",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Level 12, Prestige Towers, MG Road",

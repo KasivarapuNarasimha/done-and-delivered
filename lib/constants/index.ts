@@ -1,8 +1,8 @@
 export const SITE_NAME = "Done & Delivered";
 export const SITE_TAGLINE = "Premium Reach for Premium Properties";
-export const SITE_PHONE = "+91 98765 43210";
-export const SITE_PHONE_HREF = "tel:+919876543210";
-export const SITE_WHATSAPP = "https://wa.me/919876543210";
+export const SITE_PHONE = "+91 91104 17950";
+export const SITE_PHONE_HREF = "tel:+919110417950";
+export const SITE_WHATSAPP = "https://wa.me/919110417950";
 export const SITE_EMAIL = "hello@doneanddelivered.com";
 export const SITE_ADDRESS =
   "Level 12, Prestige Towers, MG Road, Bengaluru 560001";
