@@ -78,7 +78,7 @@ export const ongoingProjects: Project[] = [
     description:
       "Premium residential apartments positioned with luxury storytelling and high-intent buyer acquisition.",
     image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=70",
     initials: "NC",
   },
   {
@@ -91,7 +91,7 @@ export const ongoingProjects: Project[] = [
     description:
       "Plot inventory marketed with corridor-focused demand generation and conversion-led campaign systems.",
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=70",
     initials: "AB",
   },
   {
@@ -104,7 +104,7 @@ export const ongoingProjects: Project[] = [
     description:
       "Residential launch supported through premium branding, performance media, and sales-enablement workflows.",
     image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=70",
     initials: "PV",
   },
 ];
@@ -121,7 +121,7 @@ export const completedProjects: Project[] = [
     description:
       "Completed residential mandate delivered with full-funnel marketing and sales support.",
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=70",
     initials: "SS",
   },
   {
@@ -134,7 +134,7 @@ export const completedProjects: Project[] = [
     description:
       "ISO-certified developer partnership with premium positioning and measurable lead outcomes.",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=70",
     initials: "BH",
   },
   {
@@ -147,7 +147,7 @@ export const completedProjects: Project[] = [
     description:
       "Completed residential campaign with performance marketing and conversion optimization.",
     image:
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=70",
     initials: "MD",
   },
   {
@@ -160,7 +160,7 @@ export const completedProjects: Project[] = [
     description:
       "Lifestyle villa project supported with creative branding and high-intent buyer outreach.",
     image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=70",
     initials: "SA",
   },
 ];
@@ -428,7 +428,8 @@ export const projectMegaMenu = ongoingProjects.map((project) => ({
     project.type.toLowerCase().includes("plot")
       ? ("map" as const)
       : ("building" as const),
-  image: project.image,
+  // Smaller assets for mega-menu thumbnails
+  image: project.image.replace("w=900", "w=480"),
 }));
 
 export const megaMenuFeaturedLinks = [

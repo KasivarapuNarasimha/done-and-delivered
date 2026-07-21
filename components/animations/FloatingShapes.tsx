@@ -2,23 +2,35 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { scheduleIdle } from "@/lib/utils/schedule";
 
+/**
+ * Decorative only — deferred until idle and limited to desktop fine-pointer devices
+ * so initial load / LCP is not competing with continuous animation work.
+ */
 export function FloatingShapes({
   variant = "light",
 }: {
   variant?: "light" | "dark";
 }) {
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const [canAnimate, setCanAnimate] = useState(false);
 
   useEffect(() => {
-    // Avoid continuous animation work on small screens / low-power contexts
-    const mq = window.matchMedia("(min-width: 768px) and (hover: hover)");
-    const update = () => setCanAnimate(mq.matches && !reduceMotion);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    const start = () => {
+      setMounted(true);
+      const mq = window.matchMedia("(min-width: 768px) and (hover: hover)");
+      setCanAnimate(mq.matches && !reduceMotion);
+    };
+
+    const cancel = scheduleIdle(start, 2200);
+    return cancel;
   }, [reduceMotion]);
+
+  if (!mounted) {
+    return null;
+  }
 
   const shapes =
     variant === "light"

@@ -5,18 +5,24 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
+/** Display font — limited weights for faster download */
 const display = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
+/** Body font — essential weights only */
 const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -76,10 +82,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-      </head>
       <body className={`${display.variable} ${body.variable} antialiased`}>
         <a href="#main-content" className="skip-link">
           Skip to main content

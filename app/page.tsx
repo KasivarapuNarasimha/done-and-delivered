@@ -1,24 +1,32 @@
 import dynamic from "next/dynamic";
-import { PageLoad } from "@/components/animations/PageLoad";
 import { Hero } from "@/components/sections/Hero";
-import { Services } from "@/components/sections/Services";
-import { WhyChoose } from "@/components/sections/WhyChoose";
 
 /**
- * Below-the-fold sections are code-split for faster initial paint / LCP.
+ * Only the Hero is eager — everything below folds is code-split.
+ * SSR stays on for SEO; client JS loads as chunks when needed.
  */
+const Services = dynamic(
+  () => import("@/components/sections/Services").then((m) => m.Services),
+  { ssr: true, loading: () => <SectionSkeleton /> },
+);
+
+const WhyChoose = dynamic(
+  () => import("@/components/sections/WhyChoose").then((m) => m.WhyChoose),
+  { ssr: true, loading: () => <SectionSkeleton /> },
+);
+
 const MarketingProcess = dynamic(
   () =>
     import("@/components/sections/MarketingProcess").then(
       (m) => m.MarketingProcess,
     ),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
 const SalesFunnel = dynamic(
   () =>
     import("@/components/sections/SalesFunnel").then((m) => m.SalesFunnel),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton dark /> },
 );
 
 const MarketingTimeline = dynamic(
@@ -26,7 +34,7 @@ const MarketingTimeline = dynamic(
     import("@/components/sections/MarketingTimeline").then(
       (m) => m.MarketingTimeline,
     ),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
 const OngoingProjects = dynamic(
@@ -34,7 +42,7 @@ const OngoingProjects = dynamic(
     import("@/components/sections/OngoingProjects").then(
       (m) => m.OngoingProjects,
     ),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
 const CompletedProjects = dynamic(
@@ -42,7 +50,7 @@ const CompletedProjects = dynamic(
     import("@/components/sections/CompletedProjects").then(
       (m) => m.CompletedProjects,
     ),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
 const FeaturedDevelopers = dynamic(
@@ -50,13 +58,31 @@ const FeaturedDevelopers = dynamic(
     import("@/components/sections/FeaturedDevelopers").then(
       (m) => m.FeaturedDevelopers,
     ),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton dark /> },
 );
 
 const CTA = dynamic(
   () => import("@/components/sections/CTA").then((m) => m.CTA),
-  { ssr: true },
+  { ssr: true, loading: () => <SectionSkeleton /> },
 );
+
+function SectionSkeleton({ dark = false }: { dark?: boolean }) {
+  return (
+    <div
+      className={`section-pad ${dark ? "bg-primary" : "bg-background"}`}
+      aria-hidden
+    >
+      <div className="container-pad">
+        <div
+          className={`mx-auto h-8 max-w-md rounded-full ${dark ? "bg-white/10" : "bg-primary/8"}`}
+        />
+        <div
+          className={`mx-auto mt-4 h-4 max-w-lg rounded-full ${dark ? "bg-white/5" : "bg-primary/5"}`}
+        />
+      </div>
+    </div>
+  );
+}
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -101,7 +127,7 @@ const jsonLd = {
 
 export default function HomePage() {
   return (
-    <PageLoad>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -116,6 +142,6 @@ export default function HomePage() {
       <CompletedProjects />
       <FeaturedDevelopers />
       <CTA />
-    </PageLoad>
+    </>
   );
 }

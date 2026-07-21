@@ -170,7 +170,9 @@ export function Header() {
                                             alt=""
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                            sizes="280px"
+                                            sizes="200px"
+                                            quality={60}
+                                            loading="lazy"
                                           />
                                           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/45 to-transparent" />
                                           <div className="absolute left-3 top-3 grid h-9 w-9 place-items-center rounded-xl border border-white/20 bg-white/15 text-white backdrop-blur-md">

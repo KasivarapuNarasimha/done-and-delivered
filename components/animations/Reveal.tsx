@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 type Direction = "up" | "down" | "left" | "right" | "none";
 
 const offsets: Record<Direction, { x: number; y: number }> = {
-  up: { x: 0, y: 28 },
-  down: { x: 0, y: -28 },
-  left: { x: 28, y: 0 },
-  right: { x: -28, y: 0 },
+  up: { x: 0, y: 20 },
+  down: { x: 0, y: -20 },
+  left: { x: 20, y: 0 },
+  right: { x: -20, y: 0 },
   none: { x: 0, y: 0 },
 };
 
@@ -18,7 +18,7 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  duration = 0.65,
+  duration = 0.55,
   direction = "up",
   once = true,
 }: {
@@ -41,7 +41,7 @@ export function Reveal({
       className={cn(className)}
       initial={{ opacity: 0, x: offset.x, y: offset.y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-6% 0px", amount: 0.15 }}
+      viewport={{ once, margin: "0px 0px -8% 0px", amount: 0.12 }}
       transition={{
         duration,
         delay,

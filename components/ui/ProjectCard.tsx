@@ -13,11 +13,13 @@ export function ProjectCard({
   delay = 0,
   animate = true,
   className,
+  priority = false,
 }: {
   project: Project;
   delay?: number;
   animate?: boolean;
   className?: string;
+  priority?: boolean;
 }) {
   const card = (
     <article
@@ -34,7 +36,9 @@ export function ProjectCard({
           fill
           className="object-cover"
           sizes="(max-width: 640px) 92vw, (max-width: 1200px) 45vw, 360px"
-          quality={75}
+          quality={65}
+          loading={priority ? "eager" : "lazy"}
+          priority={priority}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/15 to-transparent" />
 

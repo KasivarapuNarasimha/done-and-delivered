@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import {
   Building2,
   CalendarRange,
@@ -19,6 +18,10 @@ import { Badge } from "@/components/ui/Badge";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
 import { heroConsultationOptions } from "@/lib/data/homepage";
 import { SITE_TAGLINE } from "@/lib/constants";
+import { scheduleIdle } from "@/lib/utils/schedule";
+
+/** Local asset — Next Image serves AVIF/WebP variants automatically. */
+const HERO_IMAGE = "/images/hero-bg.jpg";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -32,71 +35,96 @@ export function Hero() {
     timeline: "",
   });
 
+  // Defer GSAP entrance until after first paint so LCP image/text stay unblocked.
   useEffect(() => {
     if (reduceMotion || !headlineRef.current) return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    let cancelled = false;
+    let ctx: { revert: () => void } | undefined;
 
-      tl.fromTo(
-        ".hero-bg-image",
-        { scale: 1.14, opacity: 0.65 },
-        { scale: 1, opacity: 1, duration: 2.1, ease: "power2.out" },
-      )
-        .fromTo(
-          ".hero-line",
-          { y: 42, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, stagger: 0.1 },
-          0.2,
-        )
-        .fromTo(
-          ".hero-search",
-          { y: 36, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.85 },
-          0.55,
-        )
-        .fromTo(
-          ".hero-stats > *",
-          { y: 18, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 },
-          0.75,
+    const cancelIdle = scheduleIdle(async () => {
+      if (cancelled) return;
+      const gsap = (await import("gsap")).default;
+      if (cancelled || !sectionRef.current) return;
+
+      ctx = gsap.context(() => {
+        // Content is already painted for LCP — only enhance with light motion.
+        // Avoid opacity:0 after paint (causes flash + hurts INP/CLS).
+        gsap.fromTo(
+          ".hero-bg-image",
+          { scale: 1.05 },
+          { scale: 1, duration: 1.35, ease: "power2.out" },
         );
-    }, sectionRef);
+        gsap.from(".hero-line", {
+          y: 16,
+          duration: 0.65,
+          stagger: 0.05,
+          ease: "power3.out",
+          clearProps: "transform",
+        });
+        gsap.from(".hero-search", {
+          y: 14,
+          duration: 0.6,
+          delay: 0.12,
+          ease: "power3.out",
+          clearProps: "transform",
+        });
+      }, sectionRef);
+    }, 1200);
 
-    return () => ctx.revert();
+    return () => {
+      cancelled = true;
+      cancelIdle();
+      ctx?.revert();
+    };
   }, [reduceMotion]);
 
+  // Mouse parallax: desktop only, deferred, rAF-throttled.
   useEffect(() => {
     if (reduceMotion) return;
-    const section = sectionRef.current;
-    const bg = bgRef.current;
-    if (!section || !bg) return;
 
-    const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    if (!pointerMq.matches) return;
+    let cancelled = false;
+    let removeListener: (() => void) | undefined;
 
-    let frame = 0;
-    const onMove = (event: MouseEvent) => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        const rect = section.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        gsap.to(bg, {
-          x: x * 14,
-          y: y * 8,
-          duration: 1.15,
-          ease: "power3.out",
-          overwrite: true,
+    const cancelIdle = scheduleIdle(() => {
+      if (cancelled) return;
+      const section = sectionRef.current;
+      const bg = bgRef.current;
+      if (!section || !bg) return;
+
+      const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!pointerMq.matches) return;
+
+      let frame = 0;
+      const onMove = (event: MouseEvent) => {
+        if (frame) return;
+        frame = window.requestAnimationFrame(async () => {
+          frame = 0;
+          const gsap = (await import("gsap")).default;
+          const rect = section.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(bg, {
+            x: x * 12,
+            y: y * 7,
+            duration: 1.1,
+            ease: "power3.out",
+            overwrite: true,
+          });
         });
-      });
-    };
+      };
 
-    section.addEventListener("mousemove", onMove, { passive: true });
+      section.addEventListener("mousemove", onMove, { passive: true });
+      removeListener = () => {
+        section.removeEventListener("mousemove", onMove);
+        if (frame) window.cancelAnimationFrame(frame);
+      };
+    }, 2000);
+
     return () => {
-      section.removeEventListener("mousemove", onMove);
-      if (frame) window.cancelAnimationFrame(frame);
+      cancelled = true;
+      cancelIdle();
+      removeListener?.();
     };
   }, [reduceMotion]);
 
@@ -106,21 +134,23 @@ export function Hero() {
       className="relative min-h-[100svh] overflow-hidden bg-primary pt-[4.75rem] md:pt-[5.25rem]"
       aria-labelledby="hero-heading"
     >
-      <div ref={bgRef} className="absolute inset-[-4%]">
+      <div ref={bgRef} className="absolute inset-[-2%]">
         <Image
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=75"
+          src={HERO_IMAGE}
           alt="Premium real estate marketing for luxury property brands"
           fill
           priority
           fetchPriority="high"
-          quality={75}
+          quality={62}
+          placeholder="empty"
           className="hero-bg-image object-cover object-[center_30%]"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1400px"
         />
         <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.94)_0%,rgba(11,46,131,0.84)_48%,rgba(11,46,131,0.48)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.24),transparent_38%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.35),transparent_30%)]" />
-        <div className="premium-noise absolute inset-0" />
+        {/* Noise deferred via CSS content-visibility on large screens only */}
+        <div className="premium-noise absolute inset-0 max-md:hidden" />
       </div>
 
       <FloatingShapes variant="dark" />
@@ -199,12 +229,7 @@ export function Hero() {
           </div>
         </div>
 
-        <motion.div
-          className="hero-search mt-10 md:mt-12"
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65, duration: 0.75 }}
-        >
+        <div className="hero-search mt-10 md:mt-12">
           <div className="relative overflow-hidden rounded-[1.75rem] border border-white/50 bg-white/95 p-3 shadow-[0_36px_90px_rgba(8,31,92,0.32)] backdrop-blur-xl sm:p-4 md:p-5">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
 
@@ -224,7 +249,7 @@ export function Hero() {
                 </div>
               </div>
               <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/25 bg-accent/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-accent-dark">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 For Builders & Developers
               </span>
             </div>
@@ -340,7 +365,7 @@ export function Hero() {
               </div>
             </form>
           </div>
-        </motion.div>
+        </div>
 
         <div className="hero-stats mt-8 grid grid-cols-3 gap-2 sm:gap-3 lg:hidden">
           {[
