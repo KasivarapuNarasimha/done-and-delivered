@@ -68,7 +68,7 @@ export function SectionHeading({
           <p
             className={cn(
               "mt-5 max-w-2xl text-[0.98rem] leading-relaxed md:text-lg",
-              light ? "text-white/72" : "text-muted",
+              light ? "text-white/85" : "text-muted",
               align === "center" && "mx-auto",
             )}
           >

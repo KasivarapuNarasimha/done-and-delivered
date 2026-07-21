@@ -57,6 +57,18 @@ export function Header() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMegaOpen(false);
+        setMobileOpen(false);
+        setMobilePropsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   const solid = scrolled || mobileOpen || megaOpen;
 
   return (
@@ -246,14 +258,14 @@ export function Header() {
             <button
               type="button"
               aria-label="Search properties"
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary sm:h-11 sm:w-11"
+              className="touch-target grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary"
             >
               <Search className="h-4 w-4" />
             </button>
 
             <a
               href={SITE_PHONE_HREF}
-              className="hidden items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary lg:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary lg:inline-flex"
             >
               <Phone className="h-4 w-4" aria-hidden />
               <span className="hidden xl:inline">{SITE_PHONE}</span>
@@ -264,7 +276,7 @@ export function Header() {
               href={SITE_WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-11 w-11 place-items-center rounded-full border border-accent/50 bg-accent text-primary transition-all duration-300 hover:scale-[1.04] hover:bg-accent-dark hover:text-white md:grid"
+              className="touch-target hidden place-items-center rounded-full border border-accent/50 bg-accent text-primary transition-all duration-300 hover:scale-[1.04] hover:bg-accent-dark hover:text-white md:grid"
               aria-label="Chat on WhatsApp"
             >
               <FaWhatsapp className="h-4 w-4" />
@@ -272,7 +284,7 @@ export function Header() {
 
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-all xl:hidden sm:h-11 sm:w-11"
+              className="touch-target grid place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-all xl:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}

@@ -50,7 +50,7 @@ export function FeaturedDevelopers() {
                 <h3 className="relative font-display text-base text-white sm:text-lg md:text-xl">
                   {developer.name}
                 </h3>
-                <p className="relative mt-1.5 text-[0.7rem] text-white/60 sm:mt-2 sm:text-xs md:text-sm">
+                <p className="relative mt-1.5 text-[0.7rem] text-white/75 sm:mt-2 sm:text-xs md:text-sm">
                   {developer.projects} · {developer.years}
                 </p>
                 <div className="relative mt-3 flex justify-center sm:mt-4">

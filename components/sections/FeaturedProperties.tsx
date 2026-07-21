@@ -10,6 +10,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PropertyCard } from "@/components/ui/PropertyCard";
 import { Button } from "@/components/ui/Button";
 import { featuredProperties } from "@/lib/data/homepage";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export function FeaturedProperties() {
   const swiperRef = useRef<SwiperType | null>(null);
@@ -35,7 +37,7 @@ export function FeaturedProperties() {
             <button
               type="button"
               aria-label="Previous properties"
-              className="grid h-11 w-11 place-items-center rounded-full border border-primary/10 bg-white text-primary shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white md:h-12 md:w-12"
+              className="touch-target grid h-11 w-11 place-items-center rounded-full border border-primary/10 bg-white text-primary shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white md:h-12 md:w-12"
               onClick={() => swiperRef.current?.slidePrev()}
             >
               <ChevronLeft className="h-5 w-5" />
@@ -43,7 +45,7 @@ export function FeaturedProperties() {
             <button
               type="button"
               aria-label="Next properties"
-              className="grid h-11 w-11 place-items-center rounded-full border border-primary/10 bg-white text-primary shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white md:h-12 md:w-12"
+              className="touch-target grid h-11 w-11 place-items-center rounded-full border border-primary/10 bg-white text-primary shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white md:h-12 md:w-12"
               onClick={() => swiperRef.current?.slideNext()}
             >
               <ChevronRight className="h-5 w-5" />
@@ -54,17 +56,18 @@ export function FeaturedProperties() {
         <div className="dd-swiper relative">
           <Swiper
             modules={[Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1.05}
+            spaceBetween={16}
+            slidesPerView={1.04}
             pagination={{ clickable: true }}
             autoplay={{
-              delay: 4800,
+              delay: 5200,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
             breakpoints={{
-              640: { slidesPerView: 1.25, spaceBetween: 20 },
-              768: { slidesPerView: 2, spaceBetween: 22 },
+              480: { slidesPerView: 1.12, spaceBetween: 16 },
+              640: { slidesPerView: 1.3, spaceBetween: 18 },
+              768: { slidesPerView: 2, spaceBetween: 20 },
               1200: { slidesPerView: 3, spaceBetween: 24 },
             }}
             onBeforeInit={(swiper) => {
@@ -74,7 +77,7 @@ export function FeaturedProperties() {
           >
             {featuredProperties.map((property) => (
               <SwiperSlide key={property.id} className="!h-auto">
-                <PropertyCard property={property} />
+                <PropertyCard property={property} animate={false} />
               </SwiperSlide>
             ))}
           </Swiper>

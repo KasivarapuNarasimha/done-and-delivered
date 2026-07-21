@@ -45,10 +45,11 @@ export function LatestBlogs() {
                 >
                   <Image
                     src={post.image}
-                    alt=""
+                    alt={post.title}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 33vw"
+                    quality={75}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/55 to-transparent opacity-75" />
                   <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-primary shadow-sm">

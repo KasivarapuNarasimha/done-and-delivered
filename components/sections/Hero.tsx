@@ -71,20 +71,33 @@ export function Hero() {
     const bg = bgRef.current;
     if (!section || !bg) return;
 
+    // Mouse parallax only on fine pointers (desktop) for performance
+    const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!pointerMq.matches) return;
+
+    let frame = 0;
     const onMove = (event: MouseEvent) => {
-      const rect = section.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      gsap.to(bg, {
-        x: x * 16,
-        y: y * 10,
-        duration: 1.2,
-        ease: "power3.out",
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const rect = section.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(bg, {
+          x: x * 14,
+          y: y * 8,
+          duration: 1.15,
+          ease: "power3.out",
+          overwrite: true,
+        });
       });
     };
 
-    section.addEventListener("mousemove", onMove);
-    return () => section.removeEventListener("mousemove", onMove);
+    section.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      section.removeEventListener("mousemove", onMove);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [reduceMotion]);
 
   return (
@@ -95,10 +108,12 @@ export function Hero() {
     >
       <div ref={bgRef} className="absolute inset-[-4%]">
         <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=80"
-          alt=""
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=75"
+          alt="Luxury modern residence representing Done & Delivered verified properties"
           fill
           priority
+          fetchPriority="high"
+          quality={75}
           className="hero-bg-image object-cover object-[center_35%]"
           sizes="100vw"
         />
@@ -123,7 +138,7 @@ export function Hero() {
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.35rem] leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[4.15rem]"
+              className="font-display text-[2.15rem] leading-[1.08] text-white sm:text-5xl md:text-6xl lg:text-[4.15rem]"
             >
               <span className="hero-line block">Verified Properties.</span>
               <span className="hero-line mt-1.5 block sm:mt-2">
@@ -137,7 +152,7 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="hero-line mt-5 max-w-xl text-[0.98rem] leading-relaxed text-white/80 sm:mt-6 sm:text-lg md:text-xl">
+            <p className="hero-line mt-5 max-w-xl text-[0.95rem] leading-relaxed text-white/90 sm:mt-6 sm:text-lg md:text-xl">
               {SITE_TAGLINE} An enterprise advisory platform built for luxury
               living and capital decisions you can trust.
             </p>

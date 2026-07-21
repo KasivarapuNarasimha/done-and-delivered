@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function FloatingShapes({
   variant = "light",
@@ -8,6 +9,16 @@ export function FloatingShapes({
   variant?: "light" | "dark";
 }) {
   const reduceMotion = useReducedMotion();
+  const [canAnimate, setCanAnimate] = useState(false);
+
+  useEffect(() => {
+    // Avoid continuous animation work on small screens / low-power contexts
+    const mq = window.matchMedia("(min-width: 768px) and (hover: hover)");
+    const update = () => setCanAnimate(mq.matches && !reduceMotion);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [reduceMotion]);
 
   const shapes =
     variant === "light"
@@ -23,33 +34,36 @@ export function FloatingShapes({
         ];
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden
+    >
       <motion.div
-        className={`float-shape left-[-8%] top-[12%] h-56 w-56 md:h-72 md:w-72 ${shapes[0]}`}
+        className={`float-shape left-[-8%] top-[12%] h-40 w-40 md:h-72 md:w-72 ${shapes[0]}`}
         animate={
-          reduceMotion
-            ? undefined
-            : { y: [0, 24, 0], x: [0, 12, 0], scale: [1, 1.05, 1] }
-        }
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className={`float-shape right-[-6%] top-[28%] h-48 w-48 md:h-64 md:w-64 ${shapes[1]}`}
-        animate={
-          reduceMotion
-            ? undefined
-            : { y: [0, -20, 0], x: [0, -10, 0], scale: [1, 1.08, 1] }
+          canAnimate
+            ? { y: [0, 20, 0], x: [0, 10, 0], scale: [1, 1.04, 1] }
+            : undefined
         }
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className={`float-shape bottom-[-10%] left-[30%] h-64 w-64 md:h-80 md:w-80 ${shapes[2]}`}
+        className={`float-shape right-[-6%] top-[28%] h-36 w-36 md:h-64 md:w-64 ${shapes[1]}`}
         animate={
-          reduceMotion
-            ? undefined
-            : { y: [0, 16, 0], x: [0, 18, 0], scale: [1, 1.04, 1] }
+          canAnimate
+            ? { y: [0, -16, 0], x: [0, -8, 0], scale: [1, 1.06, 1] }
+            : undefined
         }
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className={`float-shape bottom-[-10%] left-[30%] hidden h-80 w-80 md:block ${shapes[2]}`}
+        animate={
+          canAnimate
+            ? { y: [0, 14, 0], x: [0, 14, 0], scale: [1, 1.03, 1] }
+            : undefined
+        }
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );

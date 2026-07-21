@@ -7,6 +7,8 @@ import { BadgeCheck, Quote, Star } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { testimonials } from "@/lib/data/homepage";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export function Testimonials() {
   return (
@@ -78,10 +80,11 @@ export function Testimonials() {
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-accent/45 shadow-[0_0_0_3px_rgba(212,175,55,0.12)]">
                       <Image
                         src={item.image}
-                        alt=""
+                        alt={`Portrait of ${item.name}`}
                         fill
                         className="object-cover"
                         sizes="48px"
+                        quality={70}
                       />
                     </div>
                     <div className="min-w-0">

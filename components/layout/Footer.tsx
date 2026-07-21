@@ -63,7 +63,7 @@ export function Footer() {
               <h2 className="mt-2 font-display text-2xl text-white md:text-3xl">
                 Receive verified market insights
               </h2>
-              <p className="mt-2 max-w-xl text-sm text-white/65">
+              <p className="mt-2 max-w-xl text-sm text-white/80">
                 Monthly briefings on launches, corridors, and investment signals—curated for discerning buyers.
               </p>
             </div>
@@ -92,7 +92,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr] lg:gap-12">
           <Reveal>
             <Logo variant="light" />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/68">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/80">
               A premium enterprise real estate platform built on verification,
               trust, and refined advisory—helping people invest with confidence.
             </p>
@@ -122,7 +122,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/68 transition-colors duration-300 hover:text-accent"
+                    className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -141,7 +141,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/68 transition-colors duration-300 hover:text-accent"
+                    className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -155,7 +155,7 @@ export function Footer() {
               Contact
             </h3>
             <div className="gold-line mt-3 mb-5" aria-hidden />
-            <ul className="space-y-4 text-sm text-white/72">
+            <ul className="space-y-4 text-sm text-white/85">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
                 <span>{SITE_ADDRESS}</span>
@@ -182,7 +182,7 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm text-white/52 md:mt-14 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm text-white/70 md:mt-14 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} Done & Delivered. All rights reserved.
           </p>

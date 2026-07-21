@@ -28,15 +28,16 @@ export function PropertyCategories() {
             <Reveal key={category.id} delay={index * 0.07}>
               <Link
                 href={category.href}
-                className="group relative block h-[380px] overflow-hidden rounded-[1.5rem] shadow-[0_18px_50px_rgba(11,46,131,0.12)] sm:h-[400px] xl:h-[430px]"
+                className="group relative block h-[340px] overflow-hidden rounded-[1.5rem] shadow-[0_18px_50px_rgba(11,46,131,0.12)] sm:h-[380px] md:h-[400px] xl:h-[430px]"
               >
                 <div className="img-reveal absolute inset-0">
                   <Image
                     src={category.image}
-                    alt={category.title}
+                    alt={`${category.title} properties`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    quality={75}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-primary/10 transition-opacity duration-500" />

@@ -1,8 +1,5 @@
 @import "tailwindcss";
-@import "swiper/css";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
-@import "swiper/css/effect-fade";
+/* Swiper base/pagination CSS is loaded by slider sections only */
 
 :root {
   --brand-primary: #0b2e83;
@@ -163,12 +160,18 @@ img {
 
 /* Section helpers */
 .section-pad {
-  padding-block: clamp(4.5rem, 9vw, 8rem);
+  padding-block: clamp(3.75rem, 8vw, 7.5rem);
 }
 
 .container-pad {
-  width: min(1180px, calc(100% - 1.5rem));
+  width: min(1180px, calc(100% - 1.25rem));
   margin-inline: auto;
+}
+
+@media (min-width: 480px) {
+  .container-pad {
+    width: min(1180px, calc(100% - 1.5rem));
+  }
 }
 
 @media (min-width: 640px) {
@@ -181,6 +184,12 @@ img {
   .container-pad {
     width: min(1180px, calc(100% - 3rem));
   }
+}
+
+/* Minimum touch target helper */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
 }
 
 /* Search field */
@@ -298,14 +307,25 @@ img {
   }
 }
 
-/* Floating shapes */
+/* Floating shapes — desktop accent only (Lighthouse-friendly) */
 .float-shape {
   position: absolute;
   border-radius: 999px;
   filter: blur(2px);
   pointer-events: none;
   z-index: 0;
-  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .float-shape {
+    will-change: transform;
+  }
+}
+
+@media (max-width: 767px) {
+  .float-shape {
+    opacity: 0.45;
+  }
 }
 
 /* Swiper theming */
