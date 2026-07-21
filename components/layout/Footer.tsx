@@ -164,7 +164,8 @@ export function Footer() {
               <li>
                 <a
                   href={SITE_PHONE_HREF}
-                  className="inline-flex items-center gap-3 transition-colors hover:text-accent"
+                  className="inline-flex items-center gap-3 tabular-nums transition-colors hover:text-accent"
+                  aria-label={`Call ${SITE_PHONE}`}
                 >
                   <Phone className="h-4 w-4 text-accent" aria-hidden />
                   {SITE_PHONE}

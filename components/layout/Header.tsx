@@ -268,11 +268,11 @@ export function Header() {
 
             <a
               href={SITE_PHONE_HREF}
-              className="hidden min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary lg:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary md:inline-flex"
+              aria-label={`Call ${SITE_PHONE}`}
             >
-              <Phone className="h-4 w-4" aria-hidden />
-              <span className="hidden xl:inline">{SITE_PHONE}</span>
-              <span className="xl:hidden">Call</span>
+              <Phone className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="tabular-nums tracking-wide">{SITE_PHONE}</span>
             </a>
 
             <a
@@ -378,8 +378,9 @@ export function Header() {
                   variant="gold"
                   fullWidth
                   icon={<Phone className="h-4 w-4" />}
+                  aria-label={`Call ${SITE_PHONE}`}
                 >
-                  Call Now
+                  {SITE_PHONE}
                 </Button>
                 <Button
                   href={SITE_WHATSAPP}

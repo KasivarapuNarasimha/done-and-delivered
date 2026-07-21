@@ -146,10 +146,11 @@ export function Hero() {
           className="hero-bg-image object-cover object-[center_30%]"
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1400px"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.94)_0%,rgba(11,46,131,0.84)_48%,rgba(11,46,131,0.48)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.24),transparent_38%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.35),transparent_30%)]" />
-        {/* Noise deferred via CSS content-visibility on large screens only */}
+        {/* Stronger scrim for WCAG-friendly heading contrast over photography */}
+        <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.97)_0%,rgba(11,46,131,0.92)_42%,rgba(11,46,131,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.18),transparent_40%)]" />
+        <div className="absolute inset-0 bg-primary/25" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.55),transparent_42%)]" />
         <div className="premium-noise absolute inset-0 max-md:hidden" />
       </div>
 
@@ -168,26 +169,24 @@ export function Hero() {
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.15rem] leading-[1.08] text-white sm:text-5xl md:text-6xl lg:text-[4rem]"
+              className="font-display text-[2.15rem] leading-[1.08] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-5xl md:text-6xl lg:text-[4rem]"
             >
               <span className="hero-line block">Premium Property</span>
               <span className="hero-line mt-1.5 block sm:mt-2">
-                <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent drop-shadow-none">
                   Marketing.
                 </span>
               </span>
-              <span className="hero-line mt-1.5 block text-[0.92em] sm:mt-2">
-                Verified Projects. Luxury Positioning.
-              </span>
-              <span className="hero-line mt-1.5 block text-[0.92em] sm:mt-2">
-                End-to-End Sales Support.
-              </span>
             </h1>
 
-            <p className="hero-line mt-5 max-w-xl text-[0.95rem] leading-relaxed text-white/90 sm:mt-6 sm:text-lg md:text-xl">
-              {SITE_TAGLINE}. Done & Delivered is a specialized real-estate
-              marketing agency helping builders and developers reach serious,
-              high-intent buyers with precision and impact.
+            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] sm:mt-6 sm:text-2xl md:text-[1.75rem]">
+              {SITE_TAGLINE}
+            </p>
+
+            <p className="hero-line mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white sm:text-lg md:text-xl">
+              Done & Delivered is a specialized real-estate marketing agency
+              helping builders and developers reach serious, high-intent buyers
+              with precision and impact.
             </p>
 
             <div className="hero-line mt-7 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
@@ -198,7 +197,7 @@ export function Hero() {
               ].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[0.72rem] font-medium text-white/92 backdrop-blur-md sm:text-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-primary/40 px-3 py-2 text-[0.72rem] font-medium text-white backdrop-blur-md sm:text-sm"
                 >
                   <ShieldCheck
                     className="h-3.5 w-3.5 shrink-0 text-accent sm:h-4 sm:w-4"

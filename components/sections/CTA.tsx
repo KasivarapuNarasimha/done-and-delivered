@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/animations/Reveal";
 import {
   SITE_EMAIL,
+  SITE_PHONE,
   SITE_PHONE_HREF,
   SITE_WHATSAPP,
 } from "@/lib/constants";
@@ -83,8 +84,9 @@ export function CTA() {
                   fullWidth
                   className="border-white/25 bg-transparent text-white hover:border-accent hover:bg-accent hover:text-primary"
                   icon={<Phone className="h-4 w-4" />}
+                  aria-label={`Call ${SITE_PHONE}`}
                 >
-                  Call Now
+                  Call {SITE_PHONE}
                 </Button>
               </div>
             </div>
