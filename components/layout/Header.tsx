@@ -82,7 +82,7 @@ export function Header() {
     >
       <div className="container-pad">
         <div className="flex h-[4.75rem] items-center justify-between gap-3 md:h-[5.25rem]">
-          <Logo variant="light" className="min-w-0 shrink" />
+          <Logo variant="light" size="md" priority className="min-w-0 shrink" />
 
           <nav
             className="hidden items-center gap-0.5 xl:flex"

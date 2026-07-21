@@ -56,12 +56,25 @@ export const metadata: Metadata = {
       "Done & Delivered | Premium Real Estate Marketing & Property Branding",
     description:
       "Premium reach for premium properties. Project branding, performance marketing, lead generation, and end-to-end sales support for builders and developers.",
+    images: [
+      {
+        url: "/done-and-delivered-logo.jpeg",
+        width: 1600,
+        height: 836,
+        alt: "Done & Delivered logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Done & Delivered | Premium Real Estate Marketing",
     description:
       "Premium property marketing, branding, project launches, and sales enablement for developers.",
+    images: ["/done-and-delivered-logo.jpeg"],
+  },
+  icons: {
+    // Landscape logo is not a suitable square favicon — keep app default favicon.
+    apple: "/done-and-delivered-logo.jpeg",
   },
   robots: {
     index: true,

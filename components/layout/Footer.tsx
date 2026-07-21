@@ -91,7 +91,7 @@ export function Footer() {
 
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr] lg:gap-12">
           <Reveal>
-            <Logo variant="light" />
+            <Logo variant="light" size="lg" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/80">
               A specialized real-estate marketing agency dedicated to helping
               builders, developers, and premium property brands reach the right
