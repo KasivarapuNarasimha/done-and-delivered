@@ -27,43 +27,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command                  | Description                                              |
-| ------------------------ | -------------------------------------------------------- |
-| `pnpm dev`               | Start dev server (Turbopack)                             |
-| `pnpm clean`             | Delete `.next` and other build artifacts                 |
-| `pnpm build`             | **Clean** + full production build (Hostinger default)    |
-| `pnpm build:production`  | Atomic clean build with rollback if build fails          |
-| `pnpm start`             | Start production server                                  |
-| `pnpm verify:static:prod`| Verify all `/_next/static` assets return HTTP 200 on live |
-| `pnpm lint`              | Run ESLint                                               |
-| `pnpm format`            | Format source with Prettier                              |
-| `pnpm format:check`      | Check formatting without writing                         |
+| Command             | Description                  |
+| ------------------- | ---------------------------- |
+| `pnpm dev`          | Start dev server (Turbopack) |
+| `pnpm build`        | Production build (Turbopack) |
+| `pnpm start`        | Start production server      |
+| `pnpm lint`         | Run ESLint                   |
+| `pnpm format`       | Format source with Prettier  |
+| `pnpm format:check` | Check formatting without writing |
 
-## Hostinger deployment (required)
+## Hostinger deployment
 
-Every production deploy must be a **full clean build**, never an incremental reuse of `.next`.
-
-1. **Build command** (hPanel → Node.js app):
-   ```bash
-   pnpm install --frozen-lockfile && pnpm run build:production
-   ```
-   (`pnpm build` also cleans `.next` first via `prebuild`.)
-
-2. **Start command**:
-   ```bash
-   pnpm start
-   ```
-
-3. **After every successful deploy — purge Hostinger CDN completely** for `doneanddelivered.co.in`  
-   (HTML was previously cached with long `s-maxage`, causing old HTML + new chunks → 404.)
-
-4. **Verify**:
-   ```bash
-   pnpm run verify:static:prod
-   ```
-   Every `/_next/static/*` referenced by the homepage must return **HTTP 200**.
-
-5. Do **not** copy only part of `.next`. Publish the complete folder from one build.
+- **Build command:** `pnpm build`
+- **Start command:** `pnpm start`
 
 ## Folder structure
 

@@ -4,17 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "clean": "node scripts/clean-next.mjs",
-    "prebuild": "node scripts/clean-next.mjs",
     "build": "next build --turbopack",
-    "build:atomic": "node scripts/build-atomic.mjs",
-    "build:production": "node scripts/build-atomic.mjs",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "verify:static": "node scripts/verify-static.mjs",
-    "verify:static:prod": "node scripts/verify-static.mjs https://doneanddelivered.co.in"
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
