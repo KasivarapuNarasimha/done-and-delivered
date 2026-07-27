@@ -48,8 +48,8 @@ export function SalesFunnel() {
                   className="mx-auto"
                   style={{ width: `${width}%` }}
                 >
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/8 px-5 py-4 text-center backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-white/12 sm:px-8 sm:py-5">
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-70" />
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/12 px-5 py-4 text-center backdrop-blur-md transition-all duration-300 hover:border-accent/60 hover:bg-white/16 sm:px-8 sm:py-5">
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
                     <p className="font-display text-3xl text-white sm:text-4xl">
                       {step.value}
                     </p>
@@ -68,7 +68,7 @@ export function SalesFunnel() {
           })}
         </div>
 
-        <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-white/75 md:text-base">
+        <p className="mx-auto mt-10 max-w-2xl text-center text-sm font-medium text-white md:text-base">
           Designed as a homepage highlight of our conversion system—where every
           stage is tracked, optimized, and aligned to developer sales goals.
         </p>

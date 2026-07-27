@@ -50,13 +50,15 @@ export function Testimonials() {
                     <Quote className="h-5 w-5" aria-hidden />
                   </div>
                   <blockquote className="flex-1">
-                    <p className="text-[0.98rem] leading-relaxed text-primary/90">
+                    <p className="text-[0.98rem] font-medium leading-relaxed text-primary">
                       “{item.quote}”
                     </p>
                   </blockquote>
                   <div className="mt-6 border-t border-primary/8 pt-4">
                     <p className="font-semibold text-primary">{item.role}</p>
-                    <p className="mt-1 text-xs text-muted">{item.context}</p>
+                    <p className="mt-1 text-xs font-medium text-muted">
+                      {item.context}
+                    </p>
                   </div>
                 </article>
               </SwiperSlide>

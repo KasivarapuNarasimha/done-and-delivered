@@ -40,7 +40,7 @@ export function CTA() {
                   Ready to launch your next premium project?
                 </h2>
                 <div className="gold-line mt-5" aria-hidden />
-                <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">
+                <p className="mt-5 max-w-xl text-sm font-medium leading-relaxed text-white md:text-base">
                   From the first idea to the final lead, we ensure every campaign
                   is Done & Delivered with excellence, efficiency, and premium
                   reach for premium properties.
@@ -82,7 +82,7 @@ export function CTA() {
                   variant="outline"
                   size="lg"
                   fullWidth
-                  className="border-white/25 bg-transparent text-white hover:border-accent hover:bg-accent hover:text-primary"
+                  className="border-white/45 bg-transparent font-bold text-white hover:border-accent hover:bg-accent hover:text-primary"
                   icon={<Phone className="h-4 w-4" />}
                   aria-label={`Call ${SITE_PHONE}`}
                 >
@@ -91,13 +91,13 @@ export function CTA() {
               </div>
             </div>
 
-            <p className="relative z-10 mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-sm text-white/70">
+            <p className="relative z-10 mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/15 pt-6 text-sm font-medium text-white">
               <span className="inline-flex items-center gap-2">
                 <MessageCircle className="h-4 w-4 text-accent" aria-hidden />
                 Prefer email?{" "}
                 <a
                   href={`mailto:${SITE_EMAIL}`}
-                  className="font-semibold text-accent hover:text-accent-soft"
+                  className="font-bold text-accent hover:text-white"
                 >
                   {SITE_EMAIL}
                 </a>

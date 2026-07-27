@@ -67,7 +67,7 @@ export function About() {
                   <Sparkles className="h-4 w-4" aria-hidden />
                   Why Done & Delivered
                 </div>
-                <p className="text-sm leading-relaxed text-white/90">
+                <p className="text-sm font-medium leading-relaxed text-white">
                   Exclusive real-estate focus. Premium positioning. Advanced
                   targeting. High-quality creative. End-to-end delivery from
                   strategy to execution.

@@ -37,8 +37,16 @@ export function PageHero({
       aria-labelledby="page-hero-heading"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.22),transparent_42%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.4)_0%,transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.12),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.55)_0%,rgba(11,46,131,0.35)_55%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-primary/25" />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 85% 70%, #D4AF37 0%, transparent 45%)",
+          }}
+        />
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--brand-bg)] to-transparent" />
       </div>
       <FloatingShapes variant="dark" />
@@ -46,26 +54,28 @@ export function PageHero({
       <Container className="relative z-10 py-14 sm:py-16 md:py-20 lg:py-24">
         {breadcrumbs && breadcrumbs.length > 0 ? (
           <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-2 text-xs text-white/70 sm:text-sm">
+            <ol className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white sm:text-sm">
               {breadcrumbs.map((crumb, index) => {
                 const isLast = index === breadcrumbs.length - 1;
                 return (
                   <li key={crumb.label} className="inline-flex items-center gap-2">
                     {index > 0 ? (
-                      <span className="text-white/40" aria-hidden>
+                      <span className="text-white/70" aria-hidden>
                         /
                       </span>
                     ) : null}
                     {crumb.href && !isLast ? (
                       <Link
                         href={crumb.href}
-                        className="transition-colors hover:text-accent"
+                        className="text-white transition-colors hover:text-accent"
                       >
                         {crumb.label}
                       </Link>
                     ) : (
                       <span
-                        className={isLast ? "font-semibold text-accent" : undefined}
+                        className={
+                          isLast ? "font-bold text-accent" : "text-white"
+                        }
                         aria-current={isLast ? "page" : undefined}
                       >
                         {crumb.label}
@@ -87,12 +97,12 @@ export function PageHero({
           </div>
           <h1
             id="page-hero-heading"
-            className="font-display text-[2.35rem] leading-[1.08] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.45)] sm:text-5xl md:text-6xl"
+            className="font-display text-[2.35rem] leading-[1.08] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl"
           >
             {title}
           </h1>
           <div className="gold-line mt-5" aria-hidden />
-          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base md:text-lg">
+          <p className="mt-5 max-w-2xl text-sm font-medium leading-relaxed text-white sm:text-base md:text-lg">
             {description}
           </p>
 

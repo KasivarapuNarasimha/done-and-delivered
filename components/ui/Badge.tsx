@@ -11,11 +11,12 @@ export function Badge({
   tone?: "gold" | "blue" | "glass" | "white";
 }) {
   const tones = {
-    gold: "bg-[linear-gradient(135deg,rgba(212,175,55,0.95),rgba(232,212,139,0.95))] text-primary border-accent/40 shadow-[0_6px_16px_rgba(212,175,55,0.28)]",
-    blue: "bg-primary/10 text-primary border-primary/15",
-    glass: "bg-white/12 text-white border-white/25 backdrop-blur-md",
+    gold: "bg-[linear-gradient(135deg,#D4AF37,#E8D48B)] text-primary border-accent/50 shadow-[0_6px_16px_rgba(212,175,55,0.28)]",
+    blue: "bg-primary/12 text-primary border-primary/20",
+    glass:
+      "bg-white/18 text-white border-white/45 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.18)]",
     white:
-      "bg-white text-primary border-white/80 shadow-[0_8px_20px_rgba(8,31,92,0.12)]",
+      "bg-white text-primary border-white shadow-[0_8px_20px_rgba(8,31,92,0.12)]",
   };
 
   return (

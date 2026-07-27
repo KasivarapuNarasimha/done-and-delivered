@@ -31,14 +31,14 @@ type ButtonAsLink = CommonProps & {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-primary text-white hover:bg-primary-dark border border-transparent shadow-[0_12px_28px_rgba(11,46,131,0.26)] hover:shadow-[0_14px_32px_rgba(212,175,55,0.28)] hover:border-accent/50",
+    "bg-primary text-white font-bold border border-transparent shadow-[0_12px_28px_rgba(11,46,131,0.26)] hover:bg-primary-dark hover:text-white hover:border-accent/40 hover:shadow-[0_14px_32px_rgba(212,175,55,0.22)] focus-visible:text-white",
   secondary:
-    "bg-white text-primary border border-primary/10 hover:border-accent hover:shadow-[0_10px_24px_rgba(11,46,131,0.1)] shadow-sm",
-  gold: "bg-accent text-primary hover:bg-accent-dark hover:text-white border border-transparent shadow-[0_12px_28px_rgba(212,175,55,0.32)]",
+    "bg-white text-primary font-bold border border-primary/15 shadow-sm hover:border-accent hover:text-primary hover:shadow-[0_10px_24px_rgba(11,46,131,0.12)]",
+  gold: "bg-accent text-primary font-bold border border-transparent shadow-[0_12px_28px_rgba(212,175,55,0.32)] hover:bg-[#c4a030] hover:text-primary focus-visible:text-primary",
   ghost:
-    "bg-white/10 text-white border border-white/20 hover:bg-white hover:text-primary backdrop-blur-md",
+    "bg-white/15 text-white font-bold border border-white/40 hover:bg-white hover:text-primary hover:border-white backdrop-blur-md focus-visible:text-white",
   outline:
-    "bg-white text-primary border border-primary/15 hover:border-accent hover:bg-primary hover:text-white shadow-sm",
+    "bg-white text-primary font-bold border border-primary/20 shadow-sm hover:border-accent hover:bg-primary hover:text-white",
 };
 
 const sizes: Record<Size, string> = {
@@ -58,7 +58,7 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   } = props;
 
   const classes = cn(
-    "btn-ripple inline-flex items-center justify-center font-semibold tracking-wide transition-all duration-300 ease-out active:scale-[0.985] disabled:pointer-events-none disabled:opacity-55",
+    "btn-ripple inline-flex items-center justify-center tracking-wide transition-all duration-300 ease-out active:scale-[0.985] disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     sizes[size],
     fullWidth && "w-full",

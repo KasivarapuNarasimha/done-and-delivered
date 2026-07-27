@@ -11,8 +11,9 @@
   --brand-accent-dark: #b8941f;
   --brand-bg: #f7faff;
   --brand-text: #1e293b;
-  --brand-text-muted: #64748b;
-  --brand-border: rgba(11, 46, 131, 0.1);
+  /* WCAG AA on #F7FAFF / white (~7:1) — avoid low-contrast slate */
+  --brand-text-muted: #475569;
+  --brand-border: rgba(11, 46, 131, 0.12);
   --brand-glass: rgba(255, 255, 255, 0.72);
   --brand-glass-strong: rgba(255, 255, 255, 0.92);
   --shadow-soft: 0 8px 30px rgba(11, 46, 131, 0.07);
@@ -203,11 +204,11 @@ img {
 
 .search-field label {
   padding-inline: 0.15rem;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--brand-text-muted);
+  color: var(--brand-primary);
 }
 
 .search-field select,
@@ -215,10 +216,11 @@ img {
   height: 3.35rem;
   width: 100%;
   border-radius: 1rem;
-  border: 1px solid rgba(11, 46, 131, 0.1);
+  border: 1px solid rgba(11, 46, 131, 0.16);
   background: #fff;
   padding: 0 1rem;
   font-size: 0.925rem;
+  font-weight: 500;
   color: var(--brand-primary);
   outline: none;
   transition:
@@ -232,15 +234,80 @@ img {
   padding-right: 2.4rem;
 }
 
+.search-field select option {
+  color: var(--brand-primary);
+  background: #fff;
+}
+
 .search-field select:hover,
 .search-field input:hover {
-  border-color: rgba(11, 46, 131, 0.22);
+  border-color: rgba(11, 46, 131, 0.28);
 }
 
 .search-field select:focus,
 .search-field input:focus {
   border-color: var(--brand-accent);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.16);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.22);
+}
+
+/* Light form fields (contact + enquiry) */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+
+.form-control {
+  margin-top: 0.375rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(11, 46, 131, 0.14);
+  background: #fff;
+  color: var(--brand-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-control::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+.form-control:hover {
+  border-color: rgba(11, 46, 131, 0.28);
+}
+
+.form-control:focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.22);
+}
+
+.form-control-error {
+  border-color: #dc2626 !important;
+  background: rgba(254, 242, 242, 0.65);
+}
+
+/* Readable muted copy on light surfaces */
+.text-body-muted {
+  color: var(--brand-text-muted);
+}
+
+/* High-contrast white copy on navy / dark panels */
+.text-on-dark {
+  color: #ffffff;
+}
+
+.text-on-dark-muted {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.text-on-dark-subtle {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* Premium button ripple */
@@ -372,8 +439,17 @@ img {
   border: 2px solid #eef3fb;
 }
 
-/* Focus rings */
+/* Focus rings — visible for keyboard users */
 :focus-visible {
+  outline: 2px solid var(--brand-accent);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--brand-accent);
   outline-offset: 3px;
 }

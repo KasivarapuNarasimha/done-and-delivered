@@ -216,10 +216,8 @@ export function Contact() {
   }
 
   const inputClass = (key: keyof FormState) =>
-    `mt-1.5 h-12 w-full rounded-xl border px-4 text-sm outline-none transition focus:border-accent ${
-      fieldErrors[key]
-        ? "border-red-400 bg-red-50/40"
-        : "border-primary/10 bg-white"
+    `form-control mt-1.5 h-12 px-4 ${
+      fieldErrors[key] ? "form-control-error" : ""
     }`;
 
   return (
@@ -268,7 +266,7 @@ export function Contact() {
                       {SITE_EMAIL}
                     </a>
                   </li>
-                  <li className="flex items-start gap-3 text-muted">
+                  <li className="flex items-start gap-3 text-primary">
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/8 text-primary">
                       <MapPin className="h-4 w-4" aria-hidden />
                     </span>
@@ -277,7 +275,7 @@ export function Contact() {
                         href={SITE_MAPS_DIRECTIONS_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition-colors hover:text-accent-dark"
+                        className="font-semibold transition-colors hover:text-accent-dark"
                       >
                         {SITE_ADDRESS}
                       </a>
@@ -332,7 +330,7 @@ export function Contact() {
               <h3 className="font-display text-2xl text-primary">
                 Business enquiry
               </h3>
-              <p className="mt-2 text-sm text-muted">
+              <p className="mt-2 text-sm font-medium text-muted">
                 Tell us about your project. Our team will respond with next
                 steps.
               </p>
@@ -359,7 +357,7 @@ export function Contact() {
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <label className="block text-sm font-medium text-primary">
+                <label className="form-label">
                   Full name
                   <input
                     required
@@ -370,16 +368,17 @@ export function Contact() {
                       setForm((f) => ({ ...f, name: e.target.value }))
                     }
                     className={inputClass("name")}
+                    placeholder="Your full name"
                     aria-invalid={Boolean(fieldErrors.name)}
                     aria-describedby={fieldErrors.name ? "err-name" : undefined}
                   />
                   {fieldErrors.name ? (
-                    <span id="err-name" className="mt-1 block text-xs text-red-600">
+                    <span id="err-name" className="mt-1 block text-xs font-semibold text-red-700">
                       {fieldErrors.name}
                     </span>
                   ) : null}
                 </label>
-                <label className="block text-sm font-medium text-primary">
+                <label className="form-label">
                   Email
                   <input
                     required
@@ -391,16 +390,17 @@ export function Contact() {
                       setForm((f) => ({ ...f, email: e.target.value }))
                     }
                     className={inputClass("email")}
+                    placeholder="you@company.com"
                     aria-invalid={Boolean(fieldErrors.email)}
                     aria-describedby={fieldErrors.email ? "err-email" : undefined}
                   />
                   {fieldErrors.email ? (
-                    <span id="err-email" className="mt-1 block text-xs text-red-600">
+                    <span id="err-email" className="mt-1 block text-xs font-semibold text-red-700">
                       {fieldErrors.email}
                     </span>
                   ) : null}
                 </label>
-                <label className="block text-sm font-medium text-primary">
+                <label className="form-label">
                   Phone
                   <input
                     required
@@ -412,16 +412,17 @@ export function Contact() {
                       setForm((f) => ({ ...f, phone: e.target.value }))
                     }
                     className={inputClass("phone")}
+                    placeholder="+91 XXXXX XXXXX"
                     aria-invalid={Boolean(fieldErrors.phone)}
                     aria-describedby={fieldErrors.phone ? "err-phone" : undefined}
                   />
                   {fieldErrors.phone ? (
-                    <span id="err-phone" className="mt-1 block text-xs text-red-600">
+                    <span id="err-phone" className="mt-1 block text-xs font-semibold text-red-700">
                       {fieldErrors.phone}
                     </span>
                   ) : null}
                 </label>
-                <label className="block text-sm font-medium text-primary">
+                <label className="form-label">
                   Company / Developer
                   <input
                     name="company"
@@ -431,11 +432,12 @@ export function Contact() {
                       setForm((f) => ({ ...f, company: e.target.value }))
                     }
                     className={inputClass("company")}
+                    placeholder="Builder or developer name"
                   />
                 </label>
               </div>
 
-              <label className="mt-4 block text-sm font-medium text-primary">
+              <label className="form-label mt-4">
                 Project details
                 <textarea
                   required
@@ -445,10 +447,8 @@ export function Contact() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, message: e.target.value }))
                   }
-                  className={`mt-1.5 w-full resize-y rounded-xl border px-4 py-3 text-sm outline-none transition focus:border-accent ${
-                    fieldErrors.message
-                      ? "border-red-400 bg-red-50/40"
-                      : "border-primary/10"
+                  className={`form-control mt-1.5 min-h-[7rem] resize-y px-4 py-3 ${
+                    fieldErrors.message ? "form-control-error" : ""
                   }`}
                   placeholder="Project type, city, timeline, and goals"
                   aria-invalid={Boolean(fieldErrors.message)}
@@ -457,7 +457,7 @@ export function Contact() {
                   }
                 />
                 {fieldErrors.message ? (
-                  <span id="err-message" className="mt-1 block text-xs text-red-600">
+                  <span id="err-message" className="mt-1 block text-xs font-semibold text-red-700">
                     {fieldErrors.message}
                   </span>
                 ) : null}

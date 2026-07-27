@@ -33,7 +33,7 @@ export function SectionHeading({
           <div
             className={cn(
               "mb-4 inline-flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.22em]",
-              light ? "text-accent-soft" : "text-accent-dark",
+              light ? "text-accent" : "text-accent-dark",
               align === "center" && "justify-center",
             )}
           >
@@ -68,7 +68,7 @@ export function SectionHeading({
           <p
             className={cn(
               "mt-5 max-w-2xl text-[0.98rem] leading-relaxed md:text-lg",
-              light ? "text-white/85" : "text-muted",
+              light ? "text-white" : "text-muted",
               align === "center" && "mx-auto",
             )}
           >

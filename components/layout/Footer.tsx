@@ -74,7 +74,7 @@ export function Footer() {
               <h2 className="mt-2 font-display text-2xl text-white md:text-3xl">
                 {SITE_TAGLINE}
               </h2>
-              <p className="mt-2 max-w-xl text-sm text-white/80">
+              <p className="mt-2 max-w-xl text-sm font-medium text-white">
                 Premium project branding, performance marketing, and sales
                 systems for builders and developers.
               </p>
@@ -88,7 +88,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr] lg:gap-12">
           <Reveal>
             <Logo variant="light" size="lg" />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/80">
+            <p className="mt-5 max-w-sm text-sm font-medium leading-relaxed text-white">
               A specialized real-estate marketing agency helping builders and
               developers reach high-intent buyers with precision and impact.
             </p>
@@ -113,7 +113,7 @@ export function Footer() {
             ) : (
               // TODO: Official social profile URLs are pending from Done & Delivered.
               // Configure SOCIAL_LINKS hrefs in lib/constants/index.ts when available.
-              <p className="mt-6 text-xs text-white/50">
+              <p className="mt-6 text-xs font-medium text-white/80">
                 Official social profiles coming soon.
               </p>
             )}
@@ -129,7 +129,7 @@ export function Footer() {
                 <li key={link.href + link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
+                    className="text-sm font-medium text-white transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -148,7 +148,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
+                    className="text-sm font-medium text-white transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -162,7 +162,7 @@ export function Footer() {
               Contact
             </h3>
             <div className="gold-line mt-3 mb-5" aria-hidden />
-            <ul className="space-y-4 text-sm text-white/85">
+            <ul className="space-y-4 text-sm font-medium text-white">
               <li className="flex gap-3">
                 <MapPin
                   className="mt-0.5 h-4 w-4 shrink-0 text-accent"
@@ -193,11 +193,11 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm text-white/70 md:mt-14 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/15 pt-7 text-sm font-medium text-white md:mt-14 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} Done & Delivered. All rights reserved.
           </p>
-          <p className="text-white/55">Powered by RRR Estates LLP</p>
+          <p className="text-white/90">Powered by RRR Estates LLP</p>
         </div>
       </Container>
     </footer>

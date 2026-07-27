@@ -49,10 +49,10 @@ export function FeaturedDevelopers() {
                 <h3 className="relative font-display text-base text-white sm:text-lg">
                   {developer.name}
                 </h3>
-                <p className="relative mt-1.5 text-[0.7rem] text-white/75 sm:text-xs">
+                <p className="relative mt-1.5 text-[0.7rem] font-medium text-white sm:text-xs">
                   {developer.focus}
                 </p>
-                <p className="relative mt-1 text-[0.68rem] text-white/60">
+                <p className="relative mt-1 text-[0.68rem] font-semibold text-white/90">
                   {developer.projectCount}
                 </p>
                 <div className="relative mt-3 flex justify-center sm:mt-4">

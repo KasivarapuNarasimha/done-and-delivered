@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { useEffect, useId, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import {
@@ -36,7 +37,15 @@ const megaIcons = {
   briefcase: Briefcase,
 };
 
+function isNavActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  const pathOnly = href.split("#")[0] || href;
+  if (pathOnly === "/") return false;
+  return pathname === pathOnly || pathname.startsWith(`${pathOnly}/`);
+}
+
 export function Header() {
+  const pathname = usePathname() || "/";
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -101,9 +110,10 @@ export function Header() {
                     <button
                       type="button"
                       className={cn(
-                        "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-300",
-                        "text-white/90 hover:bg-white/10 hover:text-white",
-                        megaOpen && "bg-white/10 text-white",
+                        "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold text-white transition-all duration-300",
+                        "hover:bg-white/10 hover:text-accent",
+                        (megaOpen || isNavActive(pathname, link.href)) &&
+                          "bg-white/10 text-accent",
                       )}
                       aria-expanded={megaOpen}
                       aria-controls={megaId}
@@ -182,7 +192,7 @@ export function Header() {
                                             <p className="font-display text-lg leading-none text-white">
                                               {item.title}
                                             </p>
-                                            <p className="mt-1 text-[0.72rem] text-white/75">
+                                            <p className="mt-1 text-[0.72rem] font-medium text-white/90">
                                               {item.count} · {item.description}
                                             </p>
                                           </div>
@@ -223,13 +233,13 @@ export function Header() {
                                   <p className="text-sm font-semibold">
                                     Launching a premium project?
                                   </p>
-                                  <p className="mt-1 text-xs text-white/70">
+                                  <p className="mt-1 text-xs font-medium text-white/90">
                                     Partner with Done & Delivered for branding,
                                     leads, and sales systems.
                                   </p>
                                   <Link
                                     href="/contact"
-                                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent transition-colors hover:text-accent-soft"
+                                    className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-accent transition-colors hover:text-white"
                                   >
                                     Book consultation
                                     <ArrowUpRight className="h-4 w-4" />
@@ -245,11 +255,16 @@ export function Header() {
                 );
               }
 
+              const active = isNavActive(pathname, link.href);
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="rounded-full px-3.5 py-2 text-sm font-medium text-white/90 transition-all duration-300 hover:bg-white/10 hover:text-white"
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "rounded-full px-3.5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:text-accent",
+                    active && "bg-white/10 text-accent",
+                  )}
                 >
                   {link.label}
                 </Link>
@@ -261,14 +276,14 @@ export function Header() {
             <button
               type="button"
               aria-label="Search properties"
-              className="touch-target grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary"
+              className="touch-target grid h-11 w-11 place-items-center rounded-full border border-white/35 bg-white/15 text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-accent hover:text-primary"
             >
               <Search className="h-4 w-4" />
             </button>
 
             <a
               href={SITE_PHONE_HREF}
-              className="hidden min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-white hover:text-primary md:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-full border border-white/35 bg-white/15 px-3.5 py-2.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-accent hover:text-primary md:inline-flex"
               aria-label={`Call ${SITE_PHONE}`}
             >
               <Phone className="h-4 w-4 shrink-0" aria-hidden />
@@ -279,7 +294,7 @@ export function Header() {
               href={SITE_WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="touch-target hidden place-items-center rounded-full border border-accent/50 bg-accent text-primary transition-all duration-300 hover:scale-[1.04] hover:bg-accent-dark hover:text-white md:grid"
+              className="touch-target hidden place-items-center rounded-full border border-accent/60 bg-accent font-bold text-primary transition-all duration-300 hover:scale-[1.04] hover:bg-[#c4a030] hover:text-primary md:grid"
               aria-label="Chat on WhatsApp"
             >
               <FaWhatsapp className="h-4 w-4" />
@@ -287,7 +302,7 @@ export function Header() {
 
             <button
               type="button"
-              className="touch-target grid place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-all xl:hidden"
+              className="touch-target grid place-items-center rounded-full border border-white/35 bg-white/15 text-white transition-all hover:border-accent hover:text-accent xl:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
@@ -317,7 +332,7 @@ export function Header() {
                     <div key={link.label} className="rounded-2xl bg-white/5">
                       <button
                         type="button"
-                        className="flex w-full items-center justify-between px-4 py-3.5 text-left font-medium text-white"
+                        className="flex w-full items-center justify-between px-4 py-3.5 text-left font-semibold text-white"
                         onClick={() => setMobilePropsOpen((v) => !v)}
                         aria-expanded={mobilePropsOpen}
                       >
@@ -338,16 +353,16 @@ export function Header() {
                                 key={item.title}
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
-                                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-white/85 hover:bg-white/10 hover:text-white"
+                                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 hover:text-accent"
                               >
-                                <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 text-accent">
+                                <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/15 text-accent">
                                   <Icon className="h-4 w-4" />
                                 </span>
                                 <span>
-                                  <span className="block font-medium">
+                                  <span className="block font-semibold">
                                     {item.title}
                                   </span>
-                                  <span className="block text-xs text-white/55">
+                                  <span className="block text-xs font-medium text-white/85">
                                     {item.count}
                                   </span>
                                 </span>
@@ -360,12 +375,17 @@ export function Header() {
                   );
                 }
 
+                const active = isNavActive(pathname, link.href);
                 return (
                   <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block rounded-2xl px-4 py-3.5 font-medium text-white/90 hover:bg-white/10"
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "block rounded-2xl px-4 py-3.5 font-semibold text-white hover:bg-white/10 hover:text-accent",
+                      active && "bg-white/10 text-accent",
+                    )}
                   >
                     {link.label}
                   </Link>

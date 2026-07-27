@@ -49,13 +49,13 @@ function StatCard({
     <Reveal delay={delay}>
       <div
         ref={ref}
-        className="rounded-[1.35rem] border border-white/15 bg-white/8 px-5 py-6 text-center backdrop-blur-md md:py-8"
+        className="rounded-[1.35rem] border border-white/30 bg-white/12 px-5 py-6 text-center backdrop-blur-md md:py-8"
       >
         <p className="font-display text-3xl text-white md:text-4xl lg:text-5xl">
           {display}
           {suffix}
         </p>
-        <p className="mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/75">
+        <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-white">
           {label}
         </p>
       </div>

@@ -179,10 +179,19 @@ export function Hero() {
           className="hero-bg-image object-cover object-[center_28%]"
           sizes="(max-width: 768px) 100vw, 1400px"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.97)_0%,rgba(11,46,131,0.93)_40%,rgba(11,46,131,0.78)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(212,175,55,0.2),transparent_38%)]" />
-        <div className="absolute inset-0 bg-primary/20" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.6),transparent_45%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.98)_0%,rgba(11,46,131,0.96)_38%,rgba(11,46,131,0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(212,175,55,0.14),transparent_36%)]" />
+        <div className="absolute inset-0 bg-primary/35" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.75),transparent_50%)]" />
+        {/* Decorative ambient glow — keep well under 5% opacity */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 80%, #D4AF37 0%, transparent 40%)",
+          }}
+        />
       </div>
 
       <FloatingShapes variant="dark" />
@@ -200,21 +209,19 @@ export function Hero() {
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.25rem] leading-[1.05] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl lg:text-[4.1rem]"
+              className="font-display text-[2.25rem] leading-[1.05] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.55)] sm:text-5xl md:text-6xl lg:text-[4.1rem]"
             >
-              <span className="hero-line block">Premium Property</span>
-              <span className="hero-line mt-1 block sm:mt-1.5">
-                <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent">
-                  Marketing.
-                </span>
+              <span className="hero-line block text-white">Premium Property</span>
+              <span className="hero-line mt-1 block text-accent sm:mt-1.5">
+                Marketing.
               </span>
             </h1>
 
-            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
+            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.5)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
               {SITE_TAGLINE}
             </p>
 
-            <p className="hero-line mt-4 max-w-xl text-sm leading-relaxed text-white/95 sm:text-base md:text-lg">
+            <p className="hero-line mt-4 max-w-xl text-sm font-medium leading-relaxed text-white sm:text-base md:text-lg">
               Specialized marketing for builders and developers—strategic
               thinking, premium creative, and conversion systems that put
               projects in front of high-intent buyers.
@@ -248,7 +255,7 @@ export function Hero() {
               ].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-primary/45 px-3 py-1.5 text-[0.7rem] font-medium text-white backdrop-blur-md sm:text-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-primary/55 px-3 py-1.5 text-[0.7rem] font-semibold text-white backdrop-blur-md sm:text-sm"
                 >
                   <ShieldCheck
                     className="h-3.5 w-3.5 shrink-0 text-accent"
@@ -264,12 +271,12 @@ export function Hero() {
             {HERO_STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/20 bg-white/10 px-3 py-3.5 text-center shadow-[0_12px_40px_rgba(0,0,0,0.15)] backdrop-blur-md sm:px-4 sm:py-4 lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-5 lg:text-left"
+                className="rounded-2xl border border-white/35 bg-white/12 px-3 py-3.5 text-center shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-4 sm:py-4 lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-5 lg:text-left"
               >
                 <p className="font-display text-xl text-white sm:text-2xl lg:text-3xl">
                   {stat.value}
                 </p>
-                <p className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-white/80 sm:text-[0.68rem] lg:mt-0">
+                <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white sm:text-[0.68rem] lg:mt-0">
                   {stat.label}
                 </p>
               </div>
@@ -290,7 +297,7 @@ export function Hero() {
                   <p className="text-sm font-bold text-primary md:text-base">
                     Project Marketing Consultation
                   </p>
-                  <p className="mt-0.5 text-xs text-muted md:text-sm">
+                  <p className="mt-0.5 text-xs font-medium text-slate-600 md:text-sm">
                     Share your launch goals—we design reach, leads, and sales
                     systems
                   </p>
