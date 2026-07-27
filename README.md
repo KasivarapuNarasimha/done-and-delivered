@@ -27,20 +27,62 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command             | Description                  |
-| ------------------- | ---------------------------- |
-| `pnpm dev`          | Start dev server (Turbopack) |
-| `pnpm build`        | Production build (Turbopack) |
-| `pnpm start`        | Start production server      |
-| `pnpm lint`         | Run ESLint                   |
-| `pnpm format`       | Format source with Prettier  |
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start dev server (Turbopack) |
+| `pnpm clean` | Delete `.next` and other build artifacts |
+| `pnpm build` | **Clean** + production build + local HTML/chunk integrity check |
+| `pnpm build:production` | Atomic clean build with rollback if build/integrity fails |
+| `pnpm start` | Start production server |
+| `pnpm verify:build` | Confirm generated HTML chunk refs exist under `.next/static` |
+| `pnpm verify:static:prod` | Confirm live site HTML chunks all return HTTP 200 |
+| `pnpm lint` | Run ESLint |
+| `pnpm format` | Format source with Prettier |
 | `pnpm format:check` | Check formatting without writing |
 
-## Hostinger deployment
+## Hostinger deployment (required)
 
-- **Build command:** `pnpm build`
-- **Start command:** `pnpm start`
-- **Production domain:** `https://doneanddelivered.co.in`
+### Why chunk 404s happen
+
+Fully static Next.js pages default to `Cache-Control: s-maxage=31536000`. Hostinger **hCDN** then serves **stale HTML for up to a year** while the Node origin runs a **new** build with different `/_next/static/chunks/*` hashes. The browser loads old HTML → requests missing chunks → **404**.
+
+This repo overrides document cache headers (`s-maxage=60`) and keeps hashed `/_next/static/*` immutable.
+
+### Deploy steps
+
+1. **Build command** (hPanel → Node.js app):
+   ```bash
+   pnpm install --frozen-lockfile && pnpm run build:production
+   ```
+   (`pnpm build` also cleans `.next` first via `prebuild` and runs integrity checks.)
+
+2. **Start command**:
+   ```bash
+   pnpm start
+   ```
+
+3. **After every successful deploy — purge Hostinger CDN completely** for `doneanddelivered.co.in`  
+   (Required once for any HTML still cached with the old 1-year `s-maxage`.)
+
+4. **Verify**:
+   ```bash
+   pnpm run verify:static:prod
+   ```
+   - Homepage `cache-control` must **not** be `s-maxage=31536000`
+   - Every `/_next/static/*` referenced by HTML must return **HTTP 200**
+
+5. Publish the **complete** `.next` from a single clean build. Do not mix folders across deploys.
+
+### Config checklist (this repo)
+
+| Setting | Value |
+| --- | --- |
+| `output` | default (Node server — not `export` / not forced `standalone`) |
+| `assetPrefix` | unset |
+| `basePath` | unset |
+| `distDir` | default `.next` |
+| HTML cache | `max-age=0, s-maxage=60, stale-while-revalidate=300` |
+| `/_next/static` cache | `max-age=31536000, immutable` |
 
 ## Contact form / email
 
