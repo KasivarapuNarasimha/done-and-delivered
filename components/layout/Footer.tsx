@@ -16,37 +16,48 @@ import {
   SITE_EMAIL,
   SITE_PHONE,
   SITE_PHONE_HREF,
+  SITE_TAGLINE,
+  SOCIAL_LINKS,
 } from "@/lib/constants";
 import { Reveal } from "@/components/animations/Reveal";
 
 const quickLinks = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
-  { label: "Marketing Process", href: "/#marketing-process" },
-  { label: "Ongoing Projects", href: "/#ongoing-projects" },
-  { label: "Completed Projects", href: "/#completed-projects" },
-  { label: "About", href: "/about" },
+  { label: "Our Process", href: "/#marketing-process" },
+  { label: "Projects", href: "/#ongoing-projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const serviceLinks = [
-  { label: "Premium Project Branding", href: "/#services" },
+  { label: "Project Branding", href: "/#services" },
   { label: "Digital Marketing", href: "/#services" },
   { label: "Lead Generation", href: "/#services" },
   { label: "Performance Marketing", href: "/#services" },
-  { label: "Sales Funnel Optimization", href: "/#sales-funnel" },
-  { label: "Book Consultation", href: "/contact?intent=consultation" },
+  { label: "Sales Enablement", href: "/#services" },
+  { label: "Book Consultation", href: "/#contact" },
 ];
 
-const socials = [
-  { label: "LinkedIn", href: "https://linkedin.com", icon: FaLinkedinIn },
-  { label: "Instagram", href: "https://instagram.com", icon: FaInstagram },
-  { label: "Facebook", href: "https://facebook.com", icon: FaFacebookF },
-  { label: "YouTube", href: "https://youtube.com", icon: FaYoutube },
-];
+const socialIcons = {
+  linkedin: FaLinkedinIn,
+  instagram: FaInstagram,
+  facebook: FaFacebookF,
+  youtube: FaYoutube,
+} as const;
+
+/** Only render networks with verified official URLs (null href = pending). */
+const activeSocials = SOCIAL_LINKS.filter(
+  (item): item is (typeof SOCIAL_LINKS)[number] & { href: string } =>
+    Boolean(item.href),
+);
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary text-white" role="contentinfo">
+    <footer
+      className="relative overflow-hidden bg-primary text-white"
+      role="contentinfo"
+    >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
@@ -58,34 +69,19 @@ export function Footer() {
           <div className="mb-12 grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/5 p-6 backdrop-blur-md md:mb-14 md:grid-cols-[1.4fr_auto] md:items-center md:p-8">
             <div>
               <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-accent">
-                Stay informed
+                Partner with us
               </p>
               <h2 className="mt-2 font-display text-2xl text-white md:text-3xl">
-                Receive verified market insights
+                {SITE_TAGLINE}
               </h2>
               <p className="mt-2 max-w-xl text-sm text-white/80">
-                Monthly briefings on launches, corridors, and investment signals—curated for discerning buyers.
+                Premium project branding, performance marketing, and sales
+                systems for builders and developers.
               </p>
             </div>
-            <form
-              className="flex w-full flex-col gap-2 sm:flex-row md:min-w-[340px]"
-              onSubmit={(e) => e.preventDefault()}
-              aria-label="Newsletter signup"
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                required
-                placeholder="Enter your email"
-                className="h-12 flex-1 rounded-full border border-white/15 bg-white/10 px-5 text-sm text-white outline-none placeholder:text-white/45 focus:border-accent"
-              />
-              <Button type="submit" variant="gold" className="shrink-0">
-                Subscribe
-              </Button>
-            </form>
+            <Button href="/#contact" variant="gold" size="lg">
+              Start a Conversation
+            </Button>
           </div>
         </Reveal>
 
@@ -93,24 +89,34 @@ export function Footer() {
           <Reveal>
             <Logo variant="light" size="lg" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/80">
-              A specialized real-estate marketing agency dedicated to helping
-              builders, developers, and premium property brands reach the right
-              audience with precision and impact.
+              A specialized real-estate marketing agency helping builders and
+              developers reach high-intent buyers with precision and impact.
             </p>
-            <div className="mt-6 flex items-center gap-2.5">
-              {socials.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-primary"
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                </a>
-              ))}
-            </div>
+            {activeSocials.length > 0 ? (
+              <div className="mt-6 flex items-center gap-2.5">
+                {activeSocials.map(({ label, href, platform }) => {
+                  const Icon = socialIcons[platform];
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-primary"
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                    </a>
+                  );
+                })}
+              </div>
+            ) : (
+              // TODO: Official social profile URLs are pending from Done & Delivered.
+              // Configure SOCIAL_LINKS hrefs in lib/constants/index.ts when available.
+              <p className="mt-6 text-xs text-white/50">
+                Official social profiles coming soon.
+              </p>
+            )}
           </Reveal>
 
           <Reveal delay={0.06}>
@@ -120,7 +126,7 @@ export function Footer() {
             <div className="gold-line mt-3 mb-5" aria-hidden />
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.href + link.label}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
@@ -139,7 +145,7 @@ export function Footer() {
             <div className="gold-line mt-3 mb-5" aria-hidden />
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="text-sm text-white/80 transition-colors duration-300 hover:text-accent"
@@ -158,7 +164,10 @@ export function Footer() {
             <div className="gold-line mt-3 mb-5" aria-hidden />
             <ul className="space-y-4 text-sm text-white/85">
               <li className="flex gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                <MapPin
+                  className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                  aria-hidden
+                />
                 <span>{SITE_ADDRESS}</span>
               </li>
               <li>
@@ -188,17 +197,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} Done & Delivered. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link href="/privacy" className="transition-colors hover:text-accent">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-colors hover:text-accent">
-              Terms of Use
-            </Link>
-            <Link href="/rera" className="transition-colors hover:text-accent">
-              RERA Disclosures
-            </Link>
-          </div>
+          <p className="text-white/55">Powered by RRR Estates LLP</p>
         </div>
       </Container>
     </footer>

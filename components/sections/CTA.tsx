@@ -58,7 +58,7 @@ export function CTA() {
                   Contact Us
                 </Button>
                 <Button
-                  href="/contact?intent=consultation"
+                  href="/#contact"
                   variant="ghost"
                   size="lg"
                   fullWidth

@@ -25,9 +25,9 @@ export function MarketingProcess() {
       <Container>
         <div id="process-heading">
           <SectionHeading
-            eyebrow="Marketing Process"
+            eyebrow="Our Process"
             title="Reach. Acquisition. Nurture. Sales."
-            description="An end-to-end MarTech system that moves premium projects from awareness to bookings with measurable control at every stage."
+            description="An end-to-end MarTech workflow that moves premium projects from awareness to bookings with measurable control at every stage."
           />
         </div>
 

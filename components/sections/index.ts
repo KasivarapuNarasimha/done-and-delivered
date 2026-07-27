@@ -1,10 +1,14 @@
 export { Hero } from "./Hero";
+export { About } from "./About";
 export { Services } from "./Services";
 export { WhyChoose } from "./WhyChoose";
 export { MarketingProcess } from "./MarketingProcess";
 export { SalesFunnel } from "./SalesFunnel";
 export { MarketingTimeline } from "./MarketingTimeline";
+export { Stats } from "./Stats";
 export { OngoingProjects } from "./OngoingProjects";
 export { CompletedProjects } from "./CompletedProjects";
 export { FeaturedDevelopers } from "./FeaturedDevelopers";
+export { Testimonials } from "./Testimonials";
+export { Contact } from "./Contact";
 export { CTA } from "./CTA";

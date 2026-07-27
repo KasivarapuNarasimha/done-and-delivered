@@ -40,6 +40,20 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - **Build command:** `pnpm build`
 - **Start command:** `pnpm start`
+- **Production domain:** `https://doneanddelivered.co.in`
+
+## Contact form / email
+
+Copy `.env.example` to `.env.local` (or Hostinger env vars):
+
+| Variable | Purpose |
+| --- | --- |
+| `CONTACT_TO_EMAIL` | Inbox for enquiries (defaults to `hello@doneanddelivered.com`) |
+| `RESEND_API_KEY` | Preferred production mail via [Resend](https://resend.com) |
+| `CONTACT_FROM_EMAIL` | Verified Resend from address |
+| `CONTACT_DELIVERY_MODE=log` | Log-only mode for CI / local QA |
+
+Without Resend, the API uses FormSubmit.co to deliver to `CONTACT_TO_EMAIL` (confirm the first activation email in that inbox).
 
 ## Folder structure
 

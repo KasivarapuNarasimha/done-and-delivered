@@ -1,10 +1,19 @@
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
+import {
+  SITE_ADDRESS,
+  SITE_EMAIL,
+  SITE_NAME,
+  SITE_PHONE,
+  SITE_TAGLINE,
+  SITE_URL,
+} from "@/lib/constants";
 
-/**
- * Only the Hero is eager — everything below folds is code-split.
- * SSR stays on for SEO; client JS loads as chunks when needed.
- */
+const About = dynamic(
+  () => import("@/components/sections/About").then((m) => m.About),
+  { ssr: true, loading: () => <SectionSkeleton /> },
+);
+
 const Services = dynamic(
   () => import("@/components/sections/Services").then((m) => m.Services),
   { ssr: true, loading: () => <SectionSkeleton /> },
@@ -13,6 +22,11 @@ const Services = dynamic(
 const WhyChoose = dynamic(
   () => import("@/components/sections/WhyChoose").then((m) => m.WhyChoose),
   { ssr: true, loading: () => <SectionSkeleton /> },
+);
+
+const Stats = dynamic(
+  () => import("@/components/sections/Stats").then((m) => m.Stats),
+  { ssr: true, loading: () => <SectionSkeleton dark /> },
 );
 
 const MarketingProcess = dynamic(
@@ -61,8 +75,14 @@ const FeaturedDevelopers = dynamic(
   { ssr: true, loading: () => <SectionSkeleton dark /> },
 );
 
-const CTA = dynamic(
-  () => import("@/components/sections/CTA").then((m) => m.CTA),
+const Testimonials = dynamic(
+  () =>
+    import("@/components/sections/Testimonials").then((m) => m.Testimonials),
+  { ssr: true, loading: () => <SectionSkeleton /> },
+);
+
+const Contact = dynamic(
+  () => import("@/components/sections/Contact").then((m) => m.Contact),
   { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
@@ -89,20 +109,22 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      name: "Done & Delivered",
+      name: SITE_NAME,
       alternateName: "Done and Delivered",
-      url: "https://doneanddelivered.com",
+      url: SITE_URL,
       description:
         "Done & Delivered is a specialized real-estate marketing agency for builders, developers, and premium property brands—delivering premium project branding, performance marketing, lead generation, and end-to-end sales support.",
-      slogan: "Premium Reach for Premium Properties",
-      email: "hello@doneanddelivered.com",
-      telephone: "+91-91104-17950",
+      slogan: SITE_TAGLINE,
+      email: SITE_EMAIL,
+      telephone: SITE_PHONE.replace(/\s/g, "-"),
       address: {
         "@type": "PostalAddress",
         streetAddress: "Level 12, Prestige Towers, MG Road",
         addressLocality: "Bengaluru",
         postalCode: "560001",
         addressCountry: "IN",
+        // Full address string for maps consistency
+        description: SITE_ADDRESS,
       },
       areaServed: "IN",
       knowsAbout: [
@@ -117,8 +139,8 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      name: "Done & Delivered",
-      url: "https://doneanddelivered.com",
+      name: SITE_NAME,
+      url: SITE_URL,
       description:
         "Premium real estate marketing and sales partner for project launches, property branding, and high-intent buyer acquisition.",
     },
@@ -133,15 +155,18 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      <About />
       <Services />
       <WhyChoose />
+      <Stats />
       <MarketingProcess />
       <SalesFunnel />
       <MarketingTimeline />
       <OngoingProjects />
       <CompletedProjects />
       <FeaturedDevelopers />
-      <CTA />
+      <Testimonials />
+      <Contact />
     </>
   );
 }

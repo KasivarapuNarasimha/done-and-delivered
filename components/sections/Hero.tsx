@@ -17,11 +17,17 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
 import { heroConsultationOptions } from "@/lib/data/homepage";
-import { SITE_TAGLINE } from "@/lib/constants";
+import { CONSULTATION_STORAGE_KEY, SITE_TAGLINE } from "@/lib/constants";
 import { scheduleIdle } from "@/lib/utils/schedule";
+import { heroConsultationSchema } from "@/lib/validations";
 
-/** Local asset — Next Image serves AVIF/WebP variants automatically. */
 const HERO_IMAGE = "/images/hero-bg.jpg";
+
+const HERO_STATS = [
+  { value: "1450+", label: "Lead Capacity" },
+  { value: "7+", label: "Official Projects" },
+  { value: "16 Wk", label: "Launch Systems" },
+] as const;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -34,8 +40,52 @@ export function Hero() {
     city: "",
     timeline: "",
   });
+  const [consultError, setConsultError] = useState("");
 
-  // Defer GSAP entrance until after first paint so LCP image/text stay unblocked.
+  function handleConsultationSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setConsultError("");
+
+    const parsed = heroConsultationSchema.safeParse(filters);
+    if (!parsed.success) {
+      setConsultError(
+        parsed.error.issues[0]?.message ||
+          "Please complete all consultation fields.",
+      );
+      return;
+    }
+
+    try {
+      sessionStorage.setItem(
+        CONSULTATION_STORAGE_KEY,
+        JSON.stringify(parsed.data),
+      );
+    } catch {
+      // storage may be blocked — Contact still reads query params
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("dd:consultation", { detail: parsed.data }),
+    );
+
+    const params = new URLSearchParams(parsed.data);
+    const nextUrl = `/?${params.toString()}#contact`;
+    window.history.replaceState(null, "", nextUrl);
+
+    const contact = document.getElementById("contact");
+    if (contact) {
+      contact.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => {
+        const nameInput = document.querySelector<HTMLInputElement>(
+          '#contact input[name="name"]',
+        );
+        nameInput?.focus({ preventScroll: true });
+      }, 450);
+    } else {
+      window.location.assign(nextUrl);
+    }
+  }
+
   useEffect(() => {
     if (reduceMotion || !headlineRef.current) return;
 
@@ -48,29 +98,27 @@ export function Hero() {
       if (cancelled || !sectionRef.current) return;
 
       ctx = gsap.context(() => {
-        // Content is already painted for LCP — only enhance with light motion.
-        // Avoid opacity:0 after paint (causes flash + hurts INP/CLS).
         gsap.fromTo(
           ".hero-bg-image",
-          { scale: 1.05 },
-          { scale: 1, duration: 1.35, ease: "power2.out" },
+          { scale: 1.04 },
+          { scale: 1, duration: 1.4, ease: "power2.out" },
         );
         gsap.from(".hero-line", {
-          y: 16,
-          duration: 0.65,
+          y: 14,
+          duration: 0.6,
           stagger: 0.05,
           ease: "power3.out",
           clearProps: "transform",
         });
         gsap.from(".hero-search", {
-          y: 14,
-          duration: 0.6,
-          delay: 0.12,
+          y: 12,
+          duration: 0.55,
+          delay: 0.1,
           ease: "power3.out",
           clearProps: "transform",
         });
       }, sectionRef);
-    }, 1200);
+    }, 1000);
 
     return () => {
       cancelled = true;
@@ -79,7 +127,6 @@ export function Hero() {
     };
   }, [reduceMotion]);
 
-  // Mouse parallax: desktop only, deferred, rAF-throttled.
   useEffect(() => {
     if (reduceMotion) return;
 
@@ -105,9 +152,9 @@ export function Hero() {
           const x = (event.clientX - rect.left) / rect.width - 0.5;
           const y = (event.clientY - rect.top) / rect.height - 0.5;
           gsap.to(bg, {
-            x: x * 12,
-            y: y * 7,
-            duration: 1.1,
+            x: x * 10,
+            y: y * 6,
+            duration: 1.05,
             ease: "power3.out",
             overwrite: true,
           });
@@ -141,23 +188,20 @@ export function Hero() {
           fill
           priority
           fetchPriority="high"
-          quality={62}
-          placeholder="empty"
-          className="hero-bg-image object-cover object-[center_30%]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1400px"
+          quality={65}
+          className="hero-bg-image object-cover object-[center_28%]"
+          sizes="(max-width: 768px) 100vw, 1400px"
         />
-        {/* Stronger scrim for WCAG-friendly heading contrast over photography */}
-        <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(8,31,92,0.97)_0%,rgba(11,46,131,0.92)_42%,rgba(11,46,131,0.72)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(212,175,55,0.18),transparent_40%)]" />
-        <div className="absolute inset-0 bg-primary/25" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.55),transparent_42%)]" />
-        <div className="premium-noise absolute inset-0 max-md:hidden" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.97)_0%,rgba(11,46,131,0.93)_40%,rgba(11,46,131,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(212,175,55,0.2),transparent_38%)]" />
+        <div className="absolute inset-0 bg-primary/20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.6),transparent_45%)]" />
       </div>
 
       <FloatingShapes variant="dark" />
 
-      <Container className="relative z-10 flex min-h-[calc(100svh-5.25rem)] flex-col justify-center py-14 sm:py-16 md:py-20">
-        <div className="grid items-end gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+      <Container className="relative z-10 flex min-h-[calc(100svh-5.25rem)] flex-col justify-center gap-10 py-12 sm:py-16 md:py-20 lg:gap-12">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
           <div className="max-w-3xl">
             <div className="hero-line mb-5 inline-flex sm:mb-6">
               <Badge tone="glass">
@@ -169,38 +213,58 @@ export function Hero() {
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.15rem] leading-[1.08] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-5xl md:text-6xl lg:text-[4rem]"
+              className="font-display text-[2.25rem] leading-[1.05] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl lg:text-[4.1rem]"
             >
               <span className="hero-line block">Premium Property</span>
-              <span className="hero-line mt-1.5 block sm:mt-2">
-                <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent drop-shadow-none">
+              <span className="hero-line mt-1 block sm:mt-1.5">
+                <span className="bg-gradient-to-r from-accent via-accent-soft to-accent bg-clip-text text-transparent">
                   Marketing.
                 </span>
               </span>
             </h1>
 
-            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] sm:mt-6 sm:text-2xl md:text-[1.75rem]">
+            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
               {SITE_TAGLINE}
             </p>
 
-            <p className="hero-line mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white sm:text-lg md:text-xl">
-              Done & Delivered is a specialized real-estate marketing agency
-              helping builders and developers reach serious, high-intent buyers
-              with precision and impact.
+            <p className="hero-line mt-4 max-w-xl text-sm leading-relaxed text-white/95 sm:text-base md:text-lg">
+              Specialized marketing for builders and developers—strategic
+              thinking, premium creative, and conversion systems that put
+              projects in front of high-intent buyers.
             </p>
 
-            <div className="hero-line mt-7 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
+            <div className="hero-line mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button
+                href="/#contact"
+                variant="gold"
+                size="lg"
+                className="w-full sm:w-auto"
+                icon={<Sparkles className="h-4 w-4" />}
+              >
+                Book Consultation
+              </Button>
+              <Button
+                href="/#services"
+                variant="ghost"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                Explore Services
+              </Button>
+            </div>
+
+            <div className="hero-line mt-7 flex flex-wrap gap-2 sm:mt-8 sm:gap-2.5">
               {[
-                "Premium project branding",
-                "Performance lead systems",
-                "Sales funnel excellence",
+                "Project branding",
+                "Performance leads",
+                "Sales enablement",
               ].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-primary/40 px-3 py-2 text-[0.72rem] font-medium text-white backdrop-blur-md sm:text-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-primary/45 px-3 py-1.5 text-[0.7rem] font-medium text-white backdrop-blur-md sm:text-sm"
                 >
                   <ShieldCheck
-                    className="h-3.5 w-3.5 shrink-0 text-accent sm:h-4 sm:w-4"
+                    className="h-3.5 w-3.5 shrink-0 text-accent"
                     aria-hidden
                   />
                   {item}
@@ -209,18 +273,16 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hero-stats hidden grid-cols-3 gap-3 lg:grid">
-            {[
-              { value: "1450+", label: "Lead Capacity" },
-              { value: "7+", label: "Official Projects" },
-              { value: "16 Wk", label: "Launch Systems" },
-            ].map((stat) => (
+          <div className="hero-line grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-1 lg:gap-4">
+            {HERO_STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/15 bg-white/8 p-4 text-center backdrop-blur-md"
+                className="rounded-2xl border border-white/20 bg-white/10 px-3 py-3.5 text-center shadow-[0_12px_40px_rgba(0,0,0,0.15)] backdrop-blur-md sm:px-4 sm:py-4 lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-5 lg:text-left"
               >
-                <p className="font-display text-2xl text-white">{stat.value}</p>
-                <p className="mt-1 text-[0.68rem] font-medium uppercase tracking-[0.12em] text-white/75">
+                <p className="font-display text-xl text-white sm:text-2xl lg:text-3xl">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-white/80 sm:text-[0.68rem] lg:mt-0">
                   {stat.label}
                 </p>
               </div>
@@ -228,13 +290,13 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-search mt-10 md:mt-12">
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/50 bg-white/95 p-3 shadow-[0_36px_90px_rgba(8,31,92,0.32)] backdrop-blur-xl sm:p-4 md:p-5">
+        <div className="hero-search">
+          <div className="relative overflow-hidden rounded-[1.5rem] border border-white/55 bg-white p-3 shadow-[0_28px_70px_rgba(8,31,92,0.28)] sm:rounded-[1.75rem] sm:p-5 md:p-6">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
 
-            <div className="mb-4 flex flex-col gap-3 px-1 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary text-white shadow-[0_10px_24px_rgba(11,46,131,0.25)]">
+                <span className="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary text-white shadow-[0_10px_24px_rgba(11,46,131,0.25)]">
                   <MessageSquare className="h-4 w-4" aria-hidden />
                 </span>
                 <div>
@@ -242,21 +304,21 @@ export function Hero() {
                     Project Marketing Consultation
                   </p>
                   <p className="mt-0.5 text-xs text-muted md:text-sm">
-                    Tell us about your launch—we craft reach, leads, and sales
+                    Share your launch goals—we design reach, leads, and sales
                     systems
                   </p>
                 </div>
               </div>
-              <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/25 bg-accent/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-accent-dark">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-accent-dark">
                 For Builders & Developers
               </span>
             </div>
 
             <form
               className="grid gap-3 sm:grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_1fr_auto] xl:items-end"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleConsultationSubmit}
               aria-label="Request marketing consultation"
+              noValidate
             >
               <div className="search-field">
                 <label htmlFor="hero-project-type">
@@ -350,9 +412,9 @@ export function Hero() {
                 </select>
               </div>
 
-              <div className="sm:col-span-2 xl:col-span-1">
+              <div className="flex flex-col gap-2 sm:col-span-2 xl:col-span-1">
                 <Button
-                  href="/contact?intent=consultation"
+                  type="submit"
                   variant="primary"
                   size="lg"
                   fullWidth
@@ -361,33 +423,21 @@ export function Hero() {
                 >
                   Consult Now
                 </Button>
+                {consultError ? (
+                  <p
+                    role="alert"
+                    className="text-center text-xs font-medium text-red-600 xl:text-left"
+                  >
+                    {consultError}
+                  </p>
+                ) : null}
               </div>
             </form>
           </div>
         </div>
-
-        <div className="hero-stats mt-8 grid grid-cols-3 gap-2 sm:gap-3 lg:hidden">
-          {[
-            { value: "1450+", label: "Leads" },
-            { value: "7+", label: "Projects" },
-            { value: "16 Wk", label: "Systems" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-2xl border border-white/15 bg-white/8 px-2 py-3 text-center backdrop-blur-md"
-            >
-              <p className="font-display text-lg text-white sm:text-xl">
-                {stat.value}
-              </p>
-              <p className="mt-0.5 text-[0.62rem] font-medium uppercase tracking-[0.1em] text-white/75">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
       </Container>
 
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[var(--brand-bg)] via-[var(--brand-bg)]/70 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--brand-bg)] via-[var(--brand-bg)]/80 to-transparent" />
     </section>
   );
 }

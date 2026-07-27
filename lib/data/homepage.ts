@@ -26,9 +26,32 @@ export type ServiceItem = {
     | "branding"
     | "digital"
     | "leads"
+    | "social"
     | "performance"
-    | "influencer"
+    | "creative"
+    | "sales"
     | "funnel";
+};
+
+export type StatItem = {
+  id: string;
+  value: number;
+  suffix: string;
+  label: string;
+};
+
+export type TestimonialItem = {
+  id: string;
+  quote: string;
+  role: string;
+  context: string;
+};
+
+export type AboutContent = {
+  story: string;
+  mission: string;
+  vision: string;
+  whoWeAre: string;
 };
 
 export type WhyChooseItem = {
@@ -66,7 +89,14 @@ export type TimelinePhase = {
   points: string[];
 };
 
-/** Official ongoing projects from Done & Delivered Brand Deck */
+/**
+ * Official project portfolio from the Done & Delivered Brand Deck.
+ *
+ * TODO(assets): No official project photography exists under /public yet
+ * (only hero-bg.jpg + logo). Replace each `image` URL with local assets such as
+ * `/images/projects/nikhar-celio.jpg` when marketing delivers final files.
+ * Keep layout/card components unchanged when swapping paths.
+ */
 export const ongoingProjects: Project[] = [
   {
     id: "nikhar-celio",
@@ -77,6 +107,7 @@ export const ongoingProjects: Project[] = [
     location: "Bengaluru",
     description:
       "Premium residential apartments positioned with luxury storytelling and high-intent buyer acquisition.",
+    // TODO: replace Unsplash placeholder with official Nikhar Celio asset
     image:
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=70",
     initials: "NC",
@@ -90,6 +121,7 @@ export const ongoingProjects: Project[] = [
     location: "Off Sarjapura Road, Bengaluru",
     description:
       "Plot inventory marketed with corridor-focused demand generation and conversion-led campaign systems.",
+    // TODO: replace Unsplash placeholder with official Astro Boulevards asset
     image:
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=70",
     initials: "AB",
@@ -103,6 +135,7 @@ export const ongoingProjects: Project[] = [
     location: "Bengaluru",
     description:
       "Residential launch supported through premium branding, performance media, and sales-enablement workflows.",
+    // TODO: replace Unsplash placeholder with official PSR Vanasree asset
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=70",
     initials: "PV",
@@ -120,6 +153,7 @@ export const completedProjects: Project[] = [
     location: "Bengaluru",
     description:
       "Completed residential mandate delivered with full-funnel marketing and sales support.",
+    // TODO: replace Unsplash placeholder with official Sunshine Signature asset
     image:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=70",
     initials: "SS",
@@ -133,6 +167,7 @@ export const completedProjects: Project[] = [
     location: "Bengaluru",
     description:
       "ISO-certified developer partnership with premium positioning and measurable lead outcomes.",
+    // TODO: replace Unsplash placeholder with official Bhavishya Homes asset
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=70",
     initials: "BH",
@@ -146,6 +181,7 @@ export const completedProjects: Project[] = [
     location: "Bengaluru",
     description:
       "Completed residential campaign with performance marketing and conversion optimization.",
+    // TODO: replace Unsplash placeholder with official MSR Dew Drops asset
     image:
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=70",
     initials: "MD",
@@ -159,6 +195,7 @@ export const completedProjects: Project[] = [
     location: "Bengaluru",
     description:
       "Lifestyle villa project supported with creative branding and high-intent buyer outreach.",
+    // TODO: replace Unsplash placeholder with official Skanda Avani C99 asset
     image:
       "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=70",
     initials: "SA",
@@ -218,48 +255,117 @@ export const featuredDevelopers: Developer[] = [
   },
 ];
 
+/** Brand Deck — About / Who We Are */
+export const aboutContent: AboutContent = {
+  story:
+    "Done & Delivered is a specialized real-estate marketing agency dedicated to helping builders, developers, and premium property brands reach the right audience with precision and impact. Built on the belief that great projects deserve great visibility, we combine strategic thinking, high-end creative execution, and data-driven marketing to position properties exactly where they belong—in front of serious, high-intent buyers.",
+  mission:
+    "To deliver premium reach for premium properties through exclusive marketing systems that turn visibility into qualified demand and measurable sales outcomes.",
+  vision:
+    "To be the most trusted marketing and sales enablement partner for builders and developers who refuse average campaigns for exceptional projects.",
+  whoWeAre:
+    "We are a team of real-estate marketing experts, storytellers, strategists, and digital specialists who understand evolving buyer behaviour and modern marketing channels—creating campaigns that elevate project presence and drive real results.",
+};
+
+/** Brand Deck — services portfolio */
 export const services: ServiceItem[] = [
   {
     id: "s1",
-    title: "Premium Project Branding",
+    title: "Project Branding",
     description:
-      "Luxury brand systems, positioning frameworks, and creative identity crafted for premium real-estate launches.",
+      "Premium project branding and positioning frameworks that establish luxury identity before launch.",
     icon: "branding",
   },
   {
     id: "s2",
     title: "Digital Marketing",
     description:
-      "High-impact digital campaigns across search, social, and content channels built for serious buyer intent.",
+      "High-impact digital campaigns across search, portals, and content systems built for buyer intent.",
     icon: "digital",
   },
   {
     id: "s3",
     title: "Lead Generation",
     description:
-      "Conversion-focused strategies that attract genuine homebuyers and fill developer pipelines with quality enquiries.",
+      "Conversion-focused lead systems that fill developer pipelines with genuine homebuyer enquiries.",
     icon: "leads",
   },
   {
     id: "s4",
-    title: "Performance Marketing",
+    title: "Social Media Marketing",
     description:
-      "Data-led media buying, optimization, and reporting that turns visibility into measurable sales outcomes.",
-    icon: "performance",
+      "Social activation and community storytelling that builds awareness and sustained project demand.",
+    icon: "social",
   },
   {
     id: "s5",
-    title: "Influencer Marketing",
+    title: "Performance Marketing",
     description:
-      "Trusted creator partnerships that amplify project narratives to high-intent audiences with premium reach.",
-    icon: "influencer",
+      "Data-led media buying, optimization, and reporting that turns spend into measurable outcomes.",
+    icon: "performance",
   },
   {
     id: "s6",
+    title: "Creative Services",
+    description:
+      "High-end creative assets and storytelling crafted to elevate premium real-estate launches.",
+    icon: "creative",
+  },
+  {
+    id: "s7",
+    title: "Sales Enablement",
+    description:
+      "Sales team tools, CRM-ready follow-ups, and conversion workflows from visit to booking.",
+    icon: "sales",
+  },
+  {
+    id: "s8",
     title: "Sales Funnel Optimization",
     description:
-      "End-to-end funnel design for real-estate launches—from first impression to site visit, pipeline, and booking.",
+      "End-to-end funnel design for real-estate launches—from first impression to closers.",
     icon: "funnel",
+  },
+];
+
+export const siteStats: StatItem[] = [
+  { id: "st1", value: 1450, suffix: "+", label: "Lead Capacity" },
+  { id: "st2", value: 7, suffix: "+", label: "Official Projects" },
+  { id: "st3", value: 16, suffix: " Wk", label: "Launch Roadmap" },
+  { id: "st4", value: 25, suffix: "+", label: "Target Closers" },
+];
+
+/**
+ * Partnership statements derived from Brand Deck promise language.
+ * No invented personal client identities.
+ */
+export const partnershipTestimonials: TestimonialItem[] = [
+  {
+    id: "t1",
+    quote:
+      "With Done & Delivered, the project doesn’t just reach people—it reaches the right people through premium positioning and disciplined targeting.",
+    role: "Builder Partnership Standard",
+    context: "Brand Deck · Why Builders Choose Us",
+  },
+  {
+    id: "t2",
+    quote:
+      "From the first idea to the final lead, every campaign is designed to be Done & Delivered with excellence, efficiency, and competitive standout.",
+    role: "Our Promise",
+    context: "Brand Deck · Partnership Commitment",
+  },
+  {
+    id: "t3",
+    quote:
+      "Strategic thinking, high-end creative execution, and data-driven marketing position premium inventory exactly where high-intent buyers are.",
+    role: "Agency Positioning",
+    context: "Brand Deck · About Done & Delivered",
+  },
+  {
+    id: "t4",
+    quote:
+      "Exclusive real-estate focus with end-to-end delivery—from strategy and media to nurture and sales enablement—keeps launches conversion-led.",
+    role: "Full-Funnel Delivery",
+    context: "Brand Deck · Offerings & Process",
   },
 ];
 
@@ -367,7 +473,7 @@ export const salesFunnel: FunnelStep[] = [
   { id: "f1", value: "1450", label: "Leads" },
   { id: "f2", value: "150", label: "Site Visits" },
   { id: "f3", value: "60", label: "Re-visits" },
-  { id: "f4", value: "45", label: "Pipeline" },
+  { id: "f4", value: "45", label: "Qualified Pipeline" },
   { id: "f5", value: "35", label: "Price Discussion" },
   { id: "f6", value: "25", label: "Closers" },
 ];
@@ -451,7 +557,7 @@ export const megaMenuFeaturedLinks = [
   {
     title: "Book Consultation",
     description: "Partner with Done & Delivered",
-    href: "/contact?intent=consultation",
+    href: "/#contact",
   },
 ];
 

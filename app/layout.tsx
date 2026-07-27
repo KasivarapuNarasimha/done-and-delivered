@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
 /** Display font — limited weights for faster download */
@@ -26,11 +27,11 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://doneanddelivered.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default:
       "Done & Delivered | Premium Real Estate Marketing & Property Branding",
-    template: "%s | Done & Delivered",
+    template: `%s | ${SITE_NAME}`,
   },
   description:
     "Done & Delivered is a premium real estate marketing and sales partner for builders and developers—specializing in property branding, project launches, performance marketing, lead generation, and luxury property marketing.",
@@ -46,16 +47,19 @@ export const metadata: Metadata = {
     "Sales Funnel Optimization",
     "Real Estate Marketing Agency India",
   ],
-  authors: [{ name: "Done & Delivered" }],
-  creator: "Done & Delivered",
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Done & Delivered",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     title:
       "Done & Delivered | Premium Real Estate Marketing & Property Branding",
-    description:
-      "Premium reach for premium properties. Project branding, performance marketing, lead generation, and end-to-end sales support for builders and developers.",
+    description: `${SITE_TAGLINE}. Project branding, performance marketing, lead generation, and end-to-end sales support for builders and developers.`,
     images: [
       {
         url: "/done-and-delivered-logo.jpeg",
