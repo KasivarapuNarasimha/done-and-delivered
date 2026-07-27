@@ -110,10 +110,10 @@ export function Header() {
                     <button
                       type="button"
                       className={cn(
-                        "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold text-white transition-all duration-300",
-                        "hover:bg-white/10 hover:text-accent",
+                        "nav-link-header inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm transition-all duration-300",
+                        "hover:bg-white/10",
                         (megaOpen || isNavActive(pathname, link.href)) &&
-                          "bg-white/10 text-accent",
+                          "is-active bg-white/10",
                       )}
                       aria-expanded={megaOpen}
                       aria-controls={megaId}
@@ -262,8 +262,8 @@ export function Header() {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-3.5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:text-accent",
-                    active && "bg-white/10 text-accent",
+                    "nav-link-header rounded-full px-3.5 py-2 text-sm transition-all duration-300 hover:bg-white/10",
+                    active && "is-active bg-white/10",
                   )}
                 >
                   {link.label}
@@ -332,7 +332,7 @@ export function Header() {
                     <div key={link.label} className="rounded-2xl bg-white/5">
                       <button
                         type="button"
-                        className="flex w-full items-center justify-between px-4 py-3.5 text-left font-semibold text-white"
+                        className="nav-link-header flex w-full items-center justify-between px-4 py-3.5 text-left"
                         onClick={() => setMobilePropsOpen((v) => !v)}
                         aria-expanded={mobilePropsOpen}
                       >
@@ -383,8 +383,8 @@ export function Header() {
                     onClick={() => setMobileOpen(false)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "block rounded-2xl px-4 py-3.5 font-semibold text-white hover:bg-white/10 hover:text-accent",
-                      active && "bg-white/10 text-accent",
+                      "nav-link-header block rounded-2xl px-4 py-3.5 hover:bg-white/10",
+                      active && "is-active bg-white/10",
                     )}
                   >
                     {link.label}

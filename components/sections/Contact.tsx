@@ -216,7 +216,7 @@ export function Contact() {
   }
 
   const inputClass = (key: keyof FormState) =>
-    `form-control mt-1.5 h-12 px-4 ${
+    `form-control mt-1.5 h-12 px-4 !text-[#0B2E83] ${
       fieldErrors[key] ? "form-control-error" : ""
     }`;
 

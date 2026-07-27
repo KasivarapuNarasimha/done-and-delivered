@@ -179,26 +179,17 @@ export function Hero() {
           className="hero-bg-image object-cover object-[center_28%]"
           sizes="(max-width: 768px) 100vw, 1400px"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.98)_0%,rgba(11,46,131,0.96)_38%,rgba(11,46,131,0.9)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(212,175,55,0.14),transparent_36%)]" />
-        <div className="absolute inset-0 bg-primary/35" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.75),transparent_50%)]" />
-        {/* Decorative ambient glow — keep well under 5% opacity */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          aria-hidden
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 80%, #D4AF37 0%, transparent 40%)",
-          }}
-        />
+        {/* Premium overlay — balanced so text can stay bright without crushing the photo */}
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(8,31,92,0.92)_0%,rgba(11,46,131,0.88)_42%,rgba(11,46,131,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(212,175,55,0.1),transparent_36%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,31,92,0.55),transparent_48%)]" />
       </div>
 
       <FloatingShapes variant="dark" />
 
       <Container className="relative z-10 flex min-h-[calc(100svh-5.25rem)] flex-col justify-center gap-10 py-12 sm:py-16 md:py-20 lg:gap-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
-          <div className="max-w-3xl">
+          <div className="relative z-10 max-w-3xl">
             <div className="hero-line mb-5 inline-flex sm:mb-6">
               <Badge tone="glass">
                 <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden />
@@ -209,19 +200,19 @@ export function Hero() {
             <h1
               id="hero-heading"
               ref={headlineRef}
-              className="font-display text-[2.25rem] leading-[1.05] tracking-tight text-white drop-shadow-[0_3px_20px_rgba(0,0,0,0.55)] sm:text-5xl md:text-6xl lg:text-[4.1rem]"
+              className="heading-on-dark font-display text-[2.35rem] leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.2rem]"
             >
-              <span className="hero-line block text-white">Premium Property</span>
-              <span className="hero-line mt-1 block text-accent sm:mt-1.5">
+              <span className="hero-line block">Premium Property</span>
+              <span className="hero-line heading-accent mt-1 block sm:mt-1.5">
                 Marketing.
               </span>
             </h1>
 
-            <p className="hero-line mt-5 max-w-xl font-display text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.5)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
+            <p className="hero-line text-on-dark-strong mt-5 max-w-xl font-display text-xl font-bold leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
               {SITE_TAGLINE}
             </p>
 
-            <p className="hero-line mt-4 max-w-xl text-sm font-medium leading-relaxed text-white sm:text-base md:text-lg">
+            <p className="hero-line text-on-dark-strong mt-4 max-w-xl text-sm leading-relaxed sm:text-base md:text-lg">
               Specialized marketing for builders and developers—strategic
               thinking, premium creative, and conversion systems that put
               projects in front of high-intent buyers.

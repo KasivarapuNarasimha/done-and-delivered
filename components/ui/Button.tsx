@@ -31,14 +31,14 @@ type ButtonAsLink = CommonProps & {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-primary text-white font-bold border border-transparent shadow-[0_12px_28px_rgba(11,46,131,0.26)] hover:bg-primary-dark hover:text-white hover:border-accent/40 hover:shadow-[0_14px_32px_rgba(212,175,55,0.22)] focus-visible:text-white",
+    "bg-primary !text-[#FFFFFF] font-bold border border-transparent shadow-[0_12px_28px_rgba(11,46,131,0.28)] hover:bg-primary-dark hover:!text-[#FFFFFF] hover:border-accent/45 hover:shadow-[0_14px_32px_rgba(212,175,55,0.24)] focus-visible:!text-[#FFFFFF]",
   secondary:
-    "bg-white text-primary font-bold border border-primary/15 shadow-sm hover:border-accent hover:text-primary hover:shadow-[0_10px_24px_rgba(11,46,131,0.12)]",
-  gold: "bg-accent text-primary font-bold border border-transparent shadow-[0_12px_28px_rgba(212,175,55,0.32)] hover:bg-[#c4a030] hover:text-primary focus-visible:text-primary",
+    "bg-white !text-[#0B2E83] font-bold border border-primary/20 shadow-sm hover:border-accent hover:!text-[#0B2E83] hover:shadow-[0_10px_24px_rgba(11,46,131,0.12)]",
+  gold: "bg-accent !text-[#0B2E83] font-bold border border-transparent shadow-[0_12px_28px_rgba(212,175,55,0.34)] hover:bg-[#c4a030] hover:!text-[#0B2E83] focus-visible:!text-[#0B2E83]",
   ghost:
-    "bg-white/15 text-white font-bold border border-white/40 hover:bg-white hover:text-primary hover:border-white backdrop-blur-md focus-visible:text-white",
+    "bg-white/18 !text-[#FFFFFF] font-bold border border-white/50 hover:bg-white hover:!text-[#0B2E83] hover:border-white backdrop-blur-md focus-visible:!text-[#FFFFFF]",
   outline:
-    "bg-white text-primary font-bold border border-primary/20 shadow-sm hover:border-accent hover:bg-primary hover:text-white",
+    "bg-white !text-[#0B2E83] font-bold border border-primary/25 shadow-sm hover:border-accent hover:bg-primary hover:!text-[#FFFFFF]",
 };
 
 const sizes: Record<Size, string> = {

@@ -49,8 +49,8 @@ export function SectionHeading({
       <TextReveal
         as="h2"
         className={cn(
-          "text-[1.85rem] leading-[1.15] sm:text-3xl md:text-4xl lg:text-[2.65rem]",
-          light ? "text-white" : "text-primary",
+          "text-[1.85rem] font-bold leading-[1.15] sm:text-3xl md:text-4xl lg:text-[2.65rem]",
+          light ? "heading-on-dark" : "text-primary",
         )}
         text={title}
       />
@@ -68,7 +68,7 @@ export function SectionHeading({
           <p
             className={cn(
               "mt-5 max-w-2xl text-[0.98rem] leading-relaxed md:text-lg",
-              light ? "text-white" : "text-muted",
+              light ? "text-on-dark-strong" : "text-muted",
               align === "center" && "mx-auto",
             )}
           >

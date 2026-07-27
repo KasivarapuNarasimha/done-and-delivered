@@ -40,9 +40,10 @@ export function FloatingShapes({
           "bg-[radial-gradient(circle,rgba(11,46,131,0.1),transparent_70%)]",
         ]
       : [
-          "bg-[radial-gradient(circle,rgba(255,255,255,0.12),transparent_70%)]",
-          "bg-[radial-gradient(circle,rgba(212,175,55,0.16),transparent_70%)]",
-          "bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_70%)]",
+          // Dark heroes: keep decorative shapes very soft so they never read as text
+          "bg-[radial-gradient(circle,rgba(255,255,255,0.05),transparent_70%)]",
+          "bg-[radial-gradient(circle,rgba(212,175,55,0.06),transparent_70%)]",
+          "bg-[radial-gradient(circle,rgba(255,255,255,0.04),transparent_70%)]",
         ];
 
   return (

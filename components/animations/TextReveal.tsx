@@ -44,7 +44,8 @@ export function TextReveal({
         {words.map((word, index) => (
           <span key={`${word}-${index}`} className="inline-block overflow-hidden">
             <motion.span
-              className="inline-block"
+              className="inline-block text-inherit"
+              style={{ color: "inherit" }}
               variants={{
                 hidden: { y: "110%", opacity: 0 },
                 visible: {
