@@ -1,5 +1,8 @@
 export { Hero } from "./Hero";
+export { PageHero } from "./PageHero";
 export { About } from "./About";
+export { CoreValues } from "./CoreValues";
+export { MarketingPhilosophy } from "./MarketingPhilosophy";
 export { Services } from "./Services";
 export { WhyChoose } from "./WhyChoose";
 export { MarketingProcess } from "./MarketingProcess";
@@ -11,4 +14,5 @@ export { CompletedProjects } from "./CompletedProjects";
 export { FeaturedDevelopers } from "./FeaturedDevelopers";
 export { Testimonials } from "./Testimonials";
 export { Contact } from "./Contact";
+export { ContactFAQ } from "./ContactFAQ";
 export { CTA } from "./CTA";

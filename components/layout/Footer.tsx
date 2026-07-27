@@ -23,11 +23,11 @@ import { Reveal } from "@/components/animations/Reveal";
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/#services" },
   { label: "Our Process", href: "/#marketing-process" },
   { label: "Projects", href: "/#ongoing-projects" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const serviceLinks = [
@@ -36,7 +36,7 @@ const serviceLinks = [
   { label: "Lead Generation", href: "/#services" },
   { label: "Performance Marketing", href: "/#services" },
   { label: "Sales Enablement", href: "/#services" },
-  { label: "Book Consultation", href: "/#contact" },
+  { label: "Book Consultation", href: "/contact" },
 ];
 
 const socialIcons = {
@@ -79,7 +79,7 @@ export function Footer() {
                 systems for builders and developers.
               </p>
             </div>
-            <Button href="/#contact" variant="gold" size="lg">
+            <Button href="/contact" variant="gold" size="lg">
               Start a Conversation
             </Button>
           </div>

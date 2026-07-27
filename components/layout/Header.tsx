@@ -228,7 +228,7 @@ export function Header() {
                                     leads, and sales systems.
                                   </p>
                                   <Link
-                                    href="/#contact"
+                                    href="/contact"
                                     className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent transition-colors hover:text-accent-soft"
                                   >
                                     Book consultation

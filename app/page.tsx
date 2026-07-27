@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
 import {
@@ -8,6 +9,12 @@ import {
   SITE_TAGLINE,
   SITE_URL,
 } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const About = dynamic(
   () => import("@/components/sections/About").then((m) => m.About),

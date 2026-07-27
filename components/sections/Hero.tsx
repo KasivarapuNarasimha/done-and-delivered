@@ -69,21 +69,8 @@ export function Hero() {
     );
 
     const params = new URLSearchParams(parsed.data);
-    const nextUrl = `/?${params.toString()}#contact`;
-    window.history.replaceState(null, "", nextUrl);
-
-    const contact = document.getElementById("contact");
-    if (contact) {
-      contact.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.setTimeout(() => {
-        const nameInput = document.querySelector<HTMLInputElement>(
-          '#contact input[name="name"]',
-        );
-        nameInput?.focus({ preventScroll: true });
-      }, 450);
-    } else {
-      window.location.assign(nextUrl);
-    }
+    // Hand off to the standalone contact page (same API-backed form)
+    window.location.assign(`/contact?${params.toString()}`);
   }
 
   useEffect(() => {
@@ -235,7 +222,7 @@ export function Hero() {
 
             <div className="hero-line mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
-                href="/#contact"
+                href="/contact"
                 variant="gold"
                 size="lg"
                 className="w-full sm:w-auto"

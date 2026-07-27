@@ -557,7 +557,7 @@ export const megaMenuFeaturedLinks = [
   {
     title: "Book Consultation",
     description: "Partner with Done & Delivered",
-    href: "/#contact",
+    href: "/contact",
   },
 ];
 
