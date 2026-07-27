@@ -1,20 +1,40 @@
 import type { NextConfig } from "next";
 
 /**
- * Hostinger (hCDN) deployment notes:
+ * Hostinger hCDN + Next.js static asset 404s — proven root cause
+ * ----------------------------------------------------------------
+ * Live probes showed TWO HTML generations being served:
  *
- * Next.js fully-static App Router pages default to:
- *   Cache-Control: s-maxage=31536000
- * That lets hCDN hold HTML for up to a year. After a redeploy, the edge can
- * keep serving old HTML while the Node origin has a new BUILD_ID / chunk set
- * → browser requests missing /_next/static/chunks/* → 404.
+ * A) Stale CDN HTML:
+ *    Cache-Control: s-maxage=31536000  (Next default for static pages)
+ *    age: ~48h+
+ *    scripts: /_next/static/chunks/turbopack-45a8559a9cccbb35.js  (+ peers)
+ *    those chunk URLs → HTTP 404 (Not Found) on origin
  *
- * Fix: short-circuit HTML/document CDN caching; keep hashed static assets
- * immutable and long-lived.
+ * B) Current origin HTML (after short-cache headers were deployed):
+ *    Cache-Control: max-age=0, s-maxage=60
+ *    scripts: /_next/static/chunks/turbopack-28dd6a71db85f1fa.js  (+ peers)
+ *    those chunk URLs → HTTP 200
  *
- * No assetPrefix / basePath / custom distDir — Hostinger Node expects defaults.
+ * Conclusion: HTML and /_next/static must come from the SAME build.
+ * Year-cached HTML after a redeploy references deleted chunk hashes.
+ * public/ assets (e.g. /images/hero-bg.jpg) still work → only Next
+ * build chunks from the previous BUILD_ID are missing — not a total
+ * static-file outage, not standalone-without-static as the sole cause
+ * (current generation chunks serve correctly).
+ *
+ * Headers notes:
+ * - Next merges matching header rules; a broad `/:path*` AFTER
+ *   `/_next/static` overwrote immutable static Cache-Control.
+ * - Document paths must exclude `/_next/*` so hashed assets stay
+ *   immutable while HTML never sits at the edge for a year.
  */
+const htmlCacheControl =
+  "public, max-age=0, s-maxage=0, must-revalidate";
+
 const nextConfig: NextConfig = {
+  // Default Node server output — NOT "export", NOT "standalone".
+  // Hostinger runs `next build` + `next start` with full `.next/` tree.
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
@@ -37,10 +57,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "react-icons", "framer-motion"],
   },
   async headers() {
-    // First matching source wins in Next.js.
     return [
       {
-        // Content-hashed build assets: safe to cache forever at CDN/browser.
         source: "/_next/static/:path*",
         headers: [
           {
@@ -50,7 +68,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Next image optimizer responses can be cached moderately.
         source: "/_next/image",
         headers: [
           {
@@ -60,7 +77,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // API must never be CDN-cached.
         source: "/api/:path*",
         headers: [
           {
@@ -70,16 +86,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Documents / RSC HTML: short CDN TTL so deploys are visible quickly
-        // and never leave stale HTML pointing at deleted chunk hashes.
-        source: "/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value:
-              "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
-          },
-        ],
+        // Homepage document (does not match /:path* alone in all Next versions)
+        source: "/",
+        headers: [{ key: "Cache-Control", value: htmlCacheControl }],
+      },
+      {
+        // All other documents — explicitly exclude /_next/* so static
+        // immutable headers are never overwritten by this rule.
+        source: "/:path((?!_next/).*)",
+        headers: [{ key: "Cache-Control", value: htmlCacheControl }],
       },
     ];
   },

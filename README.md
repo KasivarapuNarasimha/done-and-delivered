@@ -42,11 +42,23 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Hostinger deployment (required)
 
-### Why chunk 404s happen
+### Why chunk 404s happen (proven on production)
 
-Fully static Next.js pages default to `Cache-Control: s-maxage=31536000`. Hostinger **hCDN** then serves **stale HTML for up to a year** while the Node origin runs a **new** build with different `/_next/static/chunks/*` hashes. The browser loads old HTML → requests missing chunks → **404**.
+Live probes against `https://doneanddelivered.co.in` captured **two HTML generations**:
 
-This repo overrides document cache headers (`s-maxage=60`) and keeps hashed `/_next/static/*` immutable.
+| Variant | HTML `Cache-Control` | Example script | Chunk status |
+| --- | --- | --- | --- |
+| Stale CDN HTML | `s-maxage=31536000`, `age` ~48h+ | `turbopack-45a8559a9cccbb35.js` | **404** |
+| Current origin HTML | short / no CDN store | `turbopack-28dd6a71db85f1fa.js` | **200** |
+
+- `/images/hero-bg.jpg` still **200** while old chunks **404** → static serving works; **previous-build chunk files are gone from origin**.
+- Not caused by `.gitignore` ignoring `.next` (Hostinger builds on the server).
+- Not `output: "standalone"` missing a copy step in this repo (we use default `next start` + full `.next`).
+- Not `assetPrefix` / `basePath` (both unset).
+
+**Exact failure mode:** browser/CDN serves HTML from build A; Node origin only has `/_next/static` from build B → missing hashes → 404 → only unstyled background image.
+
+This repo forces document `Cache-Control: max-age=0, s-maxage=0, must-revalidate` and keeps `/_next/static/*` immutable. **You must still purge Hostinger CDN once** so any year-cached HTML from before this fix is dropped.
 
 ### Deploy steps
 
@@ -81,8 +93,15 @@ This repo overrides document cache headers (`s-maxage=60`) and keeps hashed `/_n
 | `assetPrefix` | unset |
 | `basePath` | unset |
 | `distDir` | default `.next` |
-| HTML cache | `max-age=0, s-maxage=60, stale-while-revalidate=300` |
-| `/_next/static` cache | `max-age=31536000, immutable` |
+| HTML cache | `max-age=0, s-maxage=0, must-revalidate` (never year-cache documents) |
+| `/_next/static` cache | `max-age=31536000, immutable` (path excluded from document rule) |
+
+### After deploy (mandatory)
+
+1. hPanel → CDN → **Purge all cache** for `doneanddelivered.co.in`
+2. Hard-refresh browser (`Ctrl+Shift+R`) or test in a private window
+3. `pnpm run verify:static:prod` — every HTML-referenced chunk must be HTTP 200  
+4. Confirm HTML response is **not** `s-maxage=31536000`
 
 ## Contact form / email
 
