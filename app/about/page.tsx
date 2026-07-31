@@ -39,7 +39,11 @@ export default function AboutPage() {
           { label: "About" },
         ]}
         icon={<Building2 className="h-3.5 w-3.5 text-accent" aria-hidden />}
-        primaryCta={{ label: "Contact Us", href: "/contact", variant: "gold" }}
+        primaryCta={{
+          label: "Contact Us",
+          href: "mailto:hello@doneanddelivered.com?subject=Business%20Enquiry",
+          variant: "gold",
+        }}
         secondaryCta={{
           label: "Explore Services",
           href: "/#services",

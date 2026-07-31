@@ -35,7 +35,7 @@ export function CTA() {
                 </p>
                 <h2
                   id="cta-heading"
-                  className="mt-3 font-display text-[1.85rem] leading-tight text-white sm:text-3xl md:text-4xl lg:text-[2.65rem]"
+                  className="heading-on-dark mt-3 font-display text-[1.85rem] leading-tight sm:text-3xl md:text-4xl lg:text-[2.65rem]"
                 >
                   Ready to launch your next premium project?
                 </h2>
@@ -49,7 +49,7 @@ export function CTA() {
 
               <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
                 <Button
-                  href="/contact"
+                  href="mailto:hello@doneanddelivered.com?subject=Business%20Enquiry"
                   variant="gold"
                   size="lg"
                   fullWidth

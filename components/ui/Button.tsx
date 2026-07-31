@@ -66,9 +66,33 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   );
 
   if ("href" in props && props.href) {
+    const href = props.href;
+    const isExternal =
+      /^(https?:|mailto:|tel:)/i.test(href) || href.startsWith("//");
+
+    // mailto/tel/https must use a native anchor so the OS email client opens correctly
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          target={props.target}
+          rel={props.rel}
+          onClick={props.onClick}
+          onMouseMove={setRippleCoords}
+          className={classes}
+          aria-label={props["aria-label"]}
+        >
+          <span className="inline-flex items-center justify-center gap-2">
+            {icon}
+            {children}
+          </span>
+        </a>
+      );
+    }
+
     return (
       <Link
-        href={props.href}
+        href={href}
         target={props.target}
         rel={props.rel}
         onClick={props.onClick}
