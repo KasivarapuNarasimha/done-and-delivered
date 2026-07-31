@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { Project } from "@/lib/data/homepage";
 import { Badge } from "@/components/ui/Badge";
@@ -78,13 +79,25 @@ export function ProjectCard({
     </article>
   );
 
+  const wrapped = project.href ? (
+    <Link
+      href={project.href}
+      className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      aria-label={`View ${project.name} project details`}
+    >
+      {card}
+    </Link>
+  ) : (
+    card
+  );
+
   if (!animate) {
-    return <div className="h-full">{card}</div>;
+    return <div className="h-full">{wrapped}</div>;
   }
 
   return (
     <Reveal delay={delay} className="h-full">
-      {card}
+      {wrapped}
     </Reveal>
   );
 }

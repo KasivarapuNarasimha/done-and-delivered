@@ -1,3 +1,8 @@
+import {
+  getProjectBanner,
+  getProjectBasePath,
+} from "@/lib/utils/project-assets";
+
 export type Project = {
   id: string;
   name: string;
@@ -8,6 +13,8 @@ export type Project = {
   description: string;
   image: string;
   initials: string;
+  /** Optional dedicated project details route */
+  href?: string;
 };
 
 export type Developer = {
@@ -91,11 +98,8 @@ export type TimelinePhase = {
 
 /**
  * Official project portfolio from the Done & Delivered Brand Deck.
- *
- * TODO(assets): No official project photography exists under /public yet
- * (only hero-bg.jpg + logo). Replace each `image` URL with local assets such as
- * `/images/projects/nikhar-celio.jpg` when marketing delivers final files.
- * Keep layout/card components unchanged when swapping paths.
+ * Project card images resolve via the slug-based asset loader
+ * (`public/projects/{slug}/…` → `/projects/{slug}/…`).
  */
 export const ongoingProjects: Project[] = [
   {
@@ -104,13 +108,12 @@ export const ongoingProjects: Project[] = [
     type: "Residential Apartment",
     status: "Ongoing",
     developer: "Nikhar",
-    location: "Bengaluru",
+    location: "Gunjur, Bengaluru",
     description:
       "Premium residential apartments positioned with luxury storytelling and high-intent buyer acquisition.",
-    // TODO: replace Unsplash placeholder with official Nikhar Celio asset
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=70",
+    image: getProjectBanner("nikhar-celio"),
     initials: "NC",
+    href: getProjectBasePath("nikhar-celio"),
   },
   {
     id: "astro-boulevards",
@@ -528,14 +531,16 @@ export const marketingTimeline: TimelinePhase[] = [
 export const projectMegaMenu = ongoingProjects.map((project) => ({
   title: project.name,
   description: project.type,
-  href: `/#${project.id}`,
+  href: project.href ?? `/#${project.id}`,
   count: project.status,
   icon:
     project.type.toLowerCase().includes("plot")
       ? ("map" as const)
       : ("building" as const),
   // Smaller assets for mega-menu thumbnails
-  image: project.image.replace("w=900", "w=480"),
+  image: project.image.includes("unsplash")
+    ? project.image.replace("w=900", "w=480")
+    : project.image,
 }));
 
 export const megaMenuFeaturedLinks = [
