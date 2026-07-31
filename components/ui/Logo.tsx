@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-/** Official logo intrinsic size (do not crop or stretch). */
-export const LOGO_SRC = "/done-and-delivered-logo.jpeg";
-export const LOGO_WIDTH = 1600;
-export const LOGO_HEIGHT = 836;
+/** Official transparent logo (public/logo.png) — do not crop or stretch. */
+export const LOGO_SRC = "/logo.png";
+export const LOGO_WIDTH = 691;
+export const LOGO_HEIGHT = 361;
 export const LOGO_ASPECT = LOGO_WIDTH / LOGO_HEIGHT;
 
 type LogoSize = "sm" | "md" | "lg";
@@ -32,10 +32,8 @@ const sizes: Record<
 };
 
 /**
- * Official Done & Delivered logo.
- * - Exact asset: /done-and-delivered-logo.jpeg
- * - Aspect ratio preserved (no stretch/crop)
- * - Works on blue header/footer; blue plate also reads correctly on light sections
+ * Official Done & Delivered logo — transparent PNG for blue header/footer.
+ * No background, border, padding box, or shadow.
  */
 export function Logo({
   variant = "dark",
@@ -43,7 +41,7 @@ export function Logo({
   size = "md",
   priority = false,
 }: {
-  /** Kept for API compatibility; logo is a self-contained blue brand plate. */
+  /** Kept for API compatibility. */
   variant?: "dark" | "light";
   className?: string;
   size?: LogoSize;
@@ -56,7 +54,7 @@ export function Logo({
     <Link
       href="/"
       className={cn(
-        "group inline-flex min-w-0 shrink-0 items-center transition-opacity hover:opacity-95",
+        "group inline-flex min-w-0 shrink-0 items-center bg-transparent p-0",
         className,
       )}
       aria-label="Done & Delivered home"
@@ -67,19 +65,19 @@ export function Logo({
         width={width}
         height={config.height}
         priority={priority}
-        quality={90}
+        quality={95}
         sizes={config.sizes}
         className={cn(
-          "h-auto max-w-[min(100%,220px)] object-contain object-left transition-transform duration-300 group-hover:scale-[1.02]",
+          "h-auto w-auto max-w-[min(100%,200px)] bg-transparent object-contain object-left",
           config.className,
         )}
         style={{
           width: "auto",
           height: undefined,
           aspectRatio: `${LOGO_WIDTH} / ${LOGO_HEIGHT}`,
+          background: "transparent",
         }}
       />
-      {/* Screen-reader only brand context; visual brand is fully in the logo image */}
       <span className="sr-only">
         Done & Delivered. Premium property marketing. Powered by RRR Estates
         LLP.
