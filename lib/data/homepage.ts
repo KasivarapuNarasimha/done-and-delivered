@@ -124,10 +124,9 @@ export const ongoingProjects: Project[] = [
     location: "Off Sarjapura Road, Bengaluru",
     description:
       "Plot inventory marketed with corridor-focused demand generation and conversion-led campaign systems.",
-    // TODO: replace Unsplash placeholder with official Astro Boulevards asset
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=70",
+    image: getProjectBanner("astro-boulevards"),
     initials: "AB",
+    href: getProjectBasePath("astro-boulevards"),
   },
   {
     id: "psr-vanasree",
