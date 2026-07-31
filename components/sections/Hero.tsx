@@ -206,93 +206,6 @@ export function Hero() {
       <FloatingShapes variant="dark" />
 
       <Container className="relative z-10 flex min-h-[calc(100svh-5.25rem)] flex-col justify-center gap-10 py-12 sm:py-16 md:py-20 lg:gap-12">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
-          <div className="relative z-10 max-w-3xl">
-            <div className="hero-line mb-5 inline-flex sm:mb-6">
-              <Badge tone="glass">
-                <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden />
-                Premium Real Estate Marketing & Sales Partner
-              </Badge>
-            </div>
-
-            <h1
-              id="hero-heading"
-              ref={headlineRef}
-              className="heading-on-dark font-display text-[2.35rem] leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.2rem]"
-            >
-              <span className="hero-line block">Premium Property</span>
-              <span className="hero-line heading-accent mt-1 block sm:mt-1.5">
-                Marketing.
-              </span>
-            </h1>
-
-            <p className="hero-line text-on-dark-strong mt-5 max-w-xl font-display text-xl font-bold leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
-              {SITE_TAGLINE}
-            </p>
-
-            <p className="hero-line text-on-dark-strong mt-4 max-w-xl text-sm leading-relaxed sm:text-base md:text-lg">
-              Specialized marketing for builders and developers—strategic
-              thinking, premium creative, and conversion systems that put
-              projects in front of high-intent buyers.
-            </p>
-
-            <div className="hero-line mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button
-                href="/contact"
-                variant="gold"
-                size="lg"
-                className="w-full sm:w-auto"
-                icon={<Sparkles className="h-4 w-4" />}
-              >
-                Book Consultation
-              </Button>
-              <Button
-                href="/#services"
-                variant="ghost"
-                size="lg"
-                className="w-full sm:w-auto"
-              >
-                Explore Services
-              </Button>
-            </div>
-
-            <div className="hero-line mt-7 flex flex-wrap gap-2 sm:mt-8 sm:gap-2.5">
-              {[
-                "Project branding",
-                "Performance leads",
-                "Sales enablement",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-primary/55 px-3 py-1.5 text-[0.7rem] font-semibold text-white backdrop-blur-md sm:text-sm"
-                >
-                  <ShieldCheck
-                    className="h-3.5 w-3.5 shrink-0 text-accent"
-                    aria-hidden
-                  />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="hero-line grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-1 lg:gap-4">
-            {HERO_STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-white/35 bg-white/12 px-3 py-3.5 text-center shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-4 sm:py-4 lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-5 lg:text-left"
-              >
-                <p className="font-display text-xl text-white sm:text-2xl lg:text-3xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white sm:text-[0.68rem] lg:mt-0">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div id="consultation" className="hero-search scroll-mt-28">
           <div className="relative overflow-hidden rounded-[1.5rem] border border-white/55 bg-white p-3 shadow-[0_28px_70px_rgba(8,31,92,0.28)] sm:rounded-[1.75rem] sm:p-5 md:p-6">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
@@ -436,6 +349,93 @@ export function Hero() {
                 ) : null}
               </div>
             </form>
+          </div>
+        </div>
+
+        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+          <div className="relative z-10 max-w-3xl">
+            <div className="hero-line mb-5 inline-flex sm:mb-6">
+              <Badge tone="glass">
+                <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden />
+                Premium Real Estate Marketing & Sales Partner
+              </Badge>
+            </div>
+
+            <h1
+              id="hero-heading"
+              ref={headlineRef}
+              className="heading-on-dark font-display text-[2.35rem] leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.2rem]"
+            >
+              <span className="hero-line block">Premium Property</span>
+              <span className="hero-line heading-accent mt-1 block sm:mt-1.5">
+                Marketing.
+              </span>
+            </h1>
+
+            <p className="hero-line text-on-dark-strong mt-5 max-w-xl font-display text-xl font-bold leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] sm:mt-6 sm:text-2xl md:text-[1.85rem]">
+              {SITE_TAGLINE}
+            </p>
+
+            <p className="hero-line text-on-dark-strong mt-4 max-w-xl text-sm leading-relaxed sm:text-base md:text-lg">
+              Specialized marketing for builders and developers—strategic
+              thinking, premium creative, and conversion systems that put
+              projects in front of high-intent buyers.
+            </p>
+
+            <div className="hero-line mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button
+                href="/contact"
+                variant="gold"
+                size="lg"
+                className="w-full sm:w-auto"
+                icon={<Sparkles className="h-4 w-4" />}
+              >
+                Book Consultation
+              </Button>
+              <Button
+                href="/#services"
+                variant="ghost"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                Explore Services
+              </Button>
+            </div>
+
+            <div className="hero-line mt-7 flex flex-wrap gap-2 sm:mt-8 sm:gap-2.5">
+              {[
+                "Project branding",
+                "Performance leads",
+                "Sales enablement",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-primary/55 px-3 py-1.5 text-[0.7rem] font-semibold text-white backdrop-blur-md sm:text-sm"
+                >
+                  <ShieldCheck
+                    className="h-3.5 w-3.5 shrink-0 text-accent"
+                    aria-hidden
+                  />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="hero-line grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-1 lg:gap-4">
+            {HERO_STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-white/35 bg-white/12 px-3 py-3.5 text-center shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-4 sm:py-4 lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-5 lg:text-left"
+              >
+                <p className="font-display text-xl text-white sm:text-2xl lg:text-3xl">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white sm:text-[0.68rem] lg:mt-0">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </Container>
