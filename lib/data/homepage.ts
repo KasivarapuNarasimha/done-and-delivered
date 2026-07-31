@@ -134,13 +134,12 @@ export const ongoingProjects: Project[] = [
     type: "Residential Apartment",
     status: "Ongoing",
     developer: "PSR",
-    location: "Bengaluru",
+    location: "Kodathi, Off Sarjapur Road, Bengaluru",
     description:
       "Residential launch supported through premium branding, performance media, and sales-enablement workflows.",
-    // TODO: replace Unsplash placeholder with official PSR Vanasree asset
-    image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=70",
+    image: getProjectBanner("psr-vanasree"),
     initials: "PV",
+    href: getProjectBasePath("psr-vanasree"),
   },
 ];
 
