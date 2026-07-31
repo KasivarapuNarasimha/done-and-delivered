@@ -143,39 +143,39 @@ export const psrVanasreeProject = {
   ],
   gallery: [
     {
-      src: getProjectGalleryImage(SLUG, "gallery-1", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-1"),
       alt: "PSR Vanasree community view",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-2", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-2"),
       alt: "Spacious apartment interiors concept",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-3", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-3"),
       alt: "Open spaces at PSR Vanasree",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-5", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-5"),
       alt: "Clubhouse and lifestyle amenities",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-7", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-7"),
       alt: "Project elevation and landscaping",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-11", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-11"),
       alt: "Amenity zone at PSR Vanasree",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-6", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-6"),
       alt: "Multi-purpose lawn",
     },
     {
-      src: getProjectGalleryImage(SLUG, "gallery-10", "webp"),
+      src: getProjectGalleryImage(SLUG, "gallery-10"),
       alt: "Garden gym area",
     },
     {
-      src: getProjectGalleryImage(SLUG, "location-map", "webp"),
+      src: getProjectGalleryImage(SLUG, "location-map"),
       alt: "PSR Vanasree location map",
     },
   ],
