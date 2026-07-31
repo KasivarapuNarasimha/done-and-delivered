@@ -72,6 +72,25 @@ export function Hero() {
     window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   }
 
+  // Smooth-scroll to consultation form when landing with #consultation
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash !== "#consultation") return;
+
+    const scrollToForm = () => {
+      const el = document.getElementById("consultation");
+      if (!el) return;
+      el.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    };
+
+    // Delay so layout/fonts settle after navigation from other pages
+    const t = window.setTimeout(scrollToForm, 120);
+    return () => window.clearTimeout(t);
+  }, [reduceMotion]);
+
   useEffect(() => {
     if (reduceMotion || !headlineRef.current) return;
 
@@ -274,7 +293,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-search">
+        <div id="consultation" className="hero-search scroll-mt-28">
           <div className="relative overflow-hidden rounded-[1.5rem] border border-white/55 bg-white p-3 shadow-[0_28px_70px_rgba(8,31,92,0.28)] sm:rounded-[1.75rem] sm:p-5 md:p-6">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
 

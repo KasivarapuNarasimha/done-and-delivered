@@ -10,6 +10,8 @@ type Cta = {
   href: string;
   variant?: "gold" | "ghost" | "primary" | "secondary" | "outline";
   external?: boolean;
+  /** For mailto: links — redirect here if mail client is unavailable */
+  mailtoFallback?: string;
 };
 
 type PageHeroProps = {
@@ -111,6 +113,7 @@ export function PageHero({
                   className="w-full sm:w-auto"
                   target={primaryCta.external ? "_blank" : undefined}
                   rel={primaryCta.external ? "noopener noreferrer" : undefined}
+                  mailtoFallback={primaryCta.mailtoFallback}
                 >
                   {primaryCta.label}
                 </Button>

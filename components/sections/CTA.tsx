@@ -11,6 +11,7 @@ import {
   SITE_PHONE_HREF,
   SITE_WHATSAPP,
 } from "@/lib/constants";
+import { BUSINESS_ENQUIRY_MAILTO } from "@/lib/utils/mailto";
 
 export function CTA() {
   return (
@@ -49,7 +50,8 @@ export function CTA() {
 
               <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
                 <Button
-                  href="mailto:hello@doneanddelivered.com?subject=Business%20Enquiry"
+                  href={BUSINESS_ENQUIRY_MAILTO}
+                  mailtoFallback="/contact"
                   variant="gold"
                   size="lg"
                   fullWidth
@@ -58,7 +60,7 @@ export function CTA() {
                   Contact Us
                 </Button>
                 <Button
-                  href="/contact"
+                  href="/#consultation"
                   variant="ghost"
                   size="lg"
                   fullWidth
