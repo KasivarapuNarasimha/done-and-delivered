@@ -31,23 +31,12 @@ const WhyChoose = dynamic(
   { ssr: true, loading: () => <SectionSkeleton /> },
 );
 
-const Stats = dynamic(
-  () => import("@/components/sections/Stats").then((m) => m.Stats),
-  { ssr: true, loading: () => <SectionSkeleton dark /> },
-);
-
 const MarketingProcess = dynamic(
   () =>
     import("@/components/sections/MarketingProcess").then(
       (m) => m.MarketingProcess,
     ),
   { ssr: true, loading: () => <SectionSkeleton /> },
-);
-
-const SalesFunnel = dynamic(
-  () =>
-    import("@/components/sections/SalesFunnel").then((m) => m.SalesFunnel),
-  { ssr: true, loading: () => <SectionSkeleton dark /> },
 );
 
 const MarketingTimeline = dynamic(
@@ -126,11 +115,11 @@ const jsonLd = {
       telephone: SITE_PHONE.replace(/\s/g, "-"),
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Level 12, Prestige Towers, MG Road",
+        streetAddress: "Swamy Vivekananda Road, Sarjapura Road",
         addressLocality: "Bengaluru",
-        postalCode: "560001",
+        addressRegion: "Karnataka",
+        postalCode: "562125",
         addressCountry: "IN",
-        // Full address string for maps consistency
         description: SITE_ADDRESS,
       },
       areaServed: "IN",
@@ -165,9 +154,7 @@ export default function HomePage() {
       <About />
       <Services />
       <WhyChoose />
-      <Stats />
       <MarketingProcess />
-      <SalesFunnel />
       <MarketingTimeline />
       <OngoingProjects />
       <CompletedProjects />

@@ -16,17 +16,23 @@ export const SITE_WHATSAPP = "https://wa.me/919110417950";
 
 export const SITE_EMAIL = "hello@doneanddelivered.com";
 export const SITE_ADDRESS =
-  "Level 12, Prestige Towers, MG Road, Bengaluru 560001";
+  "Swamy Vivekananda Road, Sarjapura Road, Bengaluru, Karnataka – 562125";
 
 /**
  * Google Maps embed for the official office address (no API key required).
- * Query targets Prestige Towers, MG Road, Bengaluru.
  */
 export const SITE_MAPS_EMBED_URL =
-  "https://maps.google.com/maps?q=Prestige+Towers+MG+Road+Bengaluru+560001&z=16&output=embed";
+  "https://maps.google.com/maps?q=Swamy+Vivekananda+Road+Sarjapura+Road+Bengaluru+Karnataka+562125&z=16&output=embed";
 
 export const SITE_MAPS_DIRECTIONS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Prestige+Towers+MG+Road+Bengaluru+560001";
+  "https://www.google.com/maps/search/?api=1&query=Swamy+Vivekananda+Road,+Sarjapura+Road,+Bengaluru,+Karnataka+562125";
+
+/** WhatsApp number without + for wa.me links */
+export const SITE_WHATSAPP_NUMBER = "919110417950";
+
+export function buildWhatsAppUrl(message: string) {
+  return `https://wa.me/${SITE_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
 
 export const BRAND = {
   primary: "#0B2E83",

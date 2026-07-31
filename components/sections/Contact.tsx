@@ -16,6 +16,7 @@ import {
   SITE_PHONE,
   SITE_PHONE_HREF,
   SITE_WHATSAPP,
+  buildWhatsAppUrl,
 } from "@/lib/constants";
 import {
   contactEnquirySchema,
@@ -177,42 +178,30 @@ export function Contact() {
       return;
     }
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(clientCheck.data),
-      });
+    const data = clientCheck.data;
+    const message = [
+      "Hello Done & Delivered,",
+      "",
+      "New Business Enquiry",
+      "",
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Phone: ${data.phone}`,
+      `Company: ${data.company || "—"}`,
+      "",
+      "Project Details:",
+      data.message,
+      "",
+      "Please contact me.",
+    ].join("\n");
 
-      const data = (await response.json()) as {
-        ok?: boolean;
-        error?: string;
-        message?: string;
-        fieldErrors?: Record<string, string[] | undefined>;
-      };
+    window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
 
-      if (!response.ok || !data.ok) {
-        setFieldErrors(fieldErrorMap(data.fieldErrors));
-        setStatus("error");
-        setStatusMessage(
-          data.error ||
-            "We could not send your enquiry. Please try again or contact us by phone.",
-        );
-        return;
-      }
-
-      setStatus("success");
-      setStatusMessage(
-        data.message ||
-          "Thank you. Your enquiry has been received — our team will connect shortly.",
-      );
-      setForm({ ...emptyForm });
-    } catch {
-      setStatus("error");
-      setStatusMessage(
-        "Network error. Please check your connection or reach us on WhatsApp.",
-      );
-    }
+    setForm({ ...emptyForm });
+    setStatus("success");
+    setStatusMessage(
+      "Thank you. Your enquiry has been opened in WhatsApp — our team will connect shortly.",
+    );
   }
 
   const inputClass = (key: keyof FormState) =>

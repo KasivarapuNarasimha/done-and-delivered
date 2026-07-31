@@ -329,7 +329,7 @@ export const services: ServiceItem[] = [
 
 export const siteStats: StatItem[] = [
   { id: "st1", value: 1450, suffix: "+", label: "Lead Capacity" },
-  { id: "st2", value: 7, suffix: "+", label: "Official Projects" },
+  { id: "st2", value: 4, suffix: "+", label: "Mandate Projects" },
   { id: "st3", value: 16, suffix: " Wk", label: "Launch Roadmap" },
   { id: "st4", value: 25, suffix: "+", label: "Target Closers" },
 ];
@@ -576,6 +576,6 @@ export const heroConsultationOptions = {
     "Sales Acceleration",
     "Full-Funnel Marketing",
   ],
-  cities: ["Bengaluru", "Hyderabad", "Chennai", "Mumbai", "Pune", "Other"],
+  cities: ["Bengaluru", "Hyderabad"],
   timelines: ["Immediate", "1–3 Months", "3–6 Months", "Planning Stage"],
 };

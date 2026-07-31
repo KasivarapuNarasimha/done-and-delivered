@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
 import { heroConsultationOptions } from "@/lib/data/homepage";
-import { CONSULTATION_STORAGE_KEY, SITE_TAGLINE } from "@/lib/constants";
+import { buildWhatsAppUrl, SITE_TAGLINE } from "@/lib/constants";
 import { scheduleIdle } from "@/lib/utils/schedule";
 import { heroConsultationSchema } from "@/lib/validations";
 
@@ -25,7 +25,7 @@ const HERO_IMAGE = "/images/hero-bg.jpg";
 
 const HERO_STATS = [
   { value: "1450+", label: "Lead Capacity" },
-  { value: "7+", label: "Official Projects" },
+  { value: "4+", label: "Mandate Projects" },
   { value: "16 Wk", label: "Launch Systems" },
 ] as const;
 
@@ -55,22 +55,21 @@ export function Hero() {
       return;
     }
 
-    try {
-      sessionStorage.setItem(
-        CONSULTATION_STORAGE_KEY,
-        JSON.stringify(parsed.data),
-      );
-    } catch {
-      // storage may be blocked — Contact still reads query params
-    }
+    const { projectType, goal, city, timeline } = parsed.data;
+    const message = [
+      "Hello Done & Delivered,",
+      "",
+      "New Project Consultation Request",
+      "",
+      `Project Type: ${projectType}`,
+      `Marketing Goal: ${goal}`,
+      `City: ${city}`,
+      `Timeline: ${timeline}`,
+      "",
+      "Please contact me regarding this project.",
+    ].join("\n");
 
-    window.dispatchEvent(
-      new CustomEvent("dd:consultation", { detail: parsed.data }),
-    );
-
-    const params = new URLSearchParams(parsed.data);
-    // Hand off to the standalone contact page (same API-backed form)
-    window.location.assign(`/contact?${params.toString()}`);
+    window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   }
 
   useEffect(() => {
