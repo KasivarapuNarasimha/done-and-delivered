@@ -3,10 +3,6 @@
 import Link from "next/link";
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { cn, setRippleCoords } from "@/lib/utils";
-import {
-  BUSINESS_ENQUIRY_MAILTO,
-  openBusinessEnquiryMail,
-} from "@/lib/utils/mailto";
 
 type Variant = "primary" | "secondary" | "gold" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
@@ -31,8 +27,6 @@ type ButtonAsLink = CommonProps & {
   target?: string;
   rel?: string;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-  /** When set on a mailto: href, opens mail with fallback path if unsupported */
-  mailtoFallback?: string;
 };
 
 const variants: Record<Variant, string> = {
@@ -74,42 +68,17 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   if ("href" in props && props.href) {
     const href = props.href;
     const linkProps = props as ButtonAsLink;
-    const isMailto = href.toLowerCase().startsWith("mailto:");
     const isExternal =
-      isMailto ||
-      /^(https?:|tel:)/i.test(href) ||
-      href.startsWith("//");
+      /^(https?:|mailto:|tel:)/i.test(href) || href.startsWith("//");
 
-    const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-      linkProps.onClick?.(event);
-      if (event.defaultPrevented) return;
-
-      // Business enquiry / any mailto with explicit fallback
-      if (isMailto) {
-        event.preventDefault();
-        if (
-          href === BUSINESS_ENQUIRY_MAILTO ||
-          linkProps.mailtoFallback !== undefined
-        ) {
-          openBusinessEnquiryMail(linkProps.mailtoFallback ?? "/contact");
-          return;
-        }
-        try {
-          window.location.href = href;
-        } catch {
-          window.location.assign(linkProps.mailtoFallback ?? "/contact");
-        }
-      }
-    };
-
-    // mailto/tel/https must use a native anchor so the OS client opens correctly
+    // External protocols need a native <a> (Next Link can swallow mailto/tel)
     if (isExternal) {
       return (
         <a
           href={href}
           target={linkProps.target}
           rel={linkProps.rel}
-          onClick={handleClick}
+          onClick={linkProps.onClick}
           onMouseMove={setRippleCoords}
           className={classes}
           aria-label={props["aria-label"]}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { ContactUsButton } from "@/components/ui/ContactUsButton";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
 import type { ReactNode } from "react";
 
@@ -10,8 +11,8 @@ type Cta = {
   href: string;
   variant?: "gold" | "ghost" | "primary" | "secondary" | "outline";
   external?: boolean;
-  /** For mailto: links — redirect here if mail client is unavailable */
-  mailtoFallback?: string;
+  /** When true, use the dedicated Contact Us email click handler */
+  contactEmail?: boolean;
 };
 
 type PageHeroProps = {
@@ -106,17 +107,28 @@ export function PageHero({
           {primaryCta || secondaryCta ? (
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               {primaryCta ? (
-                <Button
-                  href={primaryCta.href}
-                  variant={primaryCta.variant ?? "gold"}
-                  size="lg"
-                  className="w-full sm:w-auto"
-                  target={primaryCta.external ? "_blank" : undefined}
-                  rel={primaryCta.external ? "noopener noreferrer" : undefined}
-                  mailtoFallback={primaryCta.mailtoFallback}
-                >
-                  {primaryCta.label}
-                </Button>
+                primaryCta.contactEmail ? (
+                  <ContactUsButton
+                    variant={primaryCta.variant ?? "gold"}
+                    size="lg"
+                    className="w-full sm:w-auto"
+                  >
+                    {primaryCta.label}
+                  </ContactUsButton>
+                ) : (
+                  <Button
+                    href={primaryCta.href}
+                    variant={primaryCta.variant ?? "gold"}
+                    size="lg"
+                    className="w-full sm:w-auto"
+                    target={primaryCta.external ? "_blank" : undefined}
+                    rel={
+                      primaryCta.external ? "noopener noreferrer" : undefined
+                    }
+                  >
+                    {primaryCta.label}
+                  </Button>
+                )
               ) : null}
               {secondaryCta ? (
                 <Button

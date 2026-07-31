@@ -1,9 +1,10 @@
 "use client";
 
-import { MessageCircle, Phone, Sparkles, Mail } from "lucide-react";
+import { MessageCircle, Phone, Sparkles } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { ContactUsButton } from "@/components/ui/ContactUsButton";
 import { Reveal } from "@/components/animations/Reveal";
 import {
   SITE_EMAIL,
@@ -11,7 +12,6 @@ import {
   SITE_PHONE_HREF,
   SITE_WHATSAPP,
 } from "@/lib/constants";
-import { BUSINESS_ENQUIRY_MAILTO } from "@/lib/utils/mailto";
 
 export function CTA() {
   return (
@@ -49,16 +49,9 @@ export function CTA() {
               </div>
 
               <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
-                <Button
-                  href={BUSINESS_ENQUIRY_MAILTO}
-                  mailtoFallback="/contact"
-                  variant="gold"
-                  size="lg"
-                  fullWidth
-                  icon={<Mail className="h-4 w-4" />}
-                >
+                <ContactUsButton variant="gold" size="lg" fullWidth>
                   Contact Us
-                </Button>
+                </ContactUsButton>
                 <Button
                   href="/#consultation"
                   variant="ghost"

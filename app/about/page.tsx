@@ -6,7 +6,6 @@ import { CoreValues } from "@/components/sections/CoreValues";
 import { MarketingPhilosophy } from "@/components/sections/MarketingPhilosophy";
 import { CTA } from "@/components/sections/CTA";
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/constants";
-import { BUSINESS_ENQUIRY_MAILTO } from "@/lib/utils/mailto";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -42,9 +41,9 @@ export default function AboutPage() {
         icon={<Building2 className="h-3.5 w-3.5 text-accent" aria-hidden />}
         primaryCta={{
           label: "Contact Us",
-          href: BUSINESS_ENQUIRY_MAILTO,
+          href: "#",
           variant: "gold",
-          mailtoFallback: "/contact",
+          contactEmail: true,
         }}
         secondaryCta={{
           label: "Explore Services",
