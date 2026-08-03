@@ -142,17 +142,17 @@ export const ongoingProjects: Project[] = [
     href: getProjectBasePath("psr-vanasree"),
   },
   {
-    id: "prims",
-    name: "Prims",
+    id: "primus",
+    name: "Primus",
     type: "Residential",
     status: "Ongoing",
-    developer: "Prims",
+    developer: "Primus",
     location: "Bengaluru",
     description:
       "Premium residential mandate with dual brochure packs, full-funnel marketing, and conversion-led sales support.",
-    image: getProjectBanner("prims"),
+    image: getProjectBanner("primus"),
     initials: "PR",
-    href: getProjectBasePath("prims"),
+    href: getProjectBasePath("primus"),
   },
 ];
 

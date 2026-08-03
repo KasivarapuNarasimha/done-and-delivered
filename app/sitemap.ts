@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${SITE_URL}${getProjectBasePath("prims")}`,
+      url: `${SITE_URL}${getProjectBasePath("primus")}`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.85,

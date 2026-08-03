@@ -11,13 +11,13 @@ import {
   getProjectMasterPlan,
 } from "@/lib/utils/project-assets";
 
-const SLUG = "prims";
+const SLUG = "primus";
 
-export const primsProject = {
+export const primusProject = {
   slug: SLUG,
   basePath: getProjectBasePath(SLUG),
-  name: "Prims",
-  developer: "Prims",
+  name: "Primus",
+  developer: "Primus",
   type: "Premium Residential Project",
   location: "Bengaluru",
   address: "Bengaluru, Karnataka",
@@ -55,7 +55,7 @@ export const primsProject = {
     "Site visit scheduling and inventory guidance available",
   ],
   overview: [
-    "Prims is an ongoing residential project marketed by Done & Delivered. Built for families and investors seeking a refined address in Bengaluru, the development combines contemporary design, practical layouts, and community amenities that support everyday living.",
+    "Primus is an ongoing residential project marketed by Done & Delivered. Built for families and investors seeking a refined address in Bengaluru, the development combines contemporary design, practical layouts, and community amenities that support everyday living.",
     "Our team supports buyers with brochure downloads, inventory options, pricing guidance, and coordinated site visits—so decisions are clear, fast, and confidence-led from first enquiry to booking.",
   ],
   overviewTitle: "Premium residential living in Bengaluru",
@@ -67,17 +67,17 @@ export const primsProject = {
   layoutsEyebrow: "Floor Plans",
   layoutsTitle: "Available unit layouts",
   layoutsDescription:
-    "Explore representative layout options for Prims. Click any plan for a larger preview. Confirm final inventory with our team.",
+    "Explore representative layout options for Primus. Click any plan for a larger preview. Confirm final inventory with our team.",
   unitConfigDescription:
     "Choose from spacious configurations designed for light, ventilation, and premium everyday living.",
   facingDescription:
     "Facing options vary by inventory block—our team will match units to your preference.",
   galleryDescription:
-    "Project and lifestyle visuals from the Prims marketing gallery.",
-  brochureTitle: "Download the Prims brochures",
+    "Project and lifestyle visuals from the Primus marketing gallery.",
+  brochureTitle: "Download the Primus brochures",
   brochureDescription:
     "Get complete project details across two brochure PDFs—layouts, amenities, and key highlights.",
-  enquiryTitle: "Interested in Prims?",
+  enquiryTitle: "Interested in Primus?",
   enquiryDescription:
     "Share your details and our team will connect with inventory options, pricing guidance, and site visit scheduling.",
   configurations: ["2 BHK", "3 BHK"],
@@ -130,27 +130,27 @@ export const primsProject = {
   gallery: [
     {
       src: getProjectGalleryImage(SLUG, "gallery-1"),
-      alt: "Prims residential exterior",
+      alt: "Primus residential exterior",
     },
     {
       src: getProjectGalleryImage(SLUG, "gallery-2"),
-      alt: "Prims living spaces",
+      alt: "Primus living spaces",
     },
     {
       src: getProjectGalleryImage(SLUG, "gallery-3"),
-      alt: "Prims interiors",
+      alt: "Primus interiors",
     },
     {
       src: getProjectGalleryImage(SLUG, "gallery-4"),
-      alt: "Prims lifestyle view",
+      alt: "Primus lifestyle view",
     },
     {
       src: getProjectGalleryImage(SLUG, "gallery-5"),
-      alt: "Prims community spaces",
+      alt: "Primus community spaces",
     },
     {
       src: getProjectGalleryImage(SLUG, "gallery-6"),
-      alt: "Prims project photography",
+      alt: "Primus project photography",
     },
   ],
 } as const;
