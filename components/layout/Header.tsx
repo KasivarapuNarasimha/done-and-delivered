@@ -21,6 +21,7 @@ import { useEffect, useId, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
+import { SearchModal } from "@/components/search/SearchModal";
 import {
   NAV_LINKS,
   SITE_PHONE,
@@ -50,6 +51,7 @@ export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobilePropsOpen, setMobilePropsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const megaId = useId();
 
   useEffect(() => {
@@ -72,13 +74,14 @@ export function Header() {
         setMegaOpen(false);
         setMobileOpen(false);
         setMobilePropsOpen(false);
+        setSearchOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const solid = scrolled || mobileOpen || megaOpen;
+  const solid = scrolled || mobileOpen || megaOpen || searchOpen;
 
   return (
     <header
@@ -275,7 +278,14 @@ export function Header() {
           <div className="flex items-center gap-2 sm:gap-2.5">
             <button
               type="button"
-              aria-label="Search properties"
+              aria-label="Search projects or pages"
+              aria-haspopup="dialog"
+              aria-expanded={searchOpen}
+              onClick={() => {
+                setMegaOpen(false);
+                setMobileOpen(false);
+                setSearchOpen(true);
+              }}
               className="touch-target grid h-11 w-11 place-items-center rounded-full border border-white/35 bg-white/15 text-white backdrop-blur-md transition-all duration-300 hover:border-accent hover:bg-accent hover:text-primary"
             >
               <Search className="h-4 w-4" />
@@ -417,6 +427,8 @@ export function Header() {
           </motion.div>
         ) : null}
       </AnimatePresence>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
