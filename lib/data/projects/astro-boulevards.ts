@@ -33,7 +33,7 @@ export const astroBoulevardsProject = {
   brochure: getProjectBrochure(SLUG),
   stats: [
     { label: "Acres", value: "15" },
-    { label: "Plot Sizes", value: "600–5000" },
+    { label: "Plot Sizes", value: "600–2400" },
     { label: "Approval", value: "BDA" },
     { label: "RERA", value: "Approved" },
   ],
