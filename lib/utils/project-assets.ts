@@ -3,6 +3,8 @@
  *
  * Convention (public URL paths served from public/projects/{slug}/):
  *   /projects/{slug}/brochure.pdf
+ *   /projects/{slug}/brochure-1.pdf
+ *   /projects/{slug}/brochure-2.pdf
  *   /projects/{slug}/hero.jpg
  *   /projects/{slug}/banner.jpg
  *   /projects/{slug}/logo.png
@@ -28,8 +30,14 @@ export function getProjectAsset(slug: string, ...segments: string[]): string {
   return `${getProjectBasePath(slug)}/${cleaned}`;
 }
 
+/** Default single brochure: brochure.pdf */
 export function getProjectBrochure(slug: string): string {
   return getProjectAsset(slug, "brochure.pdf");
+}
+
+/** Named brochure file under the project folder (e.g. brochure-1.pdf). */
+export function getProjectBrochureFile(slug: string, filename: string): string {
+  return getProjectAsset(slug, filename);
 }
 
 export function getProjectHero(

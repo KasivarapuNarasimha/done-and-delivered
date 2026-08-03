@@ -141,6 +141,19 @@ export const ongoingProjects: Project[] = [
     initials: "PV",
     href: getProjectBasePath("psr-vanasree"),
   },
+  {
+    id: "prims",
+    name: "Prims",
+    type: "Residential",
+    status: "Ongoing",
+    developer: "Prims",
+    location: "Bengaluru",
+    description:
+      "Premium residential mandate with dual brochure packs, full-funnel marketing, and conversion-led sales support.",
+    image: getProjectBanner("prims"),
+    initials: "PR",
+    href: getProjectBasePath("prims"),
+  },
 ];
 
 /** Official completed projects from Done & Delivered Brand Deck */

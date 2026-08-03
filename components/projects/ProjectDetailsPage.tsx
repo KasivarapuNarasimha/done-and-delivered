@@ -42,7 +42,13 @@ export type ProjectDetailsData = {
   bannerImage: string;
   logo: string;
   masterPlan: string;
+  /** Primary brochure URL (used when `brochures` is not provided). */
   brochure: string;
+  /**
+   * Optional multi-brochure downloads.
+   * When set, renders one gold button per item (e.g. Brochure 1 / Brochure 2).
+   */
+  brochures?: readonly { label: string; href: string }[];
   stats: readonly { label: string; value: string }[];
   highlights: readonly string[];
   overview: readonly string[];
@@ -57,6 +63,7 @@ export type ProjectDetailsData = {
   facingDescription: string;
   galleryDescription: string;
   brochureTitle: string;
+  brochureDescription?: string;
   enquiryTitle: string;
   enquiryDescription: string;
   configurations: readonly string[];
@@ -88,6 +95,16 @@ export function ProjectDetailsPage({
     null,
   );
   const similarProjects = useMemo(() => similar, [similar]);
+
+  const brochureButtons = useMemo(() => {
+    if (project.brochures && project.brochures.length > 0) {
+      return project.brochures.map((b) => ({
+        label: b.label,
+        href: b.href,
+      }));
+    }
+    return [{ label: "Download Brochure", href: project.brochure }];
+  }, [project.brochure, project.brochures]);
 
   const siteVisitMessage = [
     "Hello Done & Delivered,",
@@ -514,17 +531,23 @@ export function ProjectDetailsPage({
                 {project.brochureTitle}
               </h2>
               <p className="mt-2 max-w-xl text-sm text-white/90">
-                Get complete project details, layouts, and amenities in one PDF.
+                {project.brochureDescription ??
+                  "Get complete project details, layouts, and amenities in one PDF."}
               </p>
             </div>
-            <Button
-              href={project.brochure}
-              variant="gold"
-              size="lg"
-              icon={<Download className="h-4 w-4" />}
-            >
-              Download Brochure
-            </Button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap md:justify-end">
+              {brochureButtons.map((item) => (
+                <Button
+                  key={item.href + item.label}
+                  href={item.href}
+                  variant="gold"
+                  size="lg"
+                  icon={<Download className="h-4 w-4" />}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </div>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
