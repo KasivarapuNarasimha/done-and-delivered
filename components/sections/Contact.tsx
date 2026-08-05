@@ -379,7 +379,7 @@ export function Contact() {
                       setForm((f) => ({ ...f, email: e.target.value }))
                     }
                     className={inputClass("email")}
-                    placeholder="you@company.com"
+                    placeholder="Email address"
                     aria-invalid={Boolean(fieldErrors.email)}
                     aria-describedby={fieldErrors.email ? "err-email" : undefined}
                   />

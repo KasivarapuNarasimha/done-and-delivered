@@ -124,7 +124,7 @@ export function ProjectEnquiryForm({
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
             className="form-control mt-1.5 h-12 px-4 !text-[#0B2E83]"
-            placeholder="you@company.com"
+            placeholder="Email address"
           />
         </label>
         <label className="form-label">

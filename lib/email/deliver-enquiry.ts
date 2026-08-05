@@ -35,7 +35,8 @@ async function deliverViaResend(
   if (!apiKey) throw new Error("RESEND_API_KEY missing");
 
   const from =
-    process.env.CONTACT_FROM_EMAIL ?? "Done & Delivered <onboarding@resend.dev>";
+    process.env.CONTACT_FROM_EMAIL ??
+    `${SITE_NAME} <${SITE_EMAIL}>`;
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
