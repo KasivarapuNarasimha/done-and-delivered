@@ -109,7 +109,7 @@ Copy `.env.example` to `.env.local` (or Hostinger env vars):
 
 | Variable | Purpose |
 | --- | --- |
-| `CONTACT_TO_EMAIL` | Inbox for enquiries (defaults to `Hemanth@doneanddelivered.co.in`) |
+| `CONTACT_TO_EMAIL` | Inbox for enquiries (defaults to `Hemanthmukkara@doneanddelivered.co.in`) |
 | `RESEND_API_KEY` | Preferred production mail via [Resend](https://resend.com) |
 | `CONTACT_FROM_EMAIL` | Verified Resend from address |
 | `CONTACT_DELIVERY_MODE=log` | Log-only mode for CI / local QA |
