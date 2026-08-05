@@ -14,7 +14,7 @@ export const SITE_PHONE = "+91 91104 17950";
 export const SITE_PHONE_HREF = "tel:+919110417950";
 export const SITE_WHATSAPP = "https://wa.me/919110417950";
 
-export const SITE_EMAIL = "hello@doneanddelivered.com";
+export const SITE_EMAIL = "Hemanth@doneanddelivered.co.in";
 export const SITE_ADDRESS =
   "Swamy Vivekananda Road, Sarjapura Road, Bengaluru, Karnataka – 562125";
 

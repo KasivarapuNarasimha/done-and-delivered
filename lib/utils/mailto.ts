@@ -1,6 +1,7 @@
+import { SITE_EMAIL } from "@/lib/constants";
+
 /** Shared business-enquiry mailto (About CTAs). */
-export const BUSINESS_ENQUIRY_MAILTO =
-  "mailto:hello@doneanddelivered.com?subject=Business%20Enquiry";
+export const BUSINESS_ENQUIRY_MAILTO = `mailto:${SITE_EMAIL}?subject=Business%20Enquiry`;
 
 /**
  * Open the default mail client for a business enquiry.
