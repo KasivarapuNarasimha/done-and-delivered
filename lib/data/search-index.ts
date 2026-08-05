@@ -70,6 +70,8 @@ function pagesFromNav(): SearchResult[] {
  * Reusable search index built from live project + navigation data.
  * Adding a project to `ongoingProjects` / `completedProjects` or a link
  * to `NAV_LINKS` automatically includes it in search.
+ *
+ * Order: Projects first, then Pages (matches search modal default sections).
  */
 export function getSearchIndex(): SearchResult[] {
   const projects = [...ongoingProjects, ...completedProjects].map(
@@ -77,11 +79,10 @@ export function getSearchIndex(): SearchResult[] {
   );
   const pages = pagesFromNav();
 
-  // Pages first for stable grouping, then projects (dedupe by href+title).
   const seen = new Set<string>();
   const index: SearchResult[] = [];
 
-  for (const item of [...pages, ...projects]) {
+  for (const item of [...projects, ...pages]) {
     const key = `${item.category}:${item.href}:${item.title.toLowerCase()}`;
     if (seen.has(key)) continue;
     seen.add(key);

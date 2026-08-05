@@ -35,16 +35,22 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const index = useMemo(() => getSearchIndex(), []);
-  const results = useMemo(() => searchSite(query, index), [query, index]);
+  const hasQuery = query.trim().length > 0;
+
+  /** Empty query → full default suggestions; typing → filtered results. */
+  const results = useMemo(
+    () => (hasQuery ? searchSite(query, index) : index),
+    [hasQuery, query, index],
+  );
 
   const grouped = useMemo(() => {
-    const pages = results.filter((r) => r.category === "Pages");
     const projects = results.filter((r) => r.category === "Projects");
-    return { pages, projects };
+    const pages = results.filter((r) => r.category === "Pages");
+    return { projects, pages };
   }, [results]);
 
   const flatResults = useMemo(
-    () => [...grouped.pages, ...grouped.projects],
+    () => [...grouped.projects, ...grouped.pages],
     [grouped],
   );
 
@@ -185,20 +191,16 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
                 Site search
               </p>
 
-              {!query.trim() ? (
-                <p className="px-2 py-6 text-center text-sm text-muted">
-                  Start typing to search projects and pages.
-                </p>
-              ) : flatResults.length === 0 ? (
+              {hasQuery && flatResults.length === 0 ? (
                 <p className="px-2 py-8 text-center text-sm font-medium text-muted">
                   No results found.
                 </p>
               ) : (
-                <div className="space-y-4">
-                  {grouped.pages.length > 0 ? (
+                <div className="space-y-5">
+                  {grouped.projects.length > 0 ? (
                     <ResultGroup
-                      label="Pages"
-                      items={grouped.pages}
+                      label="Projects"
+                      items={grouped.projects}
                       flatOffset={0}
                       activeIndex={activeIndex}
                       listboxId={listboxId}
@@ -206,11 +208,11 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
                       onHover={setActiveIndex}
                     />
                   ) : null}
-                  {grouped.projects.length > 0 ? (
+                  {grouped.pages.length > 0 ? (
                     <ResultGroup
-                      label="Projects"
-                      items={grouped.projects}
-                      flatOffset={grouped.pages.length}
+                      label="Pages"
+                      items={grouped.pages}
+                      flatOffset={grouped.projects.length}
                       activeIndex={activeIndex}
                       listboxId={listboxId}
                       onSelect={navigateTo}
@@ -223,7 +225,11 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 
             <div className="hidden border-t border-primary/8 bg-[#F7FAFF] px-4 py-2.5 text-[0.72rem] font-medium text-muted sm:flex sm:items-center sm:justify-between">
               <span>↑↓ navigate · Enter open · Esc close</span>
-              <span>{flatResults.length} result{flatResults.length === 1 ? "" : "s"}</span>
+              <span>
+                {hasQuery
+                  ? `${flatResults.length} result${flatResults.length === 1 ? "" : "s"}`
+                  : "Browse projects & pages"}
+              </span>
             </div>
           </motion.div>
         </motion.div>
