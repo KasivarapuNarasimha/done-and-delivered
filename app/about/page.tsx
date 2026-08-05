@@ -40,12 +40,6 @@ export default function AboutPage() {
         ]}
         icon={<Building2 className="h-3.5 w-3.5 text-accent" aria-hidden />}
         primaryCta={{
-          label: "Contact Us",
-          href: "#",
-          variant: "gold",
-          contactEmail: true,
-        }}
-        secondaryCta={{
           label: "Explore Services",
           href: "/#services",
           variant: "ghost",
