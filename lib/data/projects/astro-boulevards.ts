@@ -112,6 +112,36 @@ export const astroBoulevardsProject = {
     "24×7 Security",
     "Visitor Parking",
   ],
+  amenityGallery: [
+    {
+      name: "Grand Entrance",
+      image: getProjectGalleryImage(SLUG, "gate"),
+    },
+    {
+      name: "Internal Roads",
+      image: getProjectGalleryImage(SLUG, "road-1"),
+    },
+    {
+      name: "Approach Avenue",
+      image: getProjectGalleryImage(SLUG, "road-2"),
+    },
+    {
+      name: "Entry Corridor",
+      image: getProjectGalleryImage(SLUG, "entry"),
+    },
+    {
+      name: "Community Setting",
+      image: getProjectGalleryImage(SLUG, "project-1"),
+    },
+    {
+      name: "Plotted Layout",
+      image: getProjectGalleryImage(SLUG, "project-2"),
+    },
+    {
+      name: "Site Context",
+      image: getProjectGalleryImage(SLUG, "project-3"),
+    },
+  ],
   layoutGroups: [
     {
       title: "Standard Plots",

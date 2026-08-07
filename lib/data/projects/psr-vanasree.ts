@@ -103,6 +103,40 @@ export const psrVanasreeProject = {
     "Round the Clock Security",
     "CCTV Surveillance",
   ],
+  amenityGallery: [
+    {
+      name: "Clubhouse Lifestyle",
+      image: getProjectGalleryImage(SLUG, "gallery-5"),
+    },
+    {
+      name: "Garden Gym",
+      image: getProjectGalleryImage(SLUG, "gallery-10"),
+    },
+    {
+      name: "Yoga & Meditation Lawn",
+      image: getProjectGalleryImage(SLUG, "gallery-12"),
+    },
+    {
+      name: "Half Basketball Court",
+      image: getProjectGalleryImage(SLUG, "gallery-16"),
+    },
+    {
+      name: "Elder's Park",
+      image: getProjectGalleryImage(SLUG, "gallery-13"),
+    },
+    {
+      name: "Multi Purpose Lawn",
+      image: getProjectGalleryImage(SLUG, "gallery-6"),
+    },
+    {
+      name: "Open Spaces",
+      image: getProjectGalleryImage(SLUG, "gallery-3"),
+    },
+    {
+      name: "Community Living",
+      image: getProjectGalleryImage(SLUG, "gallery-1"),
+    },
+  ],
   layoutGroups: [
     {
       title: "Tower 1",

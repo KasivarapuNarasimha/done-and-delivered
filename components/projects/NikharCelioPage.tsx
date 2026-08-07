@@ -21,6 +21,10 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Reveal } from "@/components/animations/Reveal";
 import { FloatingShapes } from "@/components/animations/FloatingShapes";
 import { ImageLightbox } from "@/components/projects/ImageLightbox";
+import {
+  AmenitiesGallery,
+  AmenitiesTextGrid,
+} from "@/components/projects/AmenitiesGallery";
 import { ProjectEnquiryForm } from "@/components/projects/ProjectEnquiryForm";
 import {
   getSimilarProjects,
@@ -288,18 +292,13 @@ export function NikharCelioPage() {
             title="Lifestyle crafted for modern living"
             description="Experience life in perfect harmony at Nikhar Celio, where every amenity is carefully curated to elevate everyday living."
           />
-          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {project.amenities.map((amenity, index) => (
-              <Reveal key={amenity} delay={(index % 8) * 0.03}>
-                <div className="card-lift flex h-full items-center gap-3 rounded-[1.2rem] border border-primary/8 bg-[#F7FAFF] px-4 py-4 shadow-[0_10px_28px_rgba(11,46,131,0.05)]">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary text-white">
-                    <Sparkles className="h-4 w-4 text-accent" aria-hidden />
-                  </span>
-                  <p className="text-sm font-semibold text-primary">{amenity}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          {project.amenityGallery && project.amenityGallery.length > 0 ? (
+            <Reveal>
+              <AmenitiesGallery items={project.amenityGallery} />
+            </Reveal>
+          ) : (
+            <AmenitiesTextGrid amenities={project.amenities} />
+          )}
         </Container>
       </section>
 

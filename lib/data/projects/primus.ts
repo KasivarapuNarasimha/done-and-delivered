@@ -106,6 +106,32 @@ export const primusProject = {
     "Power Backup",
     "Rain Water Harvesting",
   ],
+  amenityGallery: [
+    {
+      name: "Clubhouse Living",
+      image: getProjectGalleryImage(SLUG, "gallery-1"),
+    },
+    {
+      name: "Premium Residences",
+      image: getProjectGalleryImage(SLUG, "gallery-2"),
+    },
+    {
+      name: "Interior Comfort",
+      image: getProjectGalleryImage(SLUG, "gallery-3"),
+    },
+    {
+      name: "Lifestyle Spaces",
+      image: getProjectGalleryImage(SLUG, "gallery-4"),
+    },
+    {
+      name: "Community Areas",
+      image: getProjectGalleryImage(SLUG, "gallery-5"),
+    },
+    {
+      name: "Project Living",
+      image: getProjectGalleryImage(SLUG, "gallery-6"),
+    },
+  ],
   layoutGroups: [
     {
       title: "Unit Types",

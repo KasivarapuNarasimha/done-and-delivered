@@ -1,6 +1,7 @@
 import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
 import {
+  getProjectAmenityImage,
   getProjectAsset,
   getProjectBanner,
   getProjectBasePath,
@@ -87,6 +88,40 @@ export const nikharCelioProject = {
     "Net Cricket Pitch",
     "Basketball Court",
     "Water Body Waiting Lounge",
+  ],
+  amenityGallery: [
+    {
+      name: "Swimming Pool",
+      image: getProjectAmenityImage(SLUG, "swimming-pool"),
+    },
+    {
+      name: "Clubhouse",
+      image: getProjectAmenityImage(SLUG, "club-house"),
+    },
+    {
+      name: "Outdoor Gym",
+      image: getProjectAmenityImage(SLUG, "outdoor-gym"),
+    },
+    {
+      name: "Tennis Court",
+      image: getProjectAmenityImage(SLUG, "tennis"),
+    },
+    {
+      name: "Children's Play Area",
+      image: getProjectGalleryImage(SLUG, "children-play"),
+    },
+    {
+      name: "Clubhouse Lounge",
+      image: getProjectGalleryImage(SLUG, "clubhouse"),
+    },
+    {
+      name: "Pool Deck",
+      image: getProjectGalleryImage(SLUG, "pool-view"),
+    },
+    {
+      name: "Poolside Living",
+      image: getProjectGalleryImage(SLUG, "pool"),
+    },
   ],
   floorPlans: {
     towerA: [
