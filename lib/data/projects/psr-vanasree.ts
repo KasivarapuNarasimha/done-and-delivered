@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
+import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
   getProjectBanner,
   getProjectBasePath,
@@ -103,40 +104,43 @@ export const psrVanasreeProject = {
     "Round the Clock Security",
     "CCTV Surveillance",
   ],
-  amenityGallery: [
+  amenityGallery: buildAmenityGallery(
+    [
+      "22,000 sq.ft. Clubhouse",
+      "Swimming Pool",
+      "Fitness Center / Gym",
+      "Garden Gym",
+      "Yoga Centre",
+      "Yoga & Meditation Lawn",
+      "Multipurpose Hall",
+      "Indoor Games",
+      "Jogging Track",
+      "Cycling Track",
+      "Children's Play Area",
+      "Sand Pit",
+      "Half Basketball Court",
+      "Cricket Net",
+      "Theme Garden",
+      "Multi Purpose Lawn",
+      "Elder's Park",
+      "Landscaped Gardens",
+      "Water Feature",
+      "Visitors Parking",
+      "Rain Water Harvesting",
+      "Power Backup",
+      "Round the Clock Security",
+      "CCTV Surveillance",
+    ],
     {
-      name: "Clubhouse Lifestyle",
-      image: getProjectGalleryImage(SLUG, "gallery-5"),
+      // Official / project amenity photography overrides
+      "Garden Gym": getProjectGalleryImage(SLUG, "gallery-10"),
+      "Yoga & Meditation Lawn": getProjectGalleryImage(SLUG, "gallery-12"),
+      "Half Basketball Court": getProjectGalleryImage(SLUG, "gallery-16"),
+      "Elder's Park": getProjectGalleryImage(SLUG, "gallery-13"),
+      "Multi Purpose Lawn": getProjectGalleryImage(SLUG, "gallery-6"),
+      "22,000 sq.ft. Clubhouse": getProjectGalleryImage(SLUG, "gallery-5"),
     },
-    {
-      name: "Garden Gym",
-      image: getProjectGalleryImage(SLUG, "gallery-10"),
-    },
-    {
-      name: "Yoga & Meditation Lawn",
-      image: getProjectGalleryImage(SLUG, "gallery-12"),
-    },
-    {
-      name: "Half Basketball Court",
-      image: getProjectGalleryImage(SLUG, "gallery-16"),
-    },
-    {
-      name: "Elder's Park",
-      image: getProjectGalleryImage(SLUG, "gallery-13"),
-    },
-    {
-      name: "Multi Purpose Lawn",
-      image: getProjectGalleryImage(SLUG, "gallery-6"),
-    },
-    {
-      name: "Open Spaces",
-      image: getProjectGalleryImage(SLUG, "gallery-3"),
-    },
-    {
-      name: "Community Living",
-      image: getProjectGalleryImage(SLUG, "gallery-1"),
-    },
-  ],
+  ),
   layoutGroups: [
     {
       title: "Tower 1",

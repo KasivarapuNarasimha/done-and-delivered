@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
+import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
   getProjectBanner,
   getProjectBasePath,
@@ -112,36 +113,32 @@ export const astroBoulevardsProject = {
     "24×7 Security",
     "Visitor Parking",
   ],
-  amenityGallery: [
+  amenityGallery: buildAmenityGallery(
+    [
+      "Grand Entrance",
+      "Clubhouse",
+      "Swimming Pool",
+      "Gymnasium",
+      "Jogging Track",
+      "Children's Play Area",
+      "Multi-purpose Hall",
+      "Lawn & Walkway",
+      "Indoor Games",
+      "Outdoor Games",
+      "Table Tennis",
+      "Landscaped Gardens",
+      "Rain Water Harvesting",
+      "Sewage Treatment Plant",
+      "Underground Drainage",
+      "Underground Cabling",
+      "24×7 Security",
+      "Visitor Parking",
+    ],
     {
-      name: "Grand Entrance",
-      image: getProjectGalleryImage(SLUG, "gate"),
+      // Project site photography when it matches an amenity
+      "Grand Entrance": getProjectGalleryImage(SLUG, "gate"),
     },
-    {
-      name: "Internal Roads",
-      image: getProjectGalleryImage(SLUG, "road-1"),
-    },
-    {
-      name: "Approach Avenue",
-      image: getProjectGalleryImage(SLUG, "road-2"),
-    },
-    {
-      name: "Entry Corridor",
-      image: getProjectGalleryImage(SLUG, "entry"),
-    },
-    {
-      name: "Community Setting",
-      image: getProjectGalleryImage(SLUG, "project-1"),
-    },
-    {
-      name: "Plotted Layout",
-      image: getProjectGalleryImage(SLUG, "project-2"),
-    },
-    {
-      name: "Site Context",
-      image: getProjectGalleryImage(SLUG, "project-3"),
-    },
-  ],
+  ),
   layoutGroups: [
     {
       title: "Standard Plots",

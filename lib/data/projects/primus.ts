@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
+import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
   getProjectBanner,
   getProjectBasePath,
@@ -106,32 +107,23 @@ export const primusProject = {
     "Power Backup",
     "Rain Water Harvesting",
   ],
-  amenityGallery: [
-    {
-      name: "Clubhouse Living",
-      image: getProjectGalleryImage(SLUG, "gallery-1"),
-    },
-    {
-      name: "Premium Residences",
-      image: getProjectGalleryImage(SLUG, "gallery-2"),
-    },
-    {
-      name: "Interior Comfort",
-      image: getProjectGalleryImage(SLUG, "gallery-3"),
-    },
-    {
-      name: "Lifestyle Spaces",
-      image: getProjectGalleryImage(SLUG, "gallery-4"),
-    },
-    {
-      name: "Community Areas",
-      image: getProjectGalleryImage(SLUG, "gallery-5"),
-    },
-    {
-      name: "Project Living",
-      image: getProjectGalleryImage(SLUG, "gallery-6"),
-    },
-  ],
+  amenityGallery: buildAmenityGallery([
+    "Clubhouse",
+    "Swimming Pool",
+    "Gymnasium",
+    "Jogging Track",
+    "Children's Play Area",
+    "Landscaped Gardens",
+    "Indoor Games",
+    "Multipurpose Hall",
+    "Yoga Deck",
+    "Senior Citizen Sit-out",
+    "Visitor Parking",
+    "24×7 Security",
+    "CCTV Surveillance",
+    "Power Backup",
+    "Rain Water Harvesting",
+  ]),
   layoutGroups: [
     {
       title: "Unit Types",

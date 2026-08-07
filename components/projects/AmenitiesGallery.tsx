@@ -11,10 +11,9 @@ import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export type AmenityGalleryItem = {
-  name: string;
-  image: string;
-};
+import type { AmenityGalleryItem } from "@/lib/data/amenity-images";
+
+export type { AmenityGalleryItem };
 
 type AmenitiesGalleryProps = {
   items: readonly AmenityGalleryItem[];

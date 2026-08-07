@@ -1,5 +1,6 @@
 import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
+import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
   getProjectAmenityImage,
   getProjectAsset,
@@ -89,40 +90,42 @@ export const nikharCelioProject = {
     "Basketball Court",
     "Water Body Waiting Lounge",
   ],
-  amenityGallery: [
+  amenityGallery: buildAmenityGallery(
+    [
+      "Swimming Pool",
+      "Kids Pool",
+      "Clubhouse",
+      "Tennis Court",
+      "Jogging Track",
+      "Outdoor Gym",
+      "Temple",
+      "Children's Play Area",
+      "Pet Park",
+      "Business Lounge",
+      "Meditation Area",
+      "Yoga Area",
+      "Flower Garden",
+      "Visitors Parking",
+      "Water Body",
+      "Landscaped Gardens",
+      "Senior Citizen Park",
+      "Volleyball Court",
+      "Skating Rink",
+      "Seating Area",
+      "Net Cricket Pitch",
+      "Basketball Court",
+      "Water Body Waiting Lounge",
+    ],
     {
-      name: "Swimming Pool",
-      image: getProjectAmenityImage(SLUG, "swimming-pool"),
+      // Official project amenity assets (override catalog placeholders)
+      "Swimming Pool": getProjectAmenityImage(SLUG, "swimming-pool"),
+      Clubhouse: getProjectAmenityImage(SLUG, "club-house"),
+      "Outdoor Gym": getProjectAmenityImage(SLUG, "outdoor-gym"),
+      "Tennis Court": getProjectAmenityImage(SLUG, "tennis"),
+      "Children's Play Area": getProjectGalleryImage(SLUG, "children-play"),
+      "Kids Pool": getProjectGalleryImage(SLUG, "pool"),
     },
-    {
-      name: "Clubhouse",
-      image: getProjectAmenityImage(SLUG, "club-house"),
-    },
-    {
-      name: "Outdoor Gym",
-      image: getProjectAmenityImage(SLUG, "outdoor-gym"),
-    },
-    {
-      name: "Tennis Court",
-      image: getProjectAmenityImage(SLUG, "tennis"),
-    },
-    {
-      name: "Children's Play Area",
-      image: getProjectGalleryImage(SLUG, "children-play"),
-    },
-    {
-      name: "Clubhouse Lounge",
-      image: getProjectGalleryImage(SLUG, "clubhouse"),
-    },
-    {
-      name: "Pool Deck",
-      image: getProjectGalleryImage(SLUG, "pool-view"),
-    },
-    {
-      name: "Poolside Living",
-      image: getProjectGalleryImage(SLUG, "pool"),
-    },
-  ],
+  ),
   floorPlans: {
     towerA: [
       {
