@@ -334,12 +334,16 @@ export function ProjectDetailsPage({
             >
               <div className="relative aspect-[4/3] w-full">
                 <Image
+                  key={project.masterPlan}
                   src={project.masterPlan}
                   alt={`${project.name} master plan`}
                   fill
                   className="object-contain"
                   sizes="(max-width: 900px) 100vw, 900px"
                   quality={80}
+                  // Serve public asset directly — avoids /_next/image cache of a
+                  // previous file that shared this path (e.g. entrance photo).
+                  unoptimized
                 />
               </div>
               <span className="mt-3 block text-center text-sm font-semibold text-primary group-hover:text-accent-dark">

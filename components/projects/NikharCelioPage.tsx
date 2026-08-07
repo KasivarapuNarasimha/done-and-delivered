@@ -268,12 +268,14 @@ export function NikharCelioPage() {
             >
               <div className="relative aspect-[4/3] w-full">
                 <Image
+                  key={project.masterPlan}
                   src={project.masterPlan}
                   alt="Nikhar Celio master plan"
                   fill
                   className="object-contain"
                   sizes="(max-width: 900px) 100vw, 900px"
                   quality={80}
+                  unoptimized
                 />
               </div>
               <span className="mt-3 block text-center text-sm font-semibold text-primary group-hover:text-accent-dark">

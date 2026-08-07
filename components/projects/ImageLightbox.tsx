@@ -46,6 +46,7 @@ export function ImageLightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <Image
+          key={src}
           src={src}
           alt={alt}
           fill
@@ -53,6 +54,7 @@ export function ImageLightbox({
           sizes="90vw"
           quality={90}
           priority
+          unoptimized
         />
       </div>
     </div>

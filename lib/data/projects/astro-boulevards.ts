@@ -2,7 +2,6 @@ import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
 import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
-  getProjectAsset,
   getProjectBanner,
   getProjectBasePath,
   getProjectBrochure,
@@ -13,8 +12,13 @@ import {
 
 const SLUG = "astro-boulevards";
 
-/** Master Plan section + lightbox — must be the layout asset only. */
-const MASTER_PLAN_SRC = getProjectAsset(SLUG, "master-plan.jpg");
+/**
+ * Master Plan section + lightbox ONLY.
+ * Path is explicit — never hero/banner/logo/gallery/entrance assets.
+ * Paired with `unoptimized` on Master Plan <Image> so Next/Image does not
+ * serve a stale optimized cache of the previous entrance photo at this path.
+ */
+const MASTER_PLAN_SRC = "/projects/astro-boulevards/master-plan.jpg";
 
 export const astroBoulevardsProject = {
   slug: SLUG,
@@ -33,7 +37,7 @@ export const astroBoulevardsProject = {
   heroImage: getProjectBanner(SLUG),
   bannerImage: getProjectBanner(SLUG),
   logo: getProjectBanner(SLUG),
-  // Master Plan section + lightbox — layout only (never banner/hero/logo/gallery)
+  // Master Plan section + lightbox — layout map only
   masterPlan: MASTER_PLAN_SRC,
   brochure: getProjectBrochure(SLUG),
   stats: [
