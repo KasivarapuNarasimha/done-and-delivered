@@ -2,16 +2,19 @@ import type { Project } from "@/lib/data/homepage";
 import { ongoingProjects } from "@/lib/data/homepage";
 import { buildAmenityGallery } from "@/lib/data/amenity-images";
 import {
+  getProjectAsset,
   getProjectBanner,
   getProjectBasePath,
   getProjectBrochure,
   getProjectFloorPlan,
   getProjectGalleryImage,
   getProjectHero,
-  getProjectMasterPlan,
 } from "@/lib/utils/project-assets";
 
 const SLUG = "astro-boulevards";
+
+/** Master Plan section + lightbox — must be the layout asset only. */
+const MASTER_PLAN_SRC = getProjectAsset(SLUG, "master-plan.jpg");
 
 export const astroBoulevardsProject = {
   slug: SLUG,
@@ -26,12 +29,12 @@ export const astroBoulevardsProject = {
   status: "Ongoing",
   shortDescription:
     "A gated plotted community off Sarjapura Road—BDA-approved villa plots with clubhouse amenities, wide internal roads, and strong connectivity to key IT corridors.",
-  // Official entrance / gateway signage (banner.jpg), not the road/building hero.jpg
+  // Entrance / gateway (not used for Master Plan)
   heroImage: getProjectBanner(SLUG),
   bannerImage: getProjectBanner(SLUG),
-  // Floating hero card: entrance signage (same official asset)
   logo: getProjectBanner(SLUG),
-  masterPlan: getProjectMasterPlan(SLUG),
+  // Master Plan section + lightbox — layout only (never banner/hero/logo/gallery)
+  masterPlan: MASTER_PLAN_SRC,
   brochure: getProjectBrochure(SLUG),
   stats: [
     { label: "Acres", value: "15" },
