@@ -8,7 +8,6 @@ import {
   getProjectFloorPlan,
   getProjectGalleryImage,
   getProjectHero,
-  getProjectLogo,
   getProjectMasterPlan,
 } from "@/lib/utils/project-assets";
 
@@ -27,9 +26,11 @@ export const astroBoulevardsProject = {
   status: "Ongoing",
   shortDescription:
     "A gated plotted community off Sarjapura Road—BDA-approved villa plots with clubhouse amenities, wide internal roads, and strong connectivity to key IT corridors.",
-  heroImage: getProjectHero(SLUG),
+  // Official entrance / gateway signage (banner.jpg), not the road/building hero.jpg
+  heroImage: getProjectBanner(SLUG),
   bannerImage: getProjectBanner(SLUG),
-  logo: getProjectLogo(SLUG, "jpg"),
+  // Floating hero card: entrance signage (same official asset)
+  logo: getProjectBanner(SLUG),
   masterPlan: getProjectMasterPlan(SLUG),
   brochure: getProjectBrochure(SLUG),
   stats: [
