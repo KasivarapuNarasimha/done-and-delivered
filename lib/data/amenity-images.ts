@@ -104,7 +104,9 @@ export const AMENITY_IMAGE_CATALOG: Record<string, string> = {
   "elder s park": U("photo-1441974231531-c6227db76b6e"),
   "elders park": U("photo-1441974231531-c6227db76b6e"),
   "seating area": U("photo-1505843513577-22bb37d4d88a"),
-  temple: U("photo-1582510003544-4d00b7f74220"),
+  // Community feature label "Temple" — use a secular landscaped courtyard
+  // (never religious architecture / temple buildings in amenity galleries)
+  temple: U("photo-1600566753190-17f0baa2a6c3"),
 
   // Parking & security
   "visitor parking": U("photo-1506521781263-d8422e82f27a"),
@@ -145,6 +147,16 @@ export function normalizeAmenityKey(name: string): string {
     .trim();
 }
 
+/** Unsplash photo IDs that must never appear in amenity galleries. */
+const BLOCKED_IMAGE_IDS = new Set([
+  // Religious buildings / temple exteriors (legacy catalog entry)
+  "photo-1582510003544-4d00b7f74220",
+]);
+
+function isBlockedImage(url: string): boolean {
+  return [...BLOCKED_IMAGE_IDS].some((id) => url.includes(id));
+}
+
 /**
  * Resolve image for an amenity name.
  * @param overrides map of exact amenity display name → image URL/path
@@ -153,10 +165,14 @@ export function resolveAmenityImage(
   name: string,
   overrides?: Record<string, string>,
 ): string {
-  if (overrides?.[name]) return overrides[name];
+  if (overrides?.[name] && !isBlockedImage(overrides[name])) {
+    return overrides[name];
+  }
 
   const key = normalizeAmenityKey(name);
-  if (AMENITY_IMAGE_CATALOG[key]) return AMENITY_IMAGE_CATALOG[key];
+  if (AMENITY_IMAGE_CATALOG[key] && !isBlockedImage(AMENITY_IMAGE_CATALOG[key])) {
+    return AMENITY_IMAGE_CATALOG[key];
+  }
 
   // Partial / includes match (longest key first for specificity)
   const keys = Object.keys(AMENITY_IMAGE_CATALOG).sort(
@@ -164,15 +180,20 @@ export function resolveAmenityImage(
   );
   for (const catalogKey of keys) {
     if (key.includes(catalogKey) || catalogKey.includes(key)) {
-      return AMENITY_IMAGE_CATALOG[catalogKey];
+      const url = AMENITY_IMAGE_CATALOG[catalogKey];
+      if (!isBlockedImage(url)) return url;
     }
   }
 
   // Token overlap (e.g. "Fitness Center / Gym" → gym)
-  const tokens = key.split(" ").filter((t) => t.length > 2);
+  // Skip ultra-short / generic tokens that cause false matches.
+  const tokens = key
+    .split(" ")
+    .filter((t) => t.length > 3 && !["area", "park", "open", "body"].includes(t));
   for (const catalogKey of keys) {
-    if (tokens.some((t) => catalogKey.includes(t))) {
-      return AMENITY_IMAGE_CATALOG[catalogKey];
+    if (tokens.some((t) => catalogKey.includes(t) || t.includes(catalogKey))) {
+      const url = AMENITY_IMAGE_CATALOG[catalogKey];
+      if (!isBlockedImage(url)) return url;
     }
   }
 
