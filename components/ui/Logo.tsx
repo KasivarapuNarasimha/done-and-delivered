@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-/** Official transparent logo (public/logo-2.png). public/logo.png kept as backup. */
-export const LOGO_SRC = "/logo-2.png";
-/** Intrinsic pixel size of public/logo-2.png */
+/** Official final logo (public/logo-3.png). logo.png and logo-2.png kept as backups. */
+export const LOGO_SRC = "/logo-3.png";
+/** Intrinsic pixel size of public/logo-3.png */
 export const LOGO_WIDTH = 1600;
 export const LOGO_HEIGHT = 800;
 export const LOGO_ASPECT = LOGO_WIDTH / LOGO_HEIGHT;
