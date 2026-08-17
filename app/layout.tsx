@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     description: `${SITE_TAGLINE}. Project branding, performance marketing, lead generation, and end-to-end sales support for builders and developers.`,
     images: [
       {
-        url: "/logo.png",
-        width: 691,
-        height: 361,
+        url: "/logo-2.png",
+        width: 1600,
+        height: 800,
         alt: "Done & Delivered logo",
       },
     ],
@@ -71,11 +71,11 @@ export const metadata: Metadata = {
     title: "Done & Delivered | Premium Real Estate Marketing",
     description:
       "Premium property marketing, branding, project launches, and sales enablement for developers.",
-    images: ["/logo.png"],
+    images: ["/logo-2.png"],
   },
   icons: {
     // Landscape logo is not a suitable square favicon — keep app default favicon.
-    apple: "/logo.png",
+    apple: "/logo-2.png",
   },
   robots: {
     index: true,

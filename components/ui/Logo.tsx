@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-/** Official transparent logo (public/logo.png) — do not crop or stretch. */
-export const LOGO_SRC = "/logo.png";
-export const LOGO_WIDTH = 691;
-export const LOGO_HEIGHT = 361;
+/** Official transparent logo (public/logo-2.png). public/logo.png kept as backup. */
+export const LOGO_SRC = "/logo-2.png";
+/** Intrinsic pixel size of public/logo-2.png */
+export const LOGO_WIDTH = 1600;
+export const LOGO_HEIGHT = 800;
 export const LOGO_ASPECT = LOGO_WIDTH / LOGO_HEIGHT;
 
 type LogoSize = "sm" | "md" | "lg";
